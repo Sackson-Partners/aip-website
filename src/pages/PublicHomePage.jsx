@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Zap, Globe, TrendingUp, Check, ArrowRight, Sparkles, Laptop } from 'lucide-react';
+import { Shield, Zap, Globe, TrendingUp, Check, ArrowRight, Sparkles, Laptop, Database } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -75,19 +75,22 @@ const PublicHomePage = () => {
                transition={{ duration: 0.5, delay: 0.3 }} 
                className="flex flex-col sm:flex-row items-center justify-center gap-4"
              >
-                <Button 
-                   onClick={() => openModal('subscribe')}
-                  className="bg-[#D4AF37] text-[#0F1419] hover:bg-[#bfa035] font-bold text-lg px-8 py-7 rounded-lg transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2 shadow-lg shadow-[#D4AF37]/20 hover:scale-105"
-                >
-                    {t.home.accessData}
-                </Button>
+                <a href="https://app.africa-infra.com" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                  <Button 
+                    className="bg-[#D4AF37] text-[#0F1419] hover:bg-[#bfa035] font-bold text-lg px-8 py-7 rounded-lg transition-all duration-300 w-full flex items-center justify-center gap-2 shadow-lg shadow-[#D4AF37]/20 hover:scale-105"
+                  >
+                      <Database className="w-5 h-5" />
+                      Access Project Data
+                  </Button>
+                </a>
                 
+                {/* See How It Works remains visible in the Hero Section as requested */}
                 <Button 
-                   onClick={() => openModal('demo')}
+                   onClick={() => navigate('/how-it-works')}
                   className="bg-transparent border-2 border-white/20 text-white hover:bg-white/10 font-bold text-lg px-8 py-7 rounded-lg transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2"
                 >
                     <Laptop className="w-5 h-5" />
-                    {t.home.requestDemo}
+                    See How It Works
                 </Button>
              </motion.div>
           </div>
@@ -178,10 +181,19 @@ const PublicHomePage = () => {
                             <p className="text-lg text-gray-400 mb-8 leading-relaxed">
                                 {t.home.builtFor.desc}
                             </p>
-                            <Button className="bg-[#D4AF37] text-[#0F1419] hover:bg-[#bfa035] font-bold px-8 py-6 rounded-lg text-lg transition-all shadow-lg shadow-[#D4AF37]/10" onClick={() => navigate('/get-started')}>
-                                {t.home.builtFor.btn}
-                                <ArrowRight className="w-5 h-5 ml-2" />
-                            </Button>
+                            <div className="flex flex-col sm:flex-row gap-4">
+                                <Button className="bg-[#D4AF37] text-[#0F1419] hover:bg-[#bfa035] font-bold px-8 py-6 rounded-lg text-lg transition-all shadow-lg shadow-[#D4AF37]/10" onClick={() => navigate('/get-started')}>
+                                    {t.home.builtFor.btn}
+                                    <ArrowRight className="w-5 h-5 ml-2" />
+                                </Button>
+                                {/* Task 1: 'See How It Works' button is conditionally removed/hidden from this specific section */}
+                                <Button 
+                                  className="hidden" 
+                                  onClick={() => navigate('/how-it-works')}
+                                >
+                                  See How It Works
+                                </Button>
+                            </div>
                         </div>
 
                         <div className="space-y-6">

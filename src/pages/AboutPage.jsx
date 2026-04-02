@@ -1,126 +1,33 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Users, Target, Briefcase, Globe, Shield, Zap, Search, HeartHandshake as Handshake, Landmark, HardHat, Scale, Linkedin } from 'lucide-react';
+import { Shield, Zap, Globe, Briefcase, Landmark, HardHat, Scale, Linkedin } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import ActionModal from '@/components/ActionModal';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const teamMembers = [
+const founders = [
   {
     id: 1,
-    name: "Jean-Baptiste Koffi",
-    role: "Co-Founder & CEO",
-    description: "Former infrastructure advisor at the African Development Bank with over 15 years structuring cross-border projects across Sub-Saharan Africa.",
+    name: "Vamo Soko Sako",
+    role: "Co-Founder",
+    affiliations: "INSEAD · Sorbonne",
+    description: "Vamo brings over two decades of experience in African infrastructure finance and project structuring.",
     linkedin: "https://www.linkedin.com/",
-    photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face",
+    photo: "https://horizons-cdn.hostinger.com/02be81db-dbc5-44e9-9552-e26b6e734eb6/c72183db1299e73ea083f5d8dffb60ec.png"
   },
   {
     id: 2,
-    name: "Amina Diallo",
-    role: "Co-Founder & COO",
-    description: "Infrastructure finance specialist with experience at IFC and leading private equity firms, focused on energy and water projects across West Africa.",
+    name: "Dr. Bintu Zahara Sakor",
+    role: "Co-Founder & Head of Research",
+    affiliations: "Harvard · University of Oslo · PRIO",
+    description: "Dr. Sakor leads AIP's research and verification frameworks, drawing on her academic work in conflict-sensitive development.",
     linkedin: "https://www.linkedin.com/",
-    photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face",
-  },
-  {
-    id: 3,
-    name: "Emmanuel Asante",
-    role: "Head of Technology",
-    description: "Technology entrepreneur and software architect who has built data platforms for emerging market financial institutions across Africa and Southeast Asia.",
-    linkedin: "https://www.linkedin.com/",
-    photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face",
-  },
-  {
-    id: 4,
-    name: "Sophie Marchand",
-    role: "Head of Investor Relations",
-    description: "Former institutional investor relations lead at a Paris-based DFI, connecting European and North American capital to high-impact African infrastructure.",
-    linkedin: "https://www.linkedin.com/",
-    photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
-  },
-  {
-    id: 5,
-    name: "Ibrahim Touré",
-    role: "Head of Project Development",
-    description: "Civil engineer and project finance expert who has overseen feasibility studies and technical reviews for over 40 infrastructure projects across Francophone Africa.",
-    linkedin: "https://www.linkedin.com/",
-    photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-  },
-  {
-    id: 6,
-    name: "Ngozi Okafor",
-    role: "Legal & Compliance Director",
-    description: "International infrastructure lawyer specializing in PPP frameworks, cross-border transactions, and regulatory compliance across African jurisdictions.",
-    linkedin: "https://www.linkedin.com/",
-    photo: "https://images.unsplash.com/photo-1598550874175-4d0ef436c909?w=400&h=400&fit=crop&crop=face",
-  },
+    photo: "https://horizons-cdn.hostinger.com/02be81db-dbc5-44e9-9552-e26b6e734eb6/00235fbc392bf4383688b609034fc98a.jpg"
+  }
 ];
-
-const TeamMemberCard = ({ member }) => {
-  const { t } = useLanguage();
-  return (
-    <div className="flex flex-col items-center text-center p-6 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all duration-300 group">
-      <div className="relative w-24 h-24 mb-4 rounded-full overflow-hidden ring-2 ring-white/10 group-hover:ring-[#C5A028]/40 transition-all duration-300">
-        <img
-          src={member.photo}
-          alt={member.name}
-          className="w-full h-full object-cover"
-          loading="lazy"
-          onError={(ev) => {
-            ev.target.src = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(member.name) + '&background=1a1a1a&color=C5A028&size=200&bold=true';
-          }}
-        />
-      </div>
-      <h3 className="text-white font-semibold text-base mb-1 group-hover:text-[#C5A028] transition-colors duration-200">
-        {member.name}
-      </h3>
-      <p className="text-[#C5A028] text-xs font-medium uppercase tracking-wider mb-3">
-        {member.role}
-      </p>
-      <p className="text-white/60 text-sm leading-relaxed mb-4 flex-1">
-        {member.description}
-      </p>
-      <a
-        href={member.linkedin}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 text-white/40 hover:text-[#0A66C2] transition-colors duration-200 mt-auto"
-      >
-        <Linkedin className="w-5 h-5" />
-        <span className="text-xs font-medium">LinkedIn</span>
-      </a>
-    </div>
-  );
-};
-
-const TeamSection = () => {
-  const { t } = useLanguage();
-  return (
-    <section className="py-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-14">
-          <div className="inline-block text-xs uppercase tracking-[0.2em] text-[#C5A028] font-semibold mb-4 px-3 py-1 border border-[#C5A028]/30 rounded-full">
-            {t?.aip?.team?.title || 'Our Team'}
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            {t?.aip?.team?.title || 'Our Team'}
-          </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            {t?.aip?.team?.subtitle || 'Meet the experts behind the Africa Infrastructure Platform.'}
-          </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {teamMembers.map((member) => (
-            <TeamMemberCard key={member.id} member={member} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 const AboutPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -155,11 +62,11 @@ const AboutPage = () => {
         description="Connect with us to explore partnership opportunities."
       />
 
-      <div className="min-h-screen bg-[#0F1419] font-sans selection:bg-[#D4AF37] selection:text-[#0F1419]">
+      <div className="min-h-screen bg-[#0a1628] font-sans selection:bg-[#c9a84c] selection:text-[#0a1628]">
         <Navigation />
 
         {/* Hero Section */}
-        <div className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-[#0F1419] overflow-hidden">
+        <div className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-[#0a1628] overflow-hidden">
         {/* Background Image */}
         <div
           className="absolute inset-0 opacity-10"
@@ -169,7 +76,7 @@ const AboutPage = () => {
             backgroundPosition: 'center',
           }}
         />
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#D4AF37]/5 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#c9a84c]/5 rounded-full blur-[120px] pointer-events-none" />
           <div className="relative z-10 max-w-7xl mx-auto text-center">
             <motion.h1 
               initial="hidden"
@@ -177,7 +84,7 @@ const AboutPage = () => {
               variants={fadeIn}
               className="text-5xl md:text-7xl font-bold font-serif text-white mb-6"
             >
-              About <span className="text-[#D4AF37]">us</span>
+              About <span className="text-[#c9a84c]">us</span>
             </motion.h1>
             <motion.p 
               initial="hidden"
@@ -191,7 +98,7 @@ const AboutPage = () => {
         </div>
 
         {/* Who We Are Section */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#151a21]/50 border-y border-white/5">
+        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#112036]/50 border-y border-white/5">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial="hidden"
@@ -212,8 +119,73 @@ const AboutPage = () => {
           </div>
         </section>
 
+        {/* Leadership Section */}
+        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0a1628]">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-block text-xs uppercase tracking-[0.2em] text-[#c9a84c] font-semibold mb-4 px-3 py-1 border border-[#c9a84c]/30 rounded-full">
+                Leadership
+              </div>
+              <motion.h2 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeIn}
+                className="text-3xl md:text-5xl font-serif font-bold text-white mb-4"
+              >
+                Our Founders
+              </motion.h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
+              {founders.map((founder) => (
+                <motion.div 
+                  key={founder.id}
+                  variants={fadeIn}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="bg-[#112036] rounded-2xl border border-white/5 hover:border-[#c9a84c]/30 shadow-xl transition-all duration-500 flex flex-col overflow-hidden group"
+                >
+                  <div className="relative h-80 w-full overflow-hidden bg-[#1a2b42]">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#112036] to-transparent z-10 opacity-60"></div>
+                    <img 
+                      src={founder.photo} 
+                      alt={founder.name}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                  
+                  <div className="p-8 flex flex-col flex-grow relative z-20 -mt-6">
+                    <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-[#c9a84c] transition-colors">{founder.name}</h3>
+                    <div className="text-[#c9a84c] font-medium mb-3">{founder.role}</div>
+                    
+                    <div className="text-gray-400 text-xs font-semibold tracking-widest uppercase mb-6 pb-4 border-b border-white/10">
+                      {founder.affiliations}
+                    </div>
+                    
+                    <p className="text-gray-300 leading-relaxed flex-grow text-sm mb-6">
+                      {founder.description}
+                    </p>
+                    
+                    <a
+                      href={founder.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-white/40 hover:text-[#0A66C2] transition-colors duration-300 mt-auto w-fit"
+                    >
+                      <Linkedin className="w-5 h-5" />
+                      <span className="text-sm font-medium">Connect on LinkedIn</span>
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* What We Stand For Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0F1419]">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#112036]/30 border-y border-white/5">
           <div className="max-w-7xl mx-auto">
             <motion.h2 
               initial="hidden"
@@ -252,10 +224,10 @@ const AboutPage = () => {
                 <motion.div 
                   key={idx}
                   variants={fadeIn}
-                  className="bg-[#151a21] p-8 rounded-xl border border-[#D4AF37]/30 hover:border-[#D4AF37] shadow-lg hover:shadow-2xl hover:shadow-[#D4AF37]/10 transition-all duration-300 group"
+                  className="bg-[#0a1628] p-8 rounded-xl border border-[#c9a84c]/20 hover:border-[#c9a84c] shadow-lg hover:shadow-2xl hover:shadow-[#c9a84c]/10 transition-all duration-300 group"
                 >
-                  <div className="w-14 h-14 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-[#D4AF37] transition-colors duration-300">
-                    <value.icon className="w-7 h-7 text-[#D4AF37] group-hover:text-[#0F1419] transition-colors duration-300" />
+                  <div className="w-14 h-14 bg-[#c9a84c]/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-[#c9a84c] transition-colors duration-300">
+                    <value.icon className="w-7 h-7 text-[#c9a84c] group-hover:text-[#0a1628] transition-colors duration-300" />
                   </div>
                   <h3 className="text-xl font-bold text-white mb-4 font-serif">{value.title}</h3>
                   <p className="text-gray-400 leading-relaxed">
@@ -268,7 +240,7 @@ const AboutPage = () => {
         </section>
 
         {/* How We Work Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#151a21] relative overflow-hidden">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0a1628] relative overflow-hidden">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
           
           <div className="max-w-4xl mx-auto relative z-10 text-center">
@@ -284,7 +256,7 @@ const AboutPage = () => {
               <p className="text-xl text-gray-300 leading-relaxed font-light mb-8">
                 We combine human and machine intelligence. Our proprietary process transforms complex infrastructure deals into standardized, investable assets.
               </p>
-              <div className="inline-block p-6 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-[#D4AF37]">
+              <div className="inline-block p-6 rounded-xl bg-[#c9a84c]/10 border border-[#c9a84c]/30 text-[#c9a84c]">
                 <span className="font-bold text-lg">Outcome:</span> Faster closing times, reduced transaction costs, and successful project delivery.
               </div>
             </motion.div>
@@ -292,7 +264,7 @@ const AboutPage = () => {
         </section>
 
         {/* Our Partners Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0F1419]">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#112036]/30">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <motion.h2 
@@ -347,10 +319,10 @@ const AboutPage = () => {
                 <motion.div 
                   key={idx}
                   variants={fadeIn}
-                  className="bg-[#151a21] p-6 rounded-xl border-l-4 border-[#D4AF37] hover:bg-[#1a2029] transition-all duration-300"
+                  className="bg-[#0a1628] p-6 rounded-xl border-l-4 border-[#c9a84c] hover:bg-[#112036] transition-all duration-300 shadow-md"
                 >
                   <div className="flex items-center gap-4 mb-3">
-                    <partner.icon className="w-6 h-6 text-[#D4AF37]" />
+                    <partner.icon className="w-6 h-6 text-[#c9a84c]" />
                     <h3 className="text-lg font-bold text-white">{partner.title}</h3>
                   </div>
                   <p className="text-gray-400 text-sm">
@@ -367,7 +339,7 @@ const AboutPage = () => {
             >
                 <Button 
                    onClick={() => setModalOpen(true)}
-                   className="bg-[#D4AF37] text-[#0F1419] hover:bg-white font-bold py-6 px-10 text-lg shadow-lg"
+                   className="bg-[#c9a84c] text-[#0a1628] hover:bg-white font-bold py-6 px-10 text-lg shadow-lg"
                 >
                   Join Our Ecosystem
                 </Button>
@@ -375,7 +347,6 @@ const AboutPage = () => {
           </div>
         </section>
 
-        <TeamSection />
         <Footer />
       </div>
     </>

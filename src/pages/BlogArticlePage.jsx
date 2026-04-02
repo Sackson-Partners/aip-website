@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
 import { ArrowLeft, Calendar, User, Clock, Share2, Facebook, Twitter, Linkedin, Loader2, AlertCircle } from 'lucide-react';
+import { marked } from 'marked';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -23,15 +24,15 @@ const BlogArticlePage = () => {
       title: 'Côte d\'Ivoire: New Energy Framework Unlocks Solar Potential',
       slug: 'cote-divoire-energy-framework',
       content: `
-        <p>The Ivorian government has recently unveiled a comprehensive new regulatory framework aimed at accelerating the deployment of renewable energy projects across the country. This strategic move is expected to attract significant Foreign Direct Investment (FDI) into the solar sector, targeting a 42% renewable mix by 2030.</p>
-        
-        <h3>Key Highlights of the Framework</h3>
-        <p>The new legislation introduces tax incentives for solar equipment imports, streamlined licensing procedures for independent power producers (IPPs), and guaranteed offtake agreements for projects exceeding 25MW. These measures address long-standing concerns regarding regulatory uncertainty and bankability.</p>
-        
-        <p>Industry experts predict this could catalyze over $500 million in new investments over the next 24 months, with several major international developers already expressing interest in utility-scale projects in the northern regions of the country.</p>
-        
-        <h3>Impact on Regional Energy Security</h3>
-        <p>Beyond domestic needs, Côte d'Ivoire is positioning itself as a key exporter of electricity within the West African Power Pool (WAPP). Increased solar capacity will free up natural gas resources for other industrial uses and stabilize the regional grid.</p>
+The Ivorian government has recently unveiled a comprehensive new regulatory framework aimed at accelerating the deployment of renewable energy projects across the country. This strategic move is expected to attract significant Foreign Direct Investment (FDI) into the solar sector, targeting a 42% renewable mix by 2030.
+
+### Key Highlights of the Framework
+The new legislation introduces tax incentives for solar equipment imports, streamlined licensing procedures for independent power producers (IPPs), and guaranteed offtake agreements for projects exceeding 25MW. These measures address long-standing concerns regarding regulatory uncertainty and bankability.
+
+Industry experts predict this could catalyze over $500 million in new investments over the next 24 months, with several major international developers already expressing interest in utility-scale projects in the northern regions of the country.
+
+### Impact on Regional Energy Security
+Beyond domestic needs, Côte d'Ivoire is positioning itself as a key exporter of electricity within the West African Power Pool (WAPP). Increased solar capacity will free up natural gas resources for other industrial uses and stabilize the regional grid.
       `,
       excerpt: 'How recent regulatory changes are accelerating renewable energy projects and attracting foreign direct investment in the Ivorian power sector.',
       category: 'Analytics',
@@ -46,15 +47,15 @@ const BlogArticlePage = () => {
       title: 'Senegal\'s Gas-to-Power transition',
       slug: 'senegal-gas-to-power',
       content: `
-        <p>Senegal is on the verge of a transformative energy shift as it prepares to integrate its significant offshore gas reserves into the domestic power grid. This gas-to-power transition represents a cornerstone of the country's strategy to achieve universal electricity access and reduce energy costs for industrial consumers.</p>
-        
-        <h3>The Role of GTA and Sangomar</h3>
-        <p>With the Grand Tortue Ahmeyim (GTA) and Sangomar fields coming online, Senegal is set to become a major gas producer. The government's gas-to-power strategy focuses on converting existing heavy fuel oil plants to gas and building new combined-cycle gas turbine (CCGT) plants.</p>
-        
-        <p>This shift is expected to lower the cost of electricity generation by approximately 30-40%, making Senegalese industries more competitive regionally and globally. It also aligns with the country's decarbonization goals by displacing more carbon-intensive liquid fuels.</p>
-        
-        <h3>Infrastructure Challenges and Opportunities</h3>
-        <p>Developing the necessary pipeline infrastructure to transport gas from offshore fields to onshore power plants remains a critical challenge. However, this also presents significant opportunities for EPC contractors and investors in the midstream sector.</p>
+Senegal is on the verge of a transformative energy shift as it prepares to integrate its significant offshore gas reserves into the domestic power grid. This gas-to-power transition represents a cornerstone of the country's strategy to achieve universal electricity access and reduce energy costs for industrial consumers.
+
+### The Role of GTA and Sangomar
+With the Grand Tortue Ahmeyim (GTA) and Sangomar fields coming online, Senegal is set to become a major gas producer. The government's gas-to-power strategy focuses on converting existing heavy fuel oil plants to gas and building new combined-cycle gas turbine (CCGT) plants.
+
+This shift is expected to lower the cost of electricity generation by approximately 30-40%, making Senegalese industries more competitive regionally and globally. It also aligns with the country's decarbonization goals by displacing more carbon-intensive liquid fuels.
+
+### Infrastructure Challenges and Opportunities
+Developing the necessary pipeline infrastructure to transport gas from offshore fields to onshore power plants remains a critical challenge. However, this also presents significant opportunities for EPC contractors and investors in the midstream sector.
       `,
       excerpt: 'Strategic analysis of Senegal\'s energy sovereignty roadmap leveraging offshore gas reserves for domestic power generation.',
       category: 'Analytics',
@@ -146,6 +147,10 @@ const BlogArticlePage = () => {
       </div>
     );
   }
+
+  const rawContent = article.content || article.content_md || `<p>${article.excerpt}</p>`;
+  const isMarkdown = rawContent.includes('## ') || rawContent.includes('### ') || rawContent.includes('**');
+  const htmlContent = isMarkdown ? marked.parse(rawContent) : rawContent;
 
   return (
     <div className="min-h-screen bg-[#1a1a1a] font-sans text-gray-300 selection:bg-[#C9A23A] selection:text-[#1a1a1a]">
@@ -245,7 +250,7 @@ const BlogArticlePage = () => {
               prose-blockquote:border-l-[#C9A23A] prose-blockquote:bg-[#242936]/50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-lg prose-blockquote:not-italic
               prose-img:rounded-xl prose-img:shadow-lg
               prose-li:text-gray-300"
-            dangerouslySetInnerHTML={{ __html: article.content || article.content_md || `<p>${article.excerpt}</p>` }} 
+            dangerouslySetInnerHTML={{ __html: htmlContent }} 
           />
           
           {/* Tags */}

@@ -20,6 +20,7 @@ import RegisterPage from '@/pages/RegisterPage';
 import SectorsPage from '@/pages/SectorsPage';
 import SectorProjectsPage from '@/pages/SectorProjectsPage';
 import AboutPage from '@/pages/AboutPage';
+import HowItWorksPage from '@/pages/HowItWorksPage';
 import InsightsPage from '@/pages/InsightsPage';
 import InsightDetailPage from '@/pages/InsightDetailPage';
 import BlogArticlePage from '@/pages/BlogArticlePage'; 
@@ -77,6 +78,7 @@ function App() {
                 <Route path="/sectors/:sectorSlug/projects" element={<SectorProjectsPage />} />
                 <Route path="/services" element={<ServicesPage />} />
                 <Route path="/about" element={<AboutPage />} />
+                <Route path="/how-it-works" element={<HowItWorksPage />} />
                 <Route path="/insights" element={<InsightsPage />} />
                 <Route path="/insight/:slug" element={<InsightDetailPage />} />
                 <Route path="/blog/:slug" element={<BlogArticlePage />} /> 
@@ -220,4 +222,3 @@ function App() {
 }
 
 export default App;
-// refresh

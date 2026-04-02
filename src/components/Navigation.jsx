@@ -52,7 +52,7 @@ const Navigation = () => {
           </Link>
 
           <div className="hidden lg:flex items-center gap-6 absolute left-1/2 transform -translate-x-1/2">
-            <NavLink to="/about">{t.nav.about}</NavLink>
+            <NavLink to="/about">About Us</NavLink>
             <NavLink to="/sectors">{t.nav.sectors}</NavLink>
             <NavLink to="/services">{t.nav.services}</NavLink>
             <NavLink to="/insights">{t.nav.insights}</NavLink>
@@ -73,8 +73,11 @@ const Navigation = () => {
                 </div>
               ) : (
                 <div className="flex items-center gap-4">
-                  <Link to="/login"><Button variant="ghost" className="text-gray-300 hover:text-white hover:bg-white/10 font-medium transition-colors">{t.nav.login}</Button></Link>
-                  <Link to="/get-started"><Button className="bg-[#C9A23A] text-[#0F1419] hover:bg-white hover:text-[#0F1419] font-bold px-6 py-2 rounded-lg transition-all duration-300 shadow-lg shadow-[#C9A23A]/10 hover:scale-105">{t.nav.getStarted}</Button></Link>
+                  <a href="https://app.africa-infra.com" target="_blank" rel="noopener noreferrer">
+                    <Button className="bg-[#C9A23A] text-[#0F1419] hover:bg-white hover:text-[#0F1419] font-bold px-6 py-2 rounded-lg transition-all duration-300 shadow-lg shadow-[#C9A23A]/10 hover:scale-105">
+                      AIP Platform
+                    </Button>
+                  </a>
                 </div>
               )}
           </div>
@@ -89,7 +92,7 @@ const Navigation = () => {
         {isOpen && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="lg:hidden bg-[#0F1419] border-b border-white/10 overflow-hidden">
             <div className="px-4 py-6 space-y-4 flex flex-col items-center text-center">
-              <NavLink to="/about">{t.nav.about}</NavLink>
+              <NavLink to="/about">About Us</NavLink>
               <NavLink to="/sectors">{t.nav.sectors}</NavLink>
               <NavLink to="/services">{t.nav.services}</NavLink>
               <NavLink to="/insights">{t.nav.insights}</NavLink>
@@ -103,8 +106,11 @@ const Navigation = () => {
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    <Link to="/login" onClick={() => setIsOpen(false)}><Button variant="ghost" className="w-full text-gray-300 hover:text-white hover:bg-white/10 font-bold">{t.nav.login}</Button></Link>
-                    <Link to="/get-started" onClick={() => setIsOpen(false)}><Button className="w-full bg-[#C9A23A] text-[#0F1419] font-bold">{t.nav.getStarted}</Button></Link>
+                    <a href="https://app.africa-infra.com" target="_blank" rel="noopener noreferrer" onClick={() => setIsOpen(false)}>
+                      <Button className="w-full bg-[#C9A23A] text-[#0F1419] font-bold">
+                        AIP Platform
+                      </Button>
+                    </a>
                   </div>
                 )}
               </div>

@@ -124,9 +124,9 @@ const InsightsPage = () => {
             >
               {t.insights.subscribe}
             </Button>
+            {/* Task 3: 'Request Custom Brief' button is intentionally omitted/hidden from this specific section */}
             <Button 
-              onClick={() => openModal('requestCustomBrief')}
-              className="bg-[#111111] text-white hover:bg-[#333] hover:text-white font-bold text-lg px-8 py-6 rounded-full transition-all"
+              className="hidden"
             >
               {t.insights.requestCustomBrief}
             </Button>

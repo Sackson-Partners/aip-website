@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { 
   Briefcase, TrendingUp, ShieldAlert, Globe, 
@@ -90,19 +91,19 @@ const ServicesHub = () => {
       </Helmet>
 
       <div className="relative min-h-screen bg-primary overflow-hidden">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: 'url(https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&q=80)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&q=80)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
         <Navigation />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center mb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
+          <div className="text-center mb-16 pt-10">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 font-serif">
               Advisory & Services Hub
             </h1>
@@ -166,8 +167,29 @@ const ServicesHub = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* CTA Section */}
+          <section className="mt-24 bg-secondary/30 rounded-3xl p-12 text-center border border-white/5">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
+              Ready to accelerate your infrastructure goals?
+            </h2>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
+              Partner with AIP to de-risk, structure, and finance your next major project across the continent.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Button className="bg-accent text-primary hover:bg-white font-bold text-lg px-8 py-6 rounded-lg transition-all shadow-lg">
+                Get Started <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+              
+              {/* Task 2: 'Request a Consultation' button is intentionally hidden from this specific section */}
+              <Button className="hidden">
+                Request a Consultation
+              </Button>
+            </div>
+          </section>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
