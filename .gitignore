@@ -9,3 +9,5 @@ npm-debug.log*
 _del_node_modules
 node_modules.tar.gz
 oryx-manifest.toml
+.vercel
+.env*.local
