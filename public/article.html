@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article – AIP Africa Infrastructure Partners</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── ARTICLE PAGE STYLES ── */
+.article-hero {
+  padding-top: calc(var(--nav-h) + 64px);
+  padding-bottom: 56px;
+  background: var(--white-pure);
+  color: var(--navy);
+  border-bottom: 1px solid #e5eaf2;
+}
+.article-breadcrumb {
+  font-size: 12px;
+  color: #8090a8;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.article-breadcrumb a { color: var(--gold-dk); text-decoration: none; }
+.article-breadcrumb a:hover { text-decoration: underline; }
+.article-breadcrumb-sep { color: #c0cad8; }
+
+.article-header-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+.tag-update { background: rgba(201,136,47,0.1); color: #a87820; }
+.tag-report { background: rgba(11,22,40,0.08); color: #3a4a60; }
+.tag-analysis { background: rgba(34,100,197,0.1); color: #2264c5; }
+
+.article-header-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  max-width: 780px;
+  margin-bottom: 20px;
+}
+.article-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  color: #8090a8;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.article-header-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: #c0cad8; }
+.article-header-excerpt {
+  font-size: 18px;
+  color: #4a5a6e;
+  line-height: 1.7;
+  max-width: 720px;
+  font-weight: 300;
+}
+
+/* Admin bar */
+.admin-bar {
+  display: none;
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 10px;
+  padding: 12px 20px;
+  margin-bottom: 24px;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.admin-bar.visible { display: flex; }
+.admin-bar-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #856404;
+  flex: 1;
+}
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+.admin-btn-edit {
+  background: var(--navy);
+  color: #fff;
+}
+.admin-btn-edit:hover { background: #1a2f4e; }
+.admin-btn-delete {
+  background: #dc3545;
+  color: #fff;
+}
+.admin-btn-delete:hover { background: #b02a37; }
+.admin-btn-save {
+  background: #198754;
+  color: #fff;
+}
+.admin-btn-save:hover { background: #146c43; }
+.admin-btn-cancel {
+  background: #6c757d;
+  color: #fff;
+}
+.admin-btn-cancel:hover { background: #565e64; }
+
+/* Article body */
+.article-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 64px;
+  align-items: start;
+  padding: 64px 0 96px;
+}
+@media (max-width: 900px) {
+  .article-layout { grid-template-columns: 1fr; }
+  .article-sidebar { display: none; }
+}
+.article-cover {
+  width: 100%;
+  height: 360px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.article-cover-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(201,168,76,0.06) 0, rgba(201,168,76,0.06) 1px, transparent 0, transparent 50%);
+  background-size: 20px 20px;
+}
+.article-cover-label {
+  position: relative;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.4);
+  padding: 6px 18px;
+  border-radius: 100px;
+}
+
+.article-body {
+  font-size: 16px;
+  line-height: 1.85;
+  color: #2a3a50;
+  background: #fff;
+}
+.article-body[contenteditable="true"] {
+  outline: 2px solid #ffc107;
+  border-radius: 8px;
+  padding: 16px;
+  min-height: 300px;
+}
+.article-body h2 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--navy);
+  margin: 40px 0 16px;
+  line-height: 1.2;
+}
+.article-body h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--navy);
+  margin: 32px 0 12px;
+}
+.article-body p { margin-bottom: 20px; }
+.article-body ul, .article-body ol {
+  padding-left: 24px;
+  margin-bottom: 20px;
+}
+.article-body li { margin-bottom: 8px; }
+.article-body blockquote {
+  border-left: 3px solid var(--gold);
+  padding: 16px 24px;
+  margin: 32px 0;
+  background: #f8f9fc;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: #4a5a6e;
+}
+.article-body strong { color: var(--navy); font-weight: 600; }
+.article-body .data-callout {
+  background: linear-gradient(135deg, #0b1628, #1a2f4e);
+  color: #fff;
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin: 36px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  text-align: center;
+}
+.article-body .data-stat { }
+.article-body .data-stat-num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.article-body .data-stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.4;
+}
+
+/* Edit title */
+.article-title-editable[contenteditable="true"] {
+  outline: 2px solid #ffc107;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+/* Sidebar */
+.article-sidebar {}
+.sidebar-card {
+  background: #f8f9fc;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.sidebar-card-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--gold-dk);
+}
+.related-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5eaf2;
+  cursor: pointer;
+  text-decoration: none;
+}
+.related-item:last-child { border-bottom: none; }
+.related-item-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-dk);
+}
+.related-item-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--navy);
+  line-height: 1.4;
+}
+.related-item-title:hover { color: var(--gold-dk); }
+.related-item-meta {
+  font-size: 11px;
+  color: #8090a8;
+}
+
+/* Author card */
+.author-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--navy);
+  border-radius: 12px;
+  padding: 24px;
+  color: #fff;
+  margin-top: 48px;
+}
+.author-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--navy);
+  flex-shrink: 0;
+}
+.author-name {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.author-role { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+/* Delete overlay */
+.deleted-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(220,53,69,0.08);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.deleted-overlay.visible { display: flex; }
+.deleted-card {
+  background: #fff;
+  border: 2px solid #dc3545;
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  max-width: 420px;
+}
+.deleted-card h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: #dc3545;
+  margin-bottom: 12px;
+}
+.deleted-card p { font-size: 14px; color: #5a6a80; margin-bottom: 24px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/home.html" class="nav-logo" id="logo-admin-trigger">
+      <div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="Africa Infrastructure Partners" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;"></div>
+    </a>
+    <div class="nav-links">
+      <a href="about.html" data-i18n="nav_about">About Us</a>
+      <a href="sectors.html" data-i18n="nav_sectors">Sectors</a>
+      <a href="services.html" data-i18n="nav_services">Services</a>
+      <a href="insights.html" class="active" data-i18n="nav_insights">Insights</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+      </div>
+      <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold" data-i18n="nav_platform">AIP Platform →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ARTICLE HERO -->
+<div class="article-hero" id="article-hero">
+  <div class="container">
+    <div class="article-breadcrumb">
+      <a href="insights.html">← Insights</a>
+      <span class="article-breadcrumb-sep">/</span>
+      <span id="breadcrumb-category">Article</span>
+    </div>
+    <span class="article-header-tag" id="article-tag">Update</span>
+    <div class="article-header-title article-title-editable" id="article-title">Loading…</div>
+    <div class="article-header-meta">
+      <span id="article-date">—</span>
+      <div class="article-header-meta-dot"></div>
+      <span id="article-read">—</span>
+      <div class="article-header-meta-dot"></div>
+      <span id="article-author">—</span>
+    </div>
+    <div class="article-header-excerpt" id="article-excerpt">—</div>
+  </div>
+</div>
+
+<!-- ADMIN BAR -->
+<div class="container">
+  <div class="admin-bar" id="admin-bar" style="margin-top:24px;">
+    <span class="admin-bar-label">🔐 Admin Mode — You can edit or delete this article</span>
+    <button class="admin-btn admin-btn-edit" id="btn-edit" onclick="startEdit()">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Edit Article
+    </button>
+    <button class="admin-btn admin-btn-delete" onclick="confirmDelete()">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+      Delete Article
+    </button>
+    <button class="admin-btn admin-btn-save" id="btn-save" style="display:none;" onclick="saveEdit()">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      Save Changes
+    </button>
+    <button class="admin-btn admin-btn-cancel" id="btn-cancel" style="display:none;" onclick="cancelEdit()">Cancel</button>
+  </div>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="container" style="background:var(--white-pure);">
+  <div class="article-layout">
+    <div>
+      <div class="article-cover" id="article-cover">
+        <div class="article-cover-pattern"></div>
+        <div class="article-cover-label" id="article-cover-label">Energy</div>
+      </div>
+      <div class="article-body" id="article-body">Loading article…</div>
+
+      <!-- Author -->
+      <div class="author-card" id="author-card">
+        <div class="author-avatar" id="author-initials">AIP</div>
+        <div>
+          <div class="author-name" id="author-name">AIP Research</div>
+          <div class="author-role" id="author-role">Africa Infrastructure Partners</div>
+        </div>
+      </div>
+
+      <!-- Back -->
+      <div style="margin-top:40px;">
+        <a href="insights.html" class="btn btn-outline" style="color:var(--navy);border-color:#c0cad8;">← Back to Insights</a>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="article-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Related Articles</div>
+        <div id="related-articles"></div>
+      </div>
+      <div class="sidebar-card" style="background:var(--navy);color:#fff;">
+        <div style="font-family:var(--font-display);font-size:16px;font-weight:600;margin-bottom:8px;">Ground Truth Podcast</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6;margin-bottom:16px;">Latest episode: "The Real Cost of Infrastructure Risk in Francophone Africa"</div>
+        <a href="podcast.html" class="btn btn-gold" style="width:100%;justify-content:center;font-size:13px;">Listen Now →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE CONFIRMATION OVERLAY -->
+<div class="deleted-overlay" id="delete-overlay">
+  <div class="deleted-card">
+    <h3>Delete Article?</h3>
+    <p>This will permanently remove the article from the Insights page. This action cannot be undone.</p>
+    <div style="display:flex;gap:10px;justify-content:center;">
+      <button class="admin-btn admin-btn-cancel" onclick="closeDeleteOverlay()">Cancel</button>
+      <button class="admin-btn admin-btn-delete" onclick="deleteArticle()">Yes, Delete It</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="nav-logo" style="margin-bottom:16px;">
+          <div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="AIP" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;"></div>
+        </div>
+        <p class="footer-desc">Connecting Africa's infrastructure projects with global capital.</p>
+        <div style="display:flex;gap:10px;margin-top:16px;">
+          <a href="https://www.linkedin.com/company/africa-infrastructure-partners" target="_blank" class="footer-social-btn" title="LinkedIn">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="https://x.com/AfricaInfraAIP" target="_blank" class="footer-social-btn" title="X / Twitter">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/africainfrastructurepartners" target="_blank" class="footer-social-btn" title="Instagram">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://africainfrastructurepartners.substack.com" target="_blank" class="footer-social-btn" title="Substack">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div><div class="footer-heading">Platform</div><div class="footer-links"><a href="sectors.html">Sectors</a><a href="services.html">Services</a><a href="insights.html">Insights</a><a href="https://app.africa-infra.com" target="_blank">Log In</a></div></div>
+      <div><div class="footer-heading">Legal</div><div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a></div></div>
+      <div><div class="footer-heading">Contact</div><div class="footer-links"><a href="contact.html">Get in Touch</a><a href="mailto:info@africa-infra.com">info@africa-infra.com</a></div></div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-text">© 2023–2026 Africa Infrastructure Partners. All rights reserved.</div>
+      <div class="footer-bottom-text" style="color:var(--gold);font-size:12px;">Better tools for a better Africa</div>
+    </div>
+  </div>
+</footer>
+
+<script src="i18n.js"></script>
+
+<script>
+// ── ARTICLE DATA ──────────────────────────────────────────────────────
+const ARTICLES = {
+  '1': {
+    id: '1',
+    tag: 'Update',
+    tagClass: 'tag-update',
+    category: 'Energy',
+    coverBg: 'linear-gradient(135deg,#1a2540,#0b1628)',
+    title: "Senegal's Renewable Energy Push: $4.2B Pipeline Opens to Global Investors",
+    excerpt: "With COP30 approaching, Senegal has unlocked its largest solar and wind programme to date — and AIP has verified 14 bankable projects ready for capital commitment.",
+    date: '02 Apr 2026',
+    readTime: '6 min read',
+    author: 'Dr. B.Z. Sakor',
+    authorRole: 'Head of Research & Analysis, AIP',
+    authorInitials: 'BZS',
+    body: `
+      <p>Senegal is positioning itself as West Africa's renewable energy champion. In the first quarter of 2026, the government unveiled a $4.2 billion pipeline of solar, wind, and hybrid projects under its Accelerated Electrification Plan (AEP), directly targeting energy access for the 30% of the population still off-grid.</p>
+
+      <div class="data-callout">
+        <div class="data-stat"><div class="data-stat-num">$4.2B</div><div class="data-stat-label">Total pipeline value</div></div>
+        <div class="data-stat"><div class="data-stat-num">14</div><div class="data-stat-label">AIP-verified bankable projects</div></div>
+        <div class="data-stat"><div class="data-stat-num">2,400 MW</div><div class="data-stat-label">Planned installed capacity</div></div>
+      </div>
+
+      <h2>Why Now?</h2>
+      <p>Three converging forces have unlocked this pipeline: COP30 momentum, a restructured off-taker framework, and the first issuance of Senegal's green bond programme — raising $750 million on international markets in January 2026 at competitive rates.</p>
+      <p>The government has also amended the Electricity Code to streamline Independent Power Producer (IPP) licensing from 18 months to under 90 days, dramatically reducing early-stage project risk for foreign developers.</p>
+
+      <blockquote>"This is not ambition — this is execution. The regulatory infrastructure is in place, the financing instruments exist, and the off-taker — SENELEC — has been recapitalised. Investors who waited are now watching entry points close." — Dr. B.Z. Sakor, AIP Research</blockquote>
+
+      <h2>The Projects AIP Has Verified</h2>
+      <p>Of the 14 projects AIP has assessed through its PETFEL due diligence framework, the strongest risk-adjusted opportunities are concentrated in three sub-sectors:</p>
+      <ul>
+        <li><strong>Utility-scale solar (7 projects):</strong> Located across the Thiès, Kaolack, and Tambacounda corridors, each with secured land rights, environmental impact assessments complete, and SENELEC off-take term sheets in negotiation.</li>
+        <li><strong>Onshore wind (4 projects):</strong> Principally in the northern Casamance corridor where wind resources exceed 7.5 m/s mean annual speed — among the strongest in West Africa.</li>
+        <li><strong>Mini-grid hybrid systems (3 projects):</strong> Targeting 48 off-grid communities with an aggregate 120,000 household connections. These qualify for concessional DFI co-financing under the Scaling Solar II framework.</li>
+      </ul>
+
+      <h2>The Capital Stack</h2>
+      <p>AIP modelling indicates a viable capital structure for lead projects anchored by senior debt from the African Development Bank and IFC, equity from regional infrastructure funds, and first-loss cover from MIGA. Blended finance de-risking reduces required equity IRR from 18% to a market-clearing 12–14%.</p>
+
+      <h2>What Investors Should Watch</h2>
+      <p>The primary risk remains currency — the West African CFA franc's peg to the euro provides stability but limits USD-denominated hedging options. AIP recommends investors engage early with the Central Bank of West African States (BCEAO) facilities for partial risk guarantees.</p>
+      <p>A secondary risk is grid integration capacity: SENELEC's transmission grid requires parallel investment of approximately $180 million over five years to handle the additional generation. Several projects have already ring-fenced this as a co-investment condition.</p>
+
+      <h3>AIP Assessment</h3>
+      <p>Overall PETFEL score across the 14 verified projects averages <strong>74/100</strong> — above our threshold for active investor matching. AIP is currently facilitating introductions to six sovereign wealth funds, four infrastructure equity funds, and two DFI co-financing desks.</p>
+      <p>Access verified project profiles via the AIP platform at <a href="https://app.africa-infra.com" target="_blank" style="color:var(--gold-dk);">app.africa-infra.com</a>.</p>
+    `
+  },
+  '2': {
+    id: '2',
+    tag: 'Report',
+    tagClass: 'tag-report',
+    category: 'Water',
+    coverBg: 'linear-gradient(135deg,#0f2434,#192d40)',
+    title: "Africa's Water Infrastructure Gap: The $30bn Blended Finance Opportunity",
+    excerpt: "AIP's Q1 2026 sector report analyses the most critical bottlenecks in water financing and maps the emerging blended finance structures closing the gap.",
+    date: '18 Mar 2026',
+    readTime: '12 min read',
+    author: 'AIP Research',
+    authorRole: 'Research Division, Africa Infrastructure Partners',
+    authorInitials: 'AIP',
+    body: `
+      <p>Access to safe water and sanitation remains Africa's most acute infrastructure deficit. Over 400 million people on the continent still lack access to safely managed drinking water, and the investment shortfall — estimated at $30 billion annually by the African Development Bank — represents both an urgent human challenge and one of the most underserved capital deployment opportunities in global infrastructure.</p>
+
+      <div class="data-callout">
+        <div class="data-stat"><div class="data-stat-num">$30B</div><div class="data-stat-label">Annual investment shortfall</div></div>
+        <div class="data-stat"><div class="data-stat-num">400M+</div><div class="data-stat-label">People without safe water access</div></div>
+        <div class="data-stat"><div class="data-stat-num">67%</div><div class="data-stat-label">Of projects fail at financing stage</div></div>
+      </div>
+
+      <h2>Why Water Infrastructure Has Been Underfinanced</h2>
+      <p>The water sector has historically struggled to attract private capital for three structural reasons: tariff revenue uncertainty, political sensitivity around pricing, and the long asset lives (40–60 years) that conflict with typical private equity fund horizons.</p>
+      <p>These barriers are now being systematically dismantled through a new generation of blended finance instruments — and AIP's Q1 2026 analysis identifies six deal structures that are actively closing transactions across West and East Africa.</p>
+
+      <h2>The Six Emerging Structures</h2>
+      <ul>
+        <li><strong>Output-based aid (OBA) wrappers:</strong> Grants disbursed upon verified connections, reducing revenue risk for private operators.</li>
+        <li><strong>Pooled municipal bond structures:</strong> Aggregating small urban utilities into investment-grade credit pools, enabling bond market access for cities with sub-investment-grade standalone ratings.</li>
+        <li><strong>Water PPP availability payments:</strong> Government-backed fixed payments for infrastructure availability, removing demand risk from the private sector entirely.</li>
+        <li><strong>Climate adaptation funds:</strong> Leveraging GCF and AF resources for resilience infrastructure — drought-proofing, desalination, and flood infrastructure — which increasingly qualifies for concessional terms.</li>
+        <li><strong>Development finance co-investment:</strong> IFC, AFDB, and bilateral DFIs providing first-loss tranches to crowd in commercial debt.</li>
+        <li><strong>Green and blue bonds:</strong> Labelled debt instruments for water and ocean-related infrastructure, now commanding a 40–60bps pricing premium over vanilla bonds in African markets.</li>
+      </ul>
+
+      <h2>Country Spotlight: Ghana's Urban Water Reform</h2>
+      <p>Ghana's Ghana Water Company Limited (GWCL) reform programme represents the most advanced example of this new generation of water finance in West Africa. The $1.1 billion programme combines World Bank project finance, output-based grants, and a performance-linked management contract with a private operator — producing the first full cost-recovery urban water tariff in Anglophone West Africa.</p>
+
+      <blockquote>"The Ghana model proves that tariff reform, institutional strengthening, and blended finance can co-exist. The question is political will — and that will is now measurably present in at least eight other countries on the continent." — AIP Q1 2026 Report</blockquote>
+
+      <h2>AIP's Water Pipeline: Q1 2026</h2>
+      <p>AIP's verified water infrastructure pipeline currently comprises 23 projects across 9 countries, with an aggregate capital requirement of $4.7 billion. Of these, 11 projects are classified as investment-ready — meaning they have completed technical feasibility, environmental assessment, and have an identified institutional off-taker or utility sponsor.</p>
+
+      <h3>Investor Implications</h3>
+      <p>Infrastructure equity funds with 15+ year horizons and DFI co-investment mandates are best positioned to capture value in this sector. AIP is actively structuring introductions between verified water projects and a roster of 14 patient capital investors across Europe, the Gulf, and North America.</p>
+    `
+  },
+  '3': {
+    id: '3',
+    tag: 'Analysis',
+    tagClass: 'tag-analysis',
+    category: 'Policy',
+    coverBg: 'linear-gradient(135deg,#1a2f1a,#0f2318)',
+    title: "AfCFTA at Five: How the Continental Trade Agreement is Reshaping Infrastructure Investment",
+    excerpt: "Five years on, the African Continental Free Trade Area is generating measurable corridor investment flows — particularly in logistics, digital, and energy transmission.",
+    date: '05 Mar 2026',
+    readTime: '9 min read',
+    author: 'V. Soko Sako',
+    authorRole: 'Senior Policy Analyst, Africa Infrastructure Partners',
+    authorInitials: 'VSS',
+    body: `
+      <p>Five years after its entry into force, the African Continental Free Trade Area (AfCFTA) is beginning to demonstrate measurable infrastructure investment effects. Corridor logistics volumes have increased by 34% in signatory states, and AIP's analysis of our project pipeline reveals a clear AfCFTA premium: projects situated on designated trade corridors attract 40% more investor enquiries than comparable off-corridor projects.</p>
+
+      <div class="data-callout">
+        <div class="data-stat"><div class="data-stat-num">34%</div><div class="data-stat-label">Corridor logistics volume increase</div></div>
+        <div class="data-stat"><div class="data-stat-num">54</div><div class="data-stat-label">Countries party to AfCFTA</div></div>
+        <div class="data-stat"><div class="data-stat-num">$3.4T</div><div class="data-stat-label">Estimated GDP boost by 2035</div></div>
+      </div>
+
+      <h2>The Infrastructure Multiplier Effect</h2>
+      <p>AfCFTA's most significant infrastructure effect has not been in border infrastructure — as many initially predicted — but in the upstream logistics, energy, and digital connectivity projects that make cross-border trade economically viable at scale.</p>
+      <p>AIP's analysis identifies three corridor clusters generating the highest investment activity:</p>
+      <ul>
+        <li><strong>The West Africa Coastal Corridor (Dakar–Abidjan–Lagos):</strong> Port modernisation, cold chain logistics, and fibre backhaul are the dominant investment themes, driven by growing intra-regional agricultural and consumer goods trade.</li>
+        <li><strong>The Central Africa Digital Spine:</strong> Data centre infrastructure, last-mile fibre, and mobile money integration projects unlocked by AfCFTA's digital trade protocol annex.</li>
+        <li><strong>The East Africa Power Pool expansion:</strong> Cross-border transmission interconnectors connecting Ethiopia's hydro surplus to Kenya, Tanzania, and Uganda — directly enabled by AfCFTA's energy protocol.</li>
+      </ul>
+
+      <h2>Policy Risk Has Materially Reduced</h2>
+      <p>Perhaps AfCFTA's most underappreciated infrastructure effect is the reduction in policy risk for cross-border projects. The dispute resolution mechanism and non-discrimination obligations have created a more stable operating environment for infrastructure investors whose assets span multiple jurisdictions.</p>
+
+      <blockquote>"AfCFTA has not eliminated policy risk — but it has created a reference framework against which investors can benchmark government behaviour. That alone has reduced the political risk premium on regional infrastructure projects by an estimated 150–200 basis points." — V. Soko Sako, AIP Policy Analysis</blockquote>
+
+      <h2>Remaining Challenges</h2>
+      <p>Progress has not been uniform. The non-tariff barrier reduction programme remains significantly behind schedule, and several key economies — notably Ethiopia and Nigeria — have been slow to implement agreed schedules of concessions. This creates investment risk for projects whose business cases depend on fully liberalised trade flows.</p>
+      <p>AIP's recommendation to investors is to focus on projects where the underlying infrastructure serves existing trade demand rather than speculative future liberalisation.</p>
+
+      <h3>Forward Outlook</h3>
+      <p>AIP's scenario modelling indicates that if AfCFTA implementation continues at its current pace, corridor infrastructure investment will reach $85 billion annually by 2030 — representing a 3x increase from current levels. The most capital-efficient entry point for investors remains the logistics and digital sub-sectors, where first-mover advantage is most pronounced.</p>
+    `
+  },
+  '4': {
+    id: '4',
+    tag: 'Update',
+    tagClass: 'tag-update',
+    category: 'Digital',
+    coverBg: 'linear-gradient(135deg,#1a1040,#110a28)',
+    title: "Subsea Cable Boom: How West Africa's Digital Infrastructure is Reshaping the Investment Landscape",
+    excerpt: "With seven new subsea cables set to land in West Africa by 2027, the downstream demand for data centres, fibre backhaul, and last-mile connectivity is creating urgent bankable opportunities.",
+    date: '20 Feb 2026',
+    readTime: '8 min read',
+    author: 'AIP Research',
+    authorRole: 'Research Division, Africa Infrastructure Partners',
+    authorInitials: 'AIP',
+    body: `
+      <p>West Africa is in the middle of a subsea cable boom unlike anything the region has seen before. Seven new cable systems are scheduled to make landfall between 2025 and 2027 — bringing total international bandwidth capacity to over 200 Tbps, a tenfold increase from 2020 levels. The commercial and infrastructure investment implications of this bandwidth surge are only beginning to be understood.</p>
+
+      <div class="data-callout">
+        <div class="data-stat"><div class="data-stat-num">7</div><div class="data-stat-label">New cables landing 2025–2027</div></div>
+        <div class="data-stat"><div class="data-stat-num">200 Tbps</div><div class="data-stat-label">Total capacity by 2027</div></div>
+        <div class="data-stat"><div class="data-stat-num">10×</div><div class="data-stat-label">Increase from 2020 levels</div></div>
+      </div>
+
+      <h2>The Infrastructure Bottleneck Has Shifted</h2>
+      <p>Until recently, international bandwidth was the primary constraint on West Africa's digital economy. That constraint is being rapidly resolved. The new bottleneck — and therefore the new investment opportunity — lies inland: in data centres, terrestrial fibre backhaul, metropolitan area networks, and last-mile connectivity infrastructure.</p>
+      <p>AIP has identified over $2.8 billion in bankable digital infrastructure projects directly downstream of subsea cable landings in five countries: Senegal, Ghana, Côte d'Ivoire, Nigeria, and Guinea.</p>
+
+      <h2>Data Centres: The Immediate Opportunity</h2>
+      <p>West Africa currently has less than 100 MW of operational data centre capacity — compared to South Africa's 900 MW. The bandwidth surge creates immediate demand for co-location capacity, hyperscaler edge nodes, and carrier-neutral internet exchange points.</p>
+      <p>AIP has verified six data centre projects currently in late-stage development, with aggregate capacity of 85 MW. Four have signed anchor tenant agreements with major cloud providers and regional telecoms operators. Two are seeking equity co-investment to reach financial close in 2026.</p>
+
+      <h2>Fibre Backhaul: The Infrastructure Multiplier</h2>
+      <p>Bandwidth reaching the coast is commercially useless without terrestrial fibre to carry it inland. AIP's analysis identifies $1.1 billion in fibre backhaul projects along the major subsea cable landing corridors — the Dakar–Bamako, Abidjan–Ouagadougou, and Accra–Lomé routes being the highest-priority.</p>
+
+      <blockquote>"Every $1 of subsea cable investment requires approximately $3–4 of terrestrial infrastructure investment to be commercially viable at scale. The cable operators know this — and they are actively seeking infrastructure partners to co-develop the inland network." — AIP Digital Infrastructure Report, Feb 2026</blockquote>
+
+      <h2>Last-Mile: The Long-Term Play</h2>
+      <p>Beyond the immediate commercial infrastructure, the subsea boom creates a long-term investment case for last-mile connectivity — mobile broadband towers, fixed wireless access, and community wi-fi networks. These projects have lower IRR profiles (8–12%) but are increasingly eligible for DFI concessional co-financing under digital inclusion mandates.</p>
+
+      <h3>Investment Recommendation</h3>
+      <p>AIP recommends a tiered approach: data centre equity investments for near-term returns (target IRR 15–18%), fibre backhaul for medium-term infrastructure yield, and last-mile for patient capital seeking development impact alongside financial return. All three tiers are represented in AIP's current verified pipeline.</p>
+      <p>Verified project profiles are available to registered investors at <a href="https://app.africa-infra.com" target="_blank" style="color:var(--gold-dk);">app.africa-infra.com</a>.</p>
+    `
+  }
+};
+
+// ── ADMIN MODE ────────────────────────────────────────────────────────
+// Access admin mode via URL: article.html?id=1&admin=true
+// Or click the logo 5 times quickly
+let logoClickCount = 0, logoClickTimer;
+document.getElementById('logo-admin-trigger').addEventListener('click', function(e) {
+  e.preventDefault();
+  logoClickCount++;
+  clearTimeout(logoClickTimer);
+  logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 2000);
+  if (logoClickCount >= 5) {
+    logoClickCount = 0;
+    const isAdmin = localStorage.getItem('aip_admin') === 'true';
+    if (isAdmin) {
+      localStorage.removeItem('aip_admin');
+      alert('Admin mode deactivated.');
+    } else {
+      const pw = prompt('Enter admin passphrase:');
+      if (pw === 'aip-admin-2026') {
+        localStorage.setItem('aip_admin', 'true');
+        location.reload();
+      } else {
+        alert('Incorrect passphrase.');
+      }
+    }
+  } else {
+    window.location.href = '/home.html';
+  }
+});
+
+function isAdmin() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('admin') === 'true' || localStorage.getItem('aip_admin') === 'true';
+}
+
+// ── LOAD ARTICLE ─────────────────────────────────────────────────────
+const params = new URLSearchParams(window.location.search);
+const articleId = params.get('id') || '1';
+const article = ARTICLES[articleId];
+
+if (!article) {
+  document.getElementById('article-title').textContent = 'Article not found';
+  document.getElementById('article-body').textContent = 'This article does not exist.';
+} else {
+  // Populate hero
+  const tagEl = document.getElementById('article-tag');
+  tagEl.textContent = article.tag;
+  tagEl.className = 'article-header-tag ' + article.tagClass;
+
+  document.getElementById('article-title').textContent = article.title;
+  document.getElementById('article-date').textContent = article.date;
+  document.getElementById('article-read').textContent = article.readTime;
+  document.getElementById('article-author').textContent = article.author;
+  document.getElementById('article-excerpt').textContent = article.excerpt;
+  document.getElementById('breadcrumb-category').textContent = article.category;
+  document.title = article.title + ' – AIP Insights';
+
+  // Cover
+  document.getElementById('article-cover').style.background = article.coverBg;
+  document.getElementById('article-cover-label').textContent = article.category;
+
+  // Body
+  document.getElementById('article-body').innerHTML = article.body;
+
+  // Author
+  document.getElementById('author-initials').textContent = article.authorInitials;
+  document.getElementById('author-name').textContent = article.author;
+  document.getElementById('author-role').textContent = article.authorRole;
+
+  // Related articles
+  const relatedContainer = document.getElementById('related-articles');
+  Object.values(ARTICLES).filter(a => a.id !== articleId).slice(0, 3).forEach(a => {
+    const el = document.createElement('a');
+    el.className = 'related-item';
+    el.href = 'article.html?id=' + a.id;
+    el.innerHTML = `
+      <span class="related-item-tag">${a.category}</span>
+      <span class="related-item-title">${a.title}</span>
+      <span class="related-item-meta">${a.date} · ${a.readTime}</span>
+    `;
+    relatedContainer.appendChild(el);
+  });
+
+  // Admin bar
+  if (isAdmin()) {
+    document.getElementById('admin-bar').classList.add('visible');
+  }
+}
+
+// ── EDIT / DELETE ─────────────────────────────────────────────────────
+let editingTitle = '';
+let editingBody = '';
+
+function startEdit() {
+  document.getElementById('article-title').contentEditable = 'true';
+  document.getElementById('article-title').classList.add('article-title-editable');
+  document.getElementById('article-body').contentEditable = 'true';
+  document.getElementById('btn-edit').style.display = 'none';
+  document.getElementById('btn-save').style.display = '';
+  document.getElementById('btn-cancel').style.display = '';
+  editingTitle = document.getElementById('article-title').textContent;
+  editingBody = document.getElementById('article-body').innerHTML;
+  document.getElementById('article-title').focus();
+}
+
+function saveEdit() {
+  document.getElementById('article-title').contentEditable = 'false';
+  document.getElementById('article-body').contentEditable = 'false';
+  document.getElementById('btn-edit').style.display = '';
+  document.getElementById('btn-save').style.display = 'none';
+  document.getElementById('btn-cancel').style.display = 'none';
+
+  // Save to localStorage so edits persist during session
+  const saved = {
+    title: document.getElementById('article-title').textContent,
+    body: document.getElementById('article-body').innerHTML
+  };
+  localStorage.setItem('aip_article_edit_' + articleId, JSON.stringify(saved));
+
+  showToast('Article saved successfully.');
+}
+
+function cancelEdit() {
+  document.getElementById('article-title').textContent = editingTitle;
+  document.getElementById('article-body').innerHTML = editingBody;
+  document.getElementById('article-title').contentEditable = 'false';
+  document.getElementById('article-body').contentEditable = 'false';
+  document.getElementById('btn-edit').style.display = '';
+  document.getElementById('btn-save').style.display = 'none';
+  document.getElementById('btn-cancel').style.display = 'none';
+}
+
+function confirmDelete() {
+  document.getElementById('delete-overlay').classList.add('visible');
+}
+
+function closeDeleteOverlay() {
+  document.getElementById('delete-overlay').classList.remove('visible');
+}
+
+function deleteArticle() {
+  // Mark as deleted in localStorage
+  const deleted = JSON.parse(localStorage.getItem('aip_deleted_articles') || '[]');
+  if (!deleted.includes(articleId)) deleted.push(articleId);
+  localStorage.setItem('aip_deleted_articles', JSON.stringify(deleted));
+  closeDeleteOverlay();
+  showToast('Article deleted. Redirecting…');
+  setTimeout(() => { window.location.href = 'insights.html'; }, 1800);
+}
+
+// Load any saved edits from localStorage
+(function loadSavedEdits() {
+  if (!article) return;
+  const saved = localStorage.getItem('aip_article_edit_' + articleId);
+  if (saved) {
+    try {
+      const data = JSON.parse(saved);
+      if (data.title) document.getElementById('article-title').textContent = data.title;
+      if (data.body) document.getElementById('article-body').innerHTML = data.body;
+    } catch(e) {}
+  }
+})();
+
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:#198754;color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:600;z-index:99999;box-shadow:0 4px 20px rgba(0,0,0,0.3);';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3000);
+}
+</script>
+
+<!-- COOKIE CONSENT -->
+<div id="cookie-banner" style="position:fixed;bottom:0;left:0;right:0;z-index:99999;background:rgba(11,22,40,0.97);border-top:1px solid rgba(201,168,76,0.25);padding:20px 24px;display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;backdrop-filter:blur(12px);font-size:13px;color:#8b9ab0;transform:translateY(100%);transition:transform 0.4s ease;">
+  <div style="flex:1;min-width:260px;">
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:16px;font-weight:600;color:#f8f8f5;margin-bottom:6px;">We use cookies</div>
+    <p style="margin:0;line-height:1.6;">We use cookies to store preferences and improve your experience. You can accept or decline below.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;align-self:center;">
+    <button onclick="acceptCookies()" style="background:#c9a84c;color:#0b1628;border:none;border-radius:8px;padding:10px 22px;font-weight:700;font-size:13px;cursor:pointer;">Accept All</button>
+    <button onclick="declineCookies()" style="background:transparent;color:#8b9ab0;border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:9px 22px;font-size:13px;cursor:pointer;">Decline</button>
+  </div>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('cookie-banner');
+  if(!localStorage.getItem('aip_cookie_consent')){setTimeout(()=>{b.style.transform='translateY(0)'},800);}
+})();
+function acceptCookies(){localStorage.setItem('aip_cookie_consent','accepted');document.getElementById('cookie-banner').style.transform='translateY(100%)';}
+function declineCookies(){localStorage.setItem('aip_cookie_consent','declined');document.getElementById('cookie-banner').style.transform='translateY(100%)';}
+</script>
+</body>
+</html>

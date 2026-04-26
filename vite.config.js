@@ -214,6 +214,7 @@ const staticPageRoutingPlugin = {
 	configureServer(server) {
 		const staticRoutes = {
 			'/': '/home.html',
+			'/article': '/article.html',
 			'/podcast': '/podcast.html',
 			'/demo': '/demo.html',
 			'/about': '/about.html',

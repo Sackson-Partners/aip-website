@@ -210,44 +210,54 @@
           <button class="cat-tab">Policy</button>
           <button class="cat-tab">Markets</button>
         </div>
-        <div style="display:flex; flex-direction:column; gap:24px;">
-          <div class="article-card" style="display:grid; grid-template-columns:200px 1fr;">
+        <div style="display:flex; flex-direction:column; gap:24px;" id="articles-list">
+          <a href="article.html?id=1" class="article-card" data-article-id="1" style="display:grid; grid-template-columns:200px 1fr; text-decoration:none;">
             <div class="article-img"><div class="article-img-pattern"></div><div class="article-img-label">Energy</div></div>
             <div class="article-content">
               <span class="article-tag tag-update">Update</span>
               <div class="article-title">Senegal's Renewable Energy Push: $4.2B Pipeline Opens to Global Investors</div>
               <div class="article-excerpt">With COP30 approaching, Senegal has unlocked its largest solar and wind programme to date — and AIP has verified 14 bankable projects ready for capital commitment.</div>
-              <div class="article-meta"><span>02 Apr 2026</span><div class="article-meta-dot"></div><span>6 min read</span><div class="article-meta-dot"></div><span>Dr. B.Z. Sakor</span></div>
+              <div class="article-meta"><span>02 Apr 2026</span><div class="article-meta-dot"></div><span>6 min read</span><div class="article-meta-dot"></div><span>Dr. B.Z. Sakor</span><div class="article-meta-dot"></div><span style="color:var(--gold-dk);">Read more →</span></div>
             </div>
-          </div>
-          <div class="article-card" style="display:grid; grid-template-columns:200px 1fr;">
+          </a>
+          <a href="article.html?id=2" class="article-card" data-article-id="2" style="display:grid; grid-template-columns:200px 1fr; text-decoration:none;">
             <div class="article-img" style="background:linear-gradient(135deg,#0f2434,#192d40)"><div class="article-img-pattern"></div><div class="article-img-label">Water</div></div>
             <div class="article-content">
               <span class="article-tag tag-report">Report</span>
               <div class="article-title">Africa's Water Infrastructure Gap: The $30bn Blended Finance Opportunity</div>
               <div class="article-excerpt">AIP's Q1 2026 sector report analyses the most critical bottlenecks in water financing and maps the emerging blended finance structures closing the gap.</div>
-              <div class="article-meta"><span>18 Mar 2026</span><div class="article-meta-dot"></div><span>12 min read</span><div class="article-meta-dot"></div><span>AIP Research</span></div>
+              <div class="article-meta"><span>18 Mar 2026</span><div class="article-meta-dot"></div><span>12 min read</span><div class="article-meta-dot"></div><span>AIP Research</span><div class="article-meta-dot"></div><span style="color:var(--gold-dk);">Read more →</span></div>
             </div>
-          </div>
-          <div class="article-card" style="display:grid; grid-template-columns:200px 1fr;">
+          </a>
+          <a href="article.html?id=3" class="article-card" data-article-id="3" style="display:grid; grid-template-columns:200px 1fr; text-decoration:none;">
             <div class="article-img" style="background:linear-gradient(135deg,#1a2f1a,#0f2318)"><div class="article-img-pattern"></div><div class="article-img-label">Policy</div></div>
             <div class="article-content">
               <span class="article-tag tag-analysis">Analysis</span>
               <div class="article-title">AfCFTA at Five: How the Continental Trade Agreement is Reshaping Infrastructure Investment</div>
               <div class="article-excerpt">Five years on, the African Continental Free Trade Area is generating measurable corridor investment flows — particularly in logistics, digital, and energy transmission.</div>
-              <div class="article-meta"><span>05 Mar 2026</span><div class="article-meta-dot"></div><span>9 min read</span><div class="article-meta-dot"></div><span>V. Soko Sako</span></div>
+              <div class="article-meta"><span>05 Mar 2026</span><div class="article-meta-dot"></div><span>9 min read</span><div class="article-meta-dot"></div><span>V. Soko Sako</span><div class="article-meta-dot"></div><span style="color:var(--gold-dk);">Read more →</span></div>
             </div>
-          </div>
-          <div class="article-card" style="display:grid; grid-template-columns:200px 1fr;">
+          </a>
+          <a href="article.html?id=4" class="article-card" data-article-id="4" style="display:grid; grid-template-columns:200px 1fr; text-decoration:none;">
             <div class="article-img" style="background:linear-gradient(135deg,#1a1040,#110a28)"><div class="article-img-pattern"></div><div class="article-img-label">Digital</div></div>
             <div class="article-content">
               <span class="article-tag tag-update">Update</span>
               <div class="article-title">Subsea Cable Boom: How West Africa's Digital Infrastructure is Reshaping the Investment Landscape</div>
               <div class="article-excerpt">With seven new subsea cables set to land in West Africa by 2027, the downstream demand for data centres, fibre backhaul, and last-mile connectivity is creating urgent bankable opportunities.</div>
-              <div class="article-meta"><span>20 Feb 2026</span><div class="article-meta-dot"></div><span>8 min read</span><div class="article-meta-dot"></div><span>AIP Research</span></div>
+              <div class="article-meta"><span>20 Feb 2026</span><div class="article-meta-dot"></div><span>8 min read</span><div class="article-meta-dot"></div><span>AIP Research</span><div class="article-meta-dot"></div><span style="color:var(--gold-dk);">Read more →</span></div>
             </div>
-          </div>
+          </a>
         </div>
+        <script>
+        // Hide articles that have been deleted by admin
+        (function(){
+          var deleted = JSON.parse(localStorage.getItem('aip_deleted_articles') || '[]');
+          deleted.forEach(function(id){
+            var el = document.querySelector('[data-article-id="'+id+'"]');
+            if(el) el.style.display = 'none';
+          });
+        })();
+        </script>
       </div>
 
       <!-- Sidebar -->

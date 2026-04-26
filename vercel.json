@@ -3,6 +3,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
+    { "source": "/article", "destination": "/article.html" },
     { "source": "/podcast", "destination": "/podcast.html" },
     { "source": "/demo", "destination": "/demo.html" },
     { "source": "/about", "destination": "/about.html" },
