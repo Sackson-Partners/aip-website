@@ -1,0 +1,1452 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIP – Africa Infrastructure Partners</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── HOME-SPECIFIC STYLES ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(160deg, #0e1d36 0%, #0b1628 60%, #071020 100%);
+  position: relative;
+  overflow: hidden;
+  padding-top: var(--nav-h);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 55% 40%, rgba(201,168,76,0.06) 0%, transparent 65%);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+}
+.hero-title { margin-bottom: 24px; }
+.hero-lead { font-size: 18px; color: var(--muted-lt); line-height: 1.7; font-weight: 300; margin-bottom: 40px; }
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.hero-visual {
+  position: relative;
+}
+.hero-badge {
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  background: var(--navy-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2;
+}
+.hero-badge-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.7;transform:scale(1.3)} }
+.hero-badge-text { font-size: 12px; color: var(--muted-lt); }
+.hero-badge-text strong { color: var(--white); display: block; font-size: 13px; }
+
+/* App preview mockup */
+.app-preview {
+  background: var(--navy-mid);
+  border: 1px solid var(--border-lt);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+}
+.app-bar {
+  background: var(--navy-card);
+  border-bottom: 1px solid var(--border-lt);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.app-bar-dot { width: 10px; height: 10px; border-radius: 50%; }
+.app-bar-url {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.app-sidebar {
+  width: 44px;
+  background: #0d1830;
+  border-right: 1px solid var(--border-lt);
+  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.app-sidebar-icon {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.05);
+  display: flex; align-items: center; justify-content: center;
+}
+.app-sidebar-icon.active { background: rgba(201,168,76,0.2); }
+.app-body { display: flex; }
+.app-main { flex: 1; padding: 20px; }
+.app-section-title { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.app-project-row {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-lt);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.app-project-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.app-project-name { font-size: 12px; color: var(--white-pure); flex: 1; }
+.app-project-tag {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-weight: 500;
+}
+.tag-green { background: rgba(34,197,94,0.15); color: #4ade80; }
+.tag-gold { background: rgba(201,168,76,0.15); color: var(--gold); }
+.tag-blue { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.app-score-row { display: flex; gap: 8px; margin-top: 14px; }
+.app-score-card {
+  flex: 1;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-lt);
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+}
+.app-score-num { font-size: 18px; font-weight: 700; color: var(--gold); font-family: var(--font-display); }
+.app-score-lbl { font-size: 9px; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ── SPOTLIGHT SECTION ──────────────────────── */
+.spotlight-section {
+  background: var(--navy);
+  border-bottom: 1px solid var(--border-lt);
+  padding: 0 0 48px;
+}
+.spotlight-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border-lt);
+  margin-bottom: 32px;
+}
+.sp-tab {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-body); font-size: 13px; font-weight: 500;
+  color: var(--muted); background: none; border: none;
+  padding: 18px 28px; cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s; margin-bottom: -1px;
+}
+.sp-tab:hover { color: var(--white); }
+.sp-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.sp-panel { display: none; }
+.sp-panel.active { display: block; }
+
+/* Video tab */
+.sp-video-grid { display: grid; grid-template-columns: 1fr 320px; gap: 20px; }
+.sp-video-player {
+  position: relative; height: 360px; border-radius: 14px; overflow: hidden;
+  background: linear-gradient(135deg, #0d1e36, #1a2f50);
+  border: 1px solid var(--border-lt); cursor: pointer;
+}
+.sp-video-bg { position: absolute; inset: 0; }
+.sp-video-shimmer {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(201,168,76,0.04) 0%, transparent 60%, rgba(201,168,76,0.02) 100%);
+}
+.sp-video-grid-lines {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 0, transparent 40px),
+                    repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 0, transparent 40px);
+}
+.sp-video-overlay {
+  position: absolute; inset: 0; display: flex;
+  flex-direction: column; align-items: center; justify-content: center;
+  background: linear-gradient(to top, rgba(11,22,40,0.9) 0%, transparent 60%);
+  z-index: 2;
+}
+.sp-play-btn {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: rgba(201,168,76,0.9); color: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 120px;
+  transition: transform 0.2s, background 0.2s;
+  box-shadow: 0 0 0 8px rgba(201,168,76,0.2);
+}
+.sp-video-player:hover .sp-play-btn { transform: scale(1.08); background: var(--gold); }
+.sp-video-meta { position: absolute; bottom: 24px; left: 24px; right: 24px; }
+.sp-video-tag {
+  display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; background: var(--gold); color: var(--navy);
+  padding: 3px 10px; border-radius: 100px; margin-bottom: 8px;
+}
+.sp-video-title { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+.sp-video-sub { font-size: 13px; color: var(--muted-lt); }
+.sp-video-list { display: flex; flex-direction: column; gap: 8px; }
+.sp-video-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; background: var(--navy-card);
+  border: 1px solid var(--border-lt); border-radius: 10px; cursor: pointer;
+  transition: all 0.2s; flex: 1;
+}
+.sp-video-item:hover, .sp-video-item.active-item { border-color: var(--border); background: rgba(201,168,76,0.05); }
+.sp-video-thumb { width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0; }
+.sp-video-thumb.energy  { background: linear-gradient(135deg,#1a2f4a,#0f1e32); }
+.sp-video-thumb.water   { background: linear-gradient(135deg,#0f2434,#192d40); }
+.sp-video-thumb.digital { background: linear-gradient(135deg,#1a1040,#110a28); }
+.sp-video-thumb.agri    { background: linear-gradient(135deg,#1a2f1a,#0f2318); }
+.sp-video-thumb.health  { background: linear-gradient(135deg,#2a1020,#1a0a14); }
+.sp-vi-title { font-size: 13px; color: var(--white); font-weight: 500; margin-bottom: 2px; flex: 1; }
+.sp-vi-meta { font-size: 11px; color: var(--muted); }
+.sp-vi-tag { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 100px; flex-shrink: 0; }
+
+/* Map tab */
+.sp-map-wrap { display: grid; grid-template-columns: 1fr 220px; gap: 24px; align-items: start; }
+.sp-map-container { position: relative; background: var(--navy-card); border: 1px solid var(--border-lt); border-radius: 14px; padding: 24px; }
+.africa-svg { width: 100%; max-height: 440px; }
+.africa-path { fill: var(--navy-light); stroke: var(--border); stroke-width: 1; }
+.africa-border { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 0.5; }
+.proj-dot { opacity: 0.9; cursor: pointer; }
+.proj-dot.energy    { fill: #c9a84c; }
+.proj-dot.water     { fill: #3b82f6; }
+.proj-dot.transport { fill: #8b5cf6; }
+.proj-dot.digital   { fill: #06b6d4; }
+.proj-dot.agri      { fill: #22c55e; }
+.proj-dot.health    { fill: #f43f5e; }
+.proj-pulse { opacity: 0; animation: mapPulse 2.5s ease-out infinite; }
+.proj-pulse.energy-pulse    { fill: #c9a84c; }
+.proj-pulse.water-pulse     { fill: #3b82f6; animation-delay: 0.5s; }
+.proj-pulse.transport-pulse { fill: #8b5cf6; animation-delay: 1s; }
+.proj-pulse.water-pulse     { fill: #06b6d4; }
+.proj-pulse.digital-pulse   { fill: #06b6d4; animation-delay: 1.5s; }
+.proj-pulse.agri-pulse      { fill: #22c55e; animation-delay: 0.3s; }
+.proj-pulse.health-pulse    { fill: #f43f5e; animation-delay: 0.7s; }
+@keyframes mapPulse { 0%{opacity:0.6;r:6} 100%{opacity:0;r:18} }
+.proj-label { font-size: 8px; fill: var(--muted-lt); font-family: var(--font-body); }
+.map-legend { position: absolute; top: 24px; right: 24px; background: rgba(11,22,40,0.9); border: 1px solid var(--border-lt); border-radius: 10px; padding: 14px 16px; }
+.map-legend-title { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.map-legend-item { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted-lt); margin-bottom: 6px; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.energy-d    { background: #c9a84c; }
+.water-d     { background: #3b82f6; }
+.transport-d { background: #8b5cf6; }
+.digital-d   { background: #06b6d4; }
+.agri-d      { background: #22c55e; }
+.health-d    { background: #f43f5e; }
+.sp-map-stats { display: flex; flex-direction: column; gap: 12px; }
+.map-stat-card { background: var(--navy-card); border: 1px solid var(--border-lt); border-radius: 10px; padding: 16px 20px; text-align: center; }
+.map-stat-num { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--gold); line-height: 1; }
+.map-stat-lbl { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+/* Insights tab */
+.sp-insights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.sp-insight-card {
+  background: var(--navy-card); border: 1px solid var(--border-lt); border-radius: 14px;
+  padding: 32px; display: flex; flex-direction: column; gap: 12px;
+  transition: all 0.2s; text-decoration: none; color: inherit;
+}
+.sp-insight-card:hover { border-color: var(--border); transform: translateY(-2px); }
+.featured-insight { background: linear-gradient(160deg, rgba(201,168,76,0.07), rgba(201,168,76,0.02)); border-color: var(--border); }
+.sp-insight-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+.sp-insight-title { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--white); line-height: 1.2; }
+.sp-insight-meta { font-size: 12px; color: var(--muted); }
+.sp-insight-excerpt { font-size: 14px; color: var(--muted-lt); line-height: 1.7; flex: 1; }
+.sp-insight-arrow { font-size: 13px; color: var(--gold); margin-top: auto; }
+.sp-insights-right { display: flex; flex-direction: column; gap: 0; background: var(--navy-card); border: 1px solid var(--border-lt); border-radius: 14px; overflow: hidden; }
+.sp-insight-row {
+  display: flex; align-items: center; gap: 12px; padding: 16px 20px;
+  border-bottom: 1px solid var(--border-lt); text-decoration: none; color: inherit;
+  transition: background 0.2s;
+}
+.sp-insight-row:last-of-type { border-bottom: none; }
+.sp-insight-row:hover { background: rgba(255,255,255,0.03); }
+.sp-insight-row-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 100px; flex-shrink: 0; }
+.energy-tag  { background: rgba(201,168,76,0.12); color: var(--gold); }
+.water-tag   { background: rgba(59,130,246,0.12); color: #60a5fa; }
+.policy-tag  { background: rgba(139,92,246,0.12); color: #a78bfa; }
+.digital-tag { background: rgba(6,182,212,0.12); color: #22d3ee; }
+.sp-insight-row-title { font-size: 13px; color: var(--white); font-weight: 500; flex: 1; line-height: 1.4; }
+.sp-insight-row-date { font-size: 11px; color: var(--muted); flex-shrink: 0; }
+
+/* Stats bar */
+.stats-bar {
+  background: var(--navy-mid);
+  border-top: 1px solid var(--border-lt);
+  border-bottom: 1px solid var(--border-lt);
+  padding: 48px 0;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.stat-item {
+  text-align: center;
+  padding: 0 24px;
+  border-right: 1px solid var(--border-lt);
+}
+.stat-item:last-child { border-right: none; }
+
+/* How It Works */
+.hiw-flow {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr 60px 1fr;
+  gap: 0;
+  align-items: start;
+  margin-bottom: 64px;
+}
+.hiw-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 48px;
+  color: var(--gold);
+  opacity: 0.6;
+}
+.hiw-step { padding: 32px; }
+.hiw-step-num {
+  font-family: var(--font-display);
+  font-size: 72px;
+  font-weight: 700;
+  color: rgba(201,168,76,0.1);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.hiw-step-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.hiw-step-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.hiw-step-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+.hiw-step-items { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.hiw-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted-lt);
+}
+.hiw-item::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+/* Dashboard section */
+.dashboard-wrap {
+  background: var(--navy-mid);
+  border: 1px solid var(--border-lt);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 48px;
+}
+.dashboard-header {
+  background: var(--navy-card);
+  border-bottom: 1px solid var(--border-lt);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.db-dots { display: flex; gap: 6px; }
+.db-dot { width: 12px; height: 12px; border-radius: 50%; }
+.db-url-bar {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px;
+  padding: 7px 16px;
+  font-size: 12px;
+  color: var(--gold);
+  font-family: monospace;
+}
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 220px 1fr 220px;
+}
+.db-panel {
+  border-right: 1px solid var(--border-lt);
+  padding: 20px;
+}
+.db-panel:last-child { border-right: none; border-left: 1px solid var(--border-lt); }
+.db-panel-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-lt);
+}
+.db-field {
+  margin-bottom: 10px;
+}
+.db-field-lbl { font-size: 9px; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+.db-field-val {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-lt);
+  border-radius: 5px;
+  padding: 6px 10px;
+  font-size: 11px;
+  color: var(--muted-lt);
+}
+.db-center { padding: 20px; }
+.db-process-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-lt);
+}
+.db-pipeline {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.db-pipe-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border-lt);
+  border-radius: 8px;
+}
+.db-pipe-step.active {
+  background: rgba(201,168,76,0.07);
+  border-color: rgba(201,168,76,0.25);
+}
+.db-pipe-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; background: rgba(201,168,76,0.1); }
+.db-pipe-name { font-size: 11px; color: var(--muted-lt); flex: 1; }
+.db-pipe-status { font-size: 9px; font-weight: 600; }
+.db-pipe-status.done { color: #4ade80; }
+.db-pipe-status.running { color: var(--gold); }
+.db-pipe-status.wait { color: var(--muted); }
+.db-score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+.db-score-item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-lt);
+  border-radius: 6px;
+  padding: 10px;
+  text-align: center;
+}
+.db-score-val { font-size: 20px; font-weight: 700; color: var(--gold); font-family: var(--font-display); }
+.db-score-lbl { font-size: 9px; color: var(--muted); margin-top: 2px; }
+.db-output-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: var(--muted-lt);
+  line-height: 1.5;
+}
+.db-check { color: #4ade80; flex-shrink: 0; font-size: 12px; }
+.db-btn {
+  width: 100%;
+  margin-top: 12px;
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Sectors preview */
+.sectors-scroll {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.sector-tile {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.sector-tile-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  opacity: 0.06;
+}
+.sector-tile-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, transparent 30%, rgba(11,22,40,0.8) 100%);
+  transition: background 0.3s;
+}
+.sector-tile:hover .sector-tile-overlay { background: linear-gradient(160deg, transparent 0%, rgba(11,22,40,0.9) 100%); }
+.sector-tile-content {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+}
+.sector-tile-icon { color: var(--gold); margin-bottom: 6px; }
+.sector-tile-name { font-family: var(--font-display); font-size: 18px; font-weight: 600; }
+.sector-tile-desc { font-size: 12px; color: var(--muted-lt); margin-top: 4px; }
+.sector-tile:nth-child(1) { background: linear-gradient(135deg, #1a2f4a, #0f1e32); }
+.sector-tile:nth-child(2) { background: linear-gradient(135deg, #0f2434, #192d40); }
+.sector-tile:nth-child(3) { background: linear-gradient(135deg, #1a2f1a, #0f2318); }
+.sector-tile:nth-child(4) { background: linear-gradient(135deg, #2a1f10, #1a140a); }
+.sector-tile:nth-child(5) { background: linear-gradient(135deg, #1a1040, #110a28); }
+.sector-tile:nth-child(6) { background: linear-gradient(135deg, #2a1020, #1a0a14); }
+
+/* ── HOW IT WORKS DIAGRAM ─── */
+.hiw-diagram { max-width: 860px; margin: 0 auto; }
+.hiw-input-row, .hiw-output-row { display: flex; justify-content: center; }
+.hiw-input-box, .hiw-output-box {
+  width: 100%;
+  background: var(--navy-card);
+  border: 1px solid var(--border-lt);
+  border-radius: 16px;
+  padding: 32px 40px;
+}
+.hiw-output-box { display: flex; gap: 48px; align-items: center; border-color: rgba(34,197,94,0.2); background: rgba(34,197,94,0.04); }
+.hiw-output-left { flex: 1; }
+.hiw-output-right { display: flex; flex-direction: column; align-items: center; gap: 20px; flex-shrink: 0; }
+.hiw-input-tag {
+  display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  background: rgba(201,168,76,0.1); color: var(--gold); border: 1px solid rgba(201,168,76,0.25);
+  padding: 4px 12px; border-radius: 100px; margin-bottom: 12px;
+}
+.hiw-input-title { font-family: var(--font-display); font-size: 24px; font-weight: 600; margin-bottom: 10px; }
+.hiw-input-desc { font-size: 14px; color: var(--muted-lt); line-height: 1.7; margin-bottom: 16px; }
+.hiw-input-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.hiw-chip {
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border-lt);
+  border-radius: 100px; padding: 5px 14px; font-size: 12px; color: var(--muted-lt);
+}
+.hiw-arrow-down {
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+  padding: 4px 0; margin: 4px auto;
+}
+.hiw-arrow-line { width: 1px; height: 32px; background: linear-gradient(to bottom, var(--border-lt), var(--gold)); }
+
+/* Dual track */
+.hiw-dual-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: stretch; }
+.hiw-track {
+  border: 1px solid var(--border-lt);
+  border-radius: 16px;
+  padding: 28px 32px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.hiw-track-ai { background: linear-gradient(160deg, rgba(201,168,76,0.06), rgba(201,168,76,0.02)); border-color: var(--border); border-right: none; border-radius: 16px 0 0 16px; }
+.hiw-track-human { background: rgba(255,255,255,0.02); border-left: none; border-radius: 0 16px 16px 0; }
+.hiw-track-header { display: flex; align-items: center; gap: 14px; }
+.hiw-track-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ai-icon { background: rgba(201,168,76,0.15); color: var(--gold); }
+.human-icon { background: rgba(99,179,237,0.15); color: #63b3ed; }
+.hiw-track-badge {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 2px;
+}
+.human-badge { color: #63b3ed; }
+.hiw-track-title { font-family: var(--font-display); font-size: 20px; font-weight: 600; }
+.hiw-track-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.hiw-track-footer { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border-lt); }
+
+/* PETFEL grid */
+.petfel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.petfel-item {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border-lt);
+  border-radius: 8px; padding: 8px 12px;
+}
+.petfel-item.done { border-color: rgba(201,168,76,0.2); }
+.petfel-item.running { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.05); animation: pulseItem 1.5s infinite; }
+@keyframes pulseItem { 0%,100%{opacity:1} 50%{opacity:0.7} }
+.petfel-letter { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--gold); width: 16px; flex-shrink: 0; }
+.petfel-name { font-size: 11px; color: var(--muted); flex: 1; }
+.petfel-score { font-size: 12px; font-weight: 600; color: #4ade80; flex-shrink: 0; }
+.petfel-item.wait .petfel-score { color: var(--muted); }
+.petfel-item.running .petfel-score { color: var(--gold); }
+.running-dot { animation: blink 1s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* Focal points */
+.focal-list { display: flex; flex-direction: column; gap: 8px; }
+.focal-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-lt); border-radius: 8px; }
+.focal-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(99,179,237,0.15); border: 1px solid rgba(99,179,237,0.3); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #63b3ed; flex-shrink: 0; }
+.focal-name { font-size: 11px; color: var(--muted-lt); margin-bottom: 2px; }
+.focal-action { font-size: 10px; color: #4ade80; }
+.focal-item:nth-child(3) .focal-action { color: var(--gold); }
+
+/* PLUS divider */
+.hiw-plus {
+  width: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+}
+.hiw-plus-circle {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--navy-mid); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 300; color: var(--gold);
+}
+
+/* Output score ring */
+.output-score-ring { position: relative; display: flex; align-items: center; justify-content: center; }
+.output-score-val { position: absolute; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--gold); }
+.output-score-lbl { font-size: 11px; color: var(--muted); text-align: center; }
+.hiw-output-tags { display: flex; flex-direction: column; gap: 6px; }
+.out-tag { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted-lt); }
+.out-check { color: #4ade80; }
+
+/* CTA */
+.cta-section {
+  background: linear-gradient(135deg, var(--navy-mid) 0%, #0e1d36 100%);
+  border-top: 1px solid var(--border-lt);
+  border-bottom: 1px solid var(--border-lt);
+  text-align: center;
+  padding: 96px 0;
+}
+</style>
+
+<style>
+.footer-social-btn {
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,0.06);color:var(--muted-lt);
+  transition:background 0.2s,color 0.2s;text-decoration:none;
+}
+.footer-social-btn:hover { background:rgba(201,168,76,0.15);color:var(--gold); }
+</style>
+</head>
+<body class="ltr" data-cc-id="cc-1" style="background-color: rgb(12, 24, 42); cursor: crosshair;">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/home.html" class="nav-logo">
+      <div class="nav-logo-img-wrap">
+        <img src="aip-logo.jpeg" alt="Africa Infrastructure Partners" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;">
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="about.html" data-i18n="nav_about">About Us</a>
+      <a href="sectors.html" data-i18n="nav_sectors">Sectors</a>
+      <a href="services.html" data-i18n="nav_services">Services</a>
+      <a href="insights.html" data-i18n="nav_insights">Insights</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        </div>
+      <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold" data-i18n="nav_platform">AIP Platform →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" data-cc-id="cc-2">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">Accelerating Africa's infrastructure pipeline delivery</div>
+        <h1 class="display-xl hero-title">
+          Connect Africa's<br>
+          <em class="gold" style="font-style:italic">Infrastructure</em><br>
+          with Global Capital
+        </h1>
+        <p class="hero-lead">An independent investment and advisory platform that identifies, structures, and connects commercially viable African infrastructure projects with global capital—reducing friction, risk, and time to investment.</p>
+        <div class="hero-actions">
+          <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold btn-lg">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>
+            Access Project Data
+          </a>
+          <a href="demo.html" class="btn btn-outline btn-lg">See How It Works</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="app-preview">
+          <div class="app-bar">
+            <div class="app-bar-dot" style="background:#ff5f57"></div>
+            <div class="app-bar-dot" style="background:#febc2e"></div>
+            <div class="app-bar-dot" style="background:#28c840"></div>
+            <div class="app-bar-url">app.africa-infra.com / dashboard</div>
+          </div>
+          <div class="app-body">
+            <div class="app-sidebar">
+              <div class="app-sidebar-icon active">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
+              </div>
+              <div class="app-sidebar-icon">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"></path></svg>
+              </div>
+              <div class="app-sidebar-icon">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg>
+              </div>
+              <div class="app-sidebar-icon">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path></svg>
+              </div>
+            </div>
+            <div class="app-main">
+              <div class="app-section-title">Pipeline Overview</div>
+              <div class="app-project-row">
+                <div class="app-project-dot" style="background:#c9a84c"></div>
+                <div class="app-project-name">Dakar Solar Farm Phase II</div>
+                <span class="app-project-tag tag-green">L4 Bankable</span>
+              </div>
+              <div class="app-project-row">
+                <div class="app-project-dot" style="background:#3b82f6"></div>
+                <div class="app-project-name">Lagos Port Expansion</div>
+                <span class="app-project-tag tag-gold">Due Diligence</span>
+              </div>
+              <div class="app-project-row">
+                <div class="app-project-dot" style="background:#8b5cf6"></div>
+                <div class="app-project-name">Nairobi Digital Corridor</div>
+                <span class="app-project-tag tag-blue">Screening</span>
+              </div>
+              <div class="app-score-row">
+                <div class="app-score-card">
+                  <div class="app-score-num">87</div>
+                  <div class="app-score-lbl">PETFEL Score</div>
+                </div>
+                <div class="app-score-card">
+                  <div class="app-score-num">$2.4B</div>
+                  <div class="app-score-lbl">Pipeline Value</div>
+                </div>
+                <div class="app-score-card">
+                  <div class="app-score-num">8</div>
+                  <div class="app-score-lbl">Countries</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          <div class="hero-badge-text">
+            <strong>Live Platform Active</strong>
+            app.africa-infra.com
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DYNAMIC SPOTLIGHT SECTION -->
+<section class="spotlight-section">
+  <div class="container">
+    <div class="spotlight-tabs">
+      <button class="sp-tab" data-tab="video">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2"></rect></svg>
+        Infrastructure Projects
+      </button>
+      <button class="sp-tab" data-tab="map">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
+        Africa Pipeline Map
+      </button>
+      <button class="sp-tab active" data-tab="insights">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path></svg>
+        Latest Insights
+      </button>
+    </div>
+
+    <!-- VIDEO TAB -->
+    <div class="sp-panel" id="sp-video">
+      <div class="sp-video-grid">
+        <div class="sp-video-main">
+          <div class="sp-video-player">
+            <div class="sp-video-overlay">
+              <div class="sp-play-btn">
+                <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </div>
+              <div class="sp-video-meta">
+                <div class="sp-video-tag">Featured Project</div>
+                <div class="sp-video-title">Dakar Solar Farm Phase II — $180M IPP</div>
+                <div class="sp-video-sub">Senegal · Energy · L3 Feasibility</div>
+              </div>
+            </div>
+            <!-- Animated background -->
+            <div class="sp-video-bg">
+              <div class="sp-video-shimmer"></div>
+              <div class="sp-video-grid-lines"></div>
+            </div>
+          </div>
+        </div>
+        <div class="sp-video-list">
+          <div class="sp-video-item active-item">
+            <div class="sp-video-thumb energy"></div>
+            <div>
+              <div class="sp-vi-title">Lagos Port Expansion</div>
+              <div class="sp-vi-meta">Nigeria · Transport · $420M</div>
+            </div>
+            <div class="sp-vi-tag tag-gold">L4</div>
+          </div>
+          <div class="sp-video-item">
+            <div class="sp-video-thumb water"></div>
+            <div>
+              <div class="sp-vi-title">Nairobi Water PPP</div>
+              <div class="sp-vi-meta">Kenya · Water · $95M</div>
+            </div>
+            <div class="sp-vi-tag tag-blue">L3</div>
+          </div>
+          <div class="sp-video-item">
+            <div class="sp-video-thumb digital"></div>
+            <div>
+              <div class="sp-vi-title">Accra Digital Corridor</div>
+              <div class="sp-vi-meta">Ghana · TMT · $60M</div>
+            </div>
+            <div class="sp-vi-tag tag-green">L2</div>
+          </div>
+          <div class="sp-video-item">
+            <div class="sp-video-thumb agri"></div>
+            <div>
+              <div class="sp-vi-title">Abidjan Agri-Hub</div>
+              <div class="sp-vi-meta">Côte d'Ivoire · Agriculture · $45M</div>
+            </div>
+            <div class="sp-vi-tag tag-blue">L2</div>
+          </div>
+          <div class="sp-video-item">
+            <div class="sp-video-thumb health"></div>
+            <div>
+              <div class="sp-vi-title">Casablanca Health Campus</div>
+              <div class="sp-vi-meta">Morocco · Healthcare · $130M</div>
+            </div>
+            <div class="sp-vi-tag tag-gold">L3</div>
+          </div>
+          <div style="margin-top:auto; padding-top:16px; border-top:1px solid var(--border-lt);">
+            <a href="https://app.africa-infra.com" target="_blank" class="btn btn-outline-gold" style="width:100%; justify-content:center; font-size:13px;">View All Projects →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAP TAB -->
+    <div class="sp-panel" id="sp-map">
+      <div class="sp-map-wrap">
+        <div class="sp-map-container" style="position:relative; overflow:hidden; border-radius:12px;">
+          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+          <div id="aip-spotlight-map" style="width:100%; height:100%; min-height:420px; background:#0b1628;"></div>
+          <!-- Legend overlay -->
+          <div class="map-legend" style="position:absolute; top:12px; left:12px; z-index:1000;">
+            <div class="map-legend-title">Active Pipeline</div>
+            <div class="map-legend-item"><span class="legend-dot energy-d"></span>Energy &amp; Mining</div>
+            <div class="map-legend-item"><span class="legend-dot water-d"></span>Water &amp; Sanitation</div>
+            <div class="map-legend-item"><span class="legend-dot transport-d"></span>Transport</div>
+            <div class="map-legend-item"><span class="legend-dot digital-d"></span>TMT / Digital</div>
+            <div class="map-legend-item"><span class="legend-dot agri-d"></span>Agriculture</div>
+            <div class="map-legend-item"><span class="legend-dot health-d"></span>Healthcare &amp; Social</div>
+          </div>
+        </div>
+        <div class="sp-map-stats">
+          <div class="map-stat-card"><div class="map-stat-num">150+</div><div class="map-stat-lbl">Active Projects</div></div>
+          <div class="map-stat-card"><div class="map-stat-num">8</div><div class="map-stat-lbl">Countries Active</div></div>
+          <div class="map-stat-card"><div class="map-stat-num">$2.4B</div><div class="map-stat-lbl">Pipeline Value</div></div>
+          <div class="map-stat-card"><div class="map-stat-num">6</div><div class="map-stat-lbl">Sectors</div></div>
+          <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold" style="width:100%; justify-content:center; margin-top:8px;">Access Full Map →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSIGHTS TAB -->
+    <div class="sp-panel active" id="sp-insights">
+      <div class="sp-insights-grid">
+        <a href="insights.html" class="sp-insight-card featured-insight">
+          <div class="sp-insight-tag">Latest Report</div>
+          <div class="sp-insight-title">Senegal's Renewable Energy Push: $4.2B Pipeline Opens to Global Investors</div>
+          <div class="sp-insight-meta">02 Apr 2026 · 6 min read · Dr. B.Z. Sakor</div>
+          <div class="sp-insight-excerpt">With COP30 approaching, Senegal has unlocked its largest solar and wind programme — 14 bankable projects now ready for capital commitment.</div>
+          <div class="sp-insight-arrow">Read More →</div>
+        </a>
+        <div class="sp-insights-right">
+          <a href="insights.html" class="sp-insight-row">
+            <div class="sp-insight-row-tag energy-tag">Energy</div>
+            <div class="sp-insight-row-title">Nigeria Approves $8.2B Power Sector Privatisation</div>
+            <div class="sp-insight-row-date">02 Feb 2026</div>
+          </a>
+          <a href="insights.html" class="sp-insight-row">
+            <div class="sp-insight-row-tag water-tag">Water</div>
+            <div class="sp-insight-row-title">Africa's Water Infrastructure Gap: The $30bn Blended Finance Opportunity</div>
+            <div class="sp-insight-row-date">18 Mar 2026</div>
+          </a>
+          <a href="insights.html" class="sp-insight-row">
+            <div class="sp-insight-row-tag policy-tag">Policy</div>
+            <div class="sp-insight-row-title">AfCFTA at Five: How Trade is Reshaping Infrastructure Investment</div>
+            <div class="sp-insight-row-date">05 Mar 2026</div>
+          </a>
+          <a href="insights.html" class="sp-insight-row">
+            <div class="sp-insight-row-tag digital-tag">Digital</div>
+            <div class="sp-insight-row-title">West Africa's Subsea Cable Boom: Downstream Investment Opportunities</div>
+            <div class="sp-insight-row-date">20 Feb 2026</div>
+          </a>
+          <a href="insights.html" class="btn btn-outline-gold" style="display:flex; align-items:center; justify-content:center; margin-top:16px; gap:8px;">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path></svg>
+            All Insights
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">$300M+</div>
+        <div class="stat-label">Projects Listed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">150+</div>
+        <div class="stat-label">Active Projects</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4</div>
+        <div class="stat-label">African Nations</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100+</div>
+        <div class="stat-label">Global Investors</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY AIP -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Why Choose AIP</div>
+      <h2 class="display-lg">Advanced technology meets<br>infrastructure expertise</h2>
+    </div>
+    <div class="grid-4">
+      <div class="card">
+        <div class="card-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <div class="card-title">Reduce Due Diligence Time</div>
+        <div class="card-body">Comprehensive risk assessment and verification using human intelligence combined with advanced AI—reducing time to investment by 70%.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        </div>
+        <div class="card-title">Verified Deal Matching</div>
+        <div class="card-body">AI-powered matching connects investors and projects at the right time, with verified data and clear audit trails for every stakeholder.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
+        </div>
+        <div class="card-title">Gateway into Africa</div>
+        <div class="card-body">Access verified, investment-ready infrastructure opportunities across our 8 active African markets from a single trusted platform.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+        </div>
+        <div class="card-title">Market Intelligence</div>
+        <div class="card-body">Real-time data and insights including PETFEL scores, EIN reports, and country-risk analysis to make informed investment decisions.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how-it-works" style="background:var(--navy-mid); border-top:1px solid var(--border-lt); border-bottom:1px solid var(--border-lt);">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label" data-i18n="hiw_label">How It Works</div>
+      <h2 class="display-lg" data-i18n="hiw_title">From project submission to capital deployment</h2>
+      <p class="lead" style="margin:16px auto 0; text-align:center" data-i18n="hiw_desc">AIP's proprietary AI pipeline transforms complex infrastructure deals into standardised, investor-grade assets.</p>
+    </div>
+
+    <!-- FULL PROCESS DIAGRAM -->
+    <div class="hiw-diagram">
+
+      <!-- ROW 1: INPUT -->
+      <div class="hiw-input-row">
+        <div class="hiw-input-box">
+          <div class="hiw-input-tag" data-i18n="hiw_step1_tag">Input</div>
+          <div class="hiw-input-title" data-i18n="hiw_step1_title">Project Submission</div>
+          <div class="hiw-input-desc" data-i18n="hiw_step1_desc">Project sponsors, governments, and developers submit their infrastructure projects through the AIP platform.</div>
+          <div class="hiw-input-chips">
+            <span class="hiw-chip">Financial Model</span>
+            <span class="hiw-chip">Technical Docs</span>
+            <span class="hiw-chip">Legal Status</span>
+            <span class="hiw-chip">ESG Data</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARROW DOWN -->
+      <div class="hiw-arrow-down">
+        <div class="hiw-arrow-line"></div>
+        <svg width="16" height="10" viewBox="0 0 16 10" fill="var(--gold)"><path d="M8 10L0 0h16z"></path></svg>
+      </div>
+
+      <!-- ROW 2: AI + HUMAN (parallel) -->
+      <div class="hiw-dual-row">
+        <!-- AI TRACK -->
+        <div class="hiw-track hiw-track-ai">
+          <div class="hiw-track-header">
+            <div class="hiw-track-icon ai-icon">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"></path></svg>
+            </div>
+            <div>
+              <div class="hiw-track-badge">AI ENGINE</div>
+              <div class="hiw-track-title">PETFEL Agent</div>
+            </div>
+          </div>
+          <div class="hiw-track-desc">Proprietary AI model runs automated multi-dimensional due diligence across 6 risk dimensions simultaneously.</div>
+          <div class="petfel-grid">
+            <div class="petfel-item done"><span class="petfel-letter">P</span><span class="petfel-name">Political</span><span class="petfel-score">82</span></div>
+            <div class="petfel-item running"><span class="petfel-letter">E</span><span class="petfel-name">Economic</span><span class="petfel-score running-dot">●</span></div>
+            <div class="petfel-item done"><span class="petfel-letter">T</span><span class="petfel-name">Technical</span><span class="petfel-score">91</span></div>
+            <div class="petfel-item done"><span class="petfel-letter">F</span><span class="petfel-name">Financial</span><span class="petfel-score">78</span></div>
+            <div class="petfel-item done"><span class="petfel-letter">E</span><span class="petfel-name">Environmental</span><span class="petfel-score">88</span></div>
+            <div class="petfel-item wait"><span class="petfel-letter">L</span><span class="petfel-name">Legal</span><span class="petfel-score">—</span></div>
+          </div>
+          <div class="hiw-track-footer">
+            <span style="color:var(--muted); font-size:10px;">Powered by AIP algorithm · PETFEL v2.0</span>
+          </div>
+        </div>
+
+        <!-- PLUS SIGN -->
+        <div class="hiw-plus">
+          <div class="hiw-plus-circle">+</div>
+          <div style="font-size:9px; color:var(--muted); text-align:center; margin-top:6px; text-transform:uppercase; letter-spacing:0.1em;">Combined<br>Verification</div>
+        </div>
+
+        <!-- HUMAN TRACK -->
+        <div class="hiw-track hiw-track-human">
+          <div class="hiw-track-header">
+            <div class="hiw-track-icon human-icon">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path></svg>
+            </div>
+            <div>
+              <div class="hiw-track-badge human-badge">HUMAN EXPERTS</div>
+              <div class="hiw-track-title">Focal Points</div>
+            </div>
+          </div>
+          <div class="hiw-track-desc">Country-based Focal Points — senior experts with on-the-ground knowledge — validate and contextualise each assessment.</div>
+          <div class="focal-list">
+            <div class="focal-item">
+              <div class="focal-avatar">SN</div>
+              <div class="focal-info">
+                <div class="focal-name">Country Expert · Senegal</div>
+                <div class="focal-action">✓ Site visit confirmed</div>
+              </div>
+            </div>
+            <div class="focal-item">
+              <div class="focal-avatar">NG</div>
+              <div class="focal-info">
+                <div class="focal-name">Legal Focal · Nigeria</div>
+                <div class="focal-action">✓ Permits verified</div>
+              </div>
+            </div>
+            <div class="focal-item">
+              <div class="focal-avatar">KE</div>
+              <div class="focal-info">
+                <div class="focal-name">Finance Focal · Kenya</div>
+                <div class="focal-action">⟳ Model review</div>
+              </div>
+            </div>
+            <div class="focal-item">
+              <div class="focal-avatar">MA</div>
+              <div class="focal-info">
+                <div class="focal-name">ESG Focal · Morocco</div>
+                <div class="focal-action">✓ Impact assessed</div>
+              </div>
+            </div>
+          </div>
+          <div class="hiw-track-footer">
+            <span style="color:var(--muted); font-size:10px;">38 Focal Points across 20 African markets</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARROW DOWN -->
+      <div class="hiw-arrow-down">
+        <div class="hiw-arrow-line"></div>
+        <svg width="16" height="10" viewBox="0 0 16 10" fill="var(--gold)"><path d="M8 10L0 0h16z"></path></svg>
+      </div>
+
+      <!-- ROW 3: OUTPUT -->
+      <div class="hiw-output-row">
+        <div class="hiw-output-box">
+          <div class="hiw-output-left">
+            <div class="hiw-input-tag" style="background:rgba(34,197,94,0.1); color:#4ade80; border-color:rgba(34,197,94,0.2);" data-i18n="hiw_step3_tag">Output</div>
+            <div class="hiw-input-title" data-i18n="hiw_step3_title">Capital Matching &amp; EIN</div>
+            <div class="hiw-input-desc" data-i18n="hiw_step3_desc">Verified projects receive an Executive Investment Note and are matched with the right investors from our global network.</div>
+          </div>
+          <div class="hiw-output-right">
+            <div class="hiw-output-score">
+              <div class="output-score-ring">
+                <svg width="80" height="80" viewBox="0 0 80 80">
+                  <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(201,168,76,0.1)" stroke-width="6"></circle>
+                  <circle cx="40" cy="40" r="34" fill="none" stroke="var(--gold)" stroke-width="6" stroke-dasharray="213" stroke-dashoffset="27" stroke-linecap="round" transform="rotate(-90 40 40)"></circle>
+                </svg>
+                <div class="output-score-val">87</div>
+              </div>
+              <div class="output-score-lbl">PETFEL Score</div>
+            </div>
+            <div class="hiw-output-tags">
+              <div class="out-tag"><span class="out-check">✓</span> EIN Generated</div>
+              <div class="out-tag"><span class="out-check">✓</span> 3 Investors Matched</div>
+              <div class="out-tag"><span class="out-check">✓</span> Climate Aligned</div>
+              <div class="out-tag"><span class="out-check">✓</span> Secure Data Room</div>
+              <div class="out-tag" style="color:var(--muted)"><span>○</span> IC Review Pending</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end hiw-diagram -->
+  </div>
+</section>
+
+<!-- SECTORS PREVIEW -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Sectors</div>
+      <h2 class="display-lg">Six sectors driving<br>Africa's transformation</h2>
+    </div>
+    <div class="sectors-scroll">
+      <div class="sector-tile">
+        <div class="sector-tile-bg">⚡</div>
+        <div class="sector-tile-overlay"></div>
+        <div class="sector-tile-content">
+          <div class="sector-tile-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          </div>
+          <div class="sector-tile-name">Energy &amp; Mining</div>
+          <div class="sector-tile-desc">Solar, wind, hydro &amp; storage</div>
+        </div>
+      </div>
+      <div class="sector-tile">
+        <div class="sector-tile-bg">💧</div>
+        <div class="sector-tile-overlay"></div>
+        <div class="sector-tile-content">
+          <div class="sector-tile-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"></path></svg>
+          </div>
+          <div class="sector-tile-name">Water &amp; Sanitation</div>
+          <div class="sector-tile-desc">Treatment, distribution &amp; irrigation</div>
+        </div>
+      </div>
+      <div class="sector-tile">
+        <div class="sector-tile-bg">🌾</div>
+        <div class="sector-tile-overlay"></div>
+        <div class="sector-tile-content">
+          <div class="sector-tile-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22V12M12 12C12 12 7 10 7 5c0 3 3 5 5 7zM12 12c0 0 5-2 5-7-2 3-5 5-5 7z"></path></svg>
+          </div>
+          <div class="sector-tile-name">Agriculture</div>
+          <div class="sector-tile-desc">Agri-logistics &amp; food systems</div>
+        </div>
+      </div>
+      <div class="sector-tile">
+        <div class="sector-tile-bg">🚢</div>
+        <div class="sector-tile-overlay"></div>
+        <div class="sector-tile-content">
+          <div class="sector-tile-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"></rect><path d="M16 8h4l3 3v5h-7V8zM2 19h20M5 19v3M19 19v3"></path></svg>
+          </div>
+          <div class="sector-tile-name">Transport &amp; Logistics</div>
+          <div class="sector-tile-desc">Roads, rail, ports &amp; airports</div>
+        </div>
+      </div>
+      <div class="sector-tile">
+        <div class="sector-tile-bg">📡</div>
+        <div class="sector-tile-overlay"></div>
+        <div class="sector-tile-content">
+          <div class="sector-tile-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"></path></svg>
+          </div>
+          <div class="sector-tile-name">TMT &amp; Digital</div>
+          <div class="sector-tile-desc">Fibre, data centres &amp; towers</div>
+        </div>
+      </div>
+      <div class="sector-tile">
+        <div class="sector-tile-bg">🏥</div>
+        <div class="sector-tile-overlay"></div>
+        <div class="sector-tile-content">
+          <div class="sector-tile-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+          </div>
+          <div class="sector-tile-name">Healthcare &amp; Social Infrastructures</div>
+          <div class="sector-tile-desc">Hospitals, schools, universities &amp; health PPPs</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:40px;">
+      <a href="sectors.html" class="btn btn-outline-gold btn-lg">Explore All Sectors →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="container">
+    <div class="section-label">Get Started</div>
+    <h2 class="display-lg" style="margin-bottom:16px;">Ready to accelerate your<br><em class="gold" style="font-style:italic">infrastructure goals?</em></h2>
+    <p class="lead" style="margin:0 auto 40px; text-align:center">Whether you need capital, verified projects, or strategic advisory, our team is ready to assist.</p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <a href="contact.html" class="btn btn-gold btn-lg">Get in Touch →</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="/home.html" class="nav-logo" style="margin-bottom:16px;">
+          <div class="nav-logo-img-wrap">
+            <img src="aip-logo.jpeg" alt="AIP" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;">
+          </div>
+        </a>
+        <p class="footer-desc">Connecting Africa's infrastructure projects with global capital. We structure, verify, and facilitate investments to drive sustainable development across the continent.</p>
+        <div class="footer-social" style="margin-top:24px;display:flex;gap:6px;flex-wrap:wrap;">
+          <a href="https://www.linkedin.com/company/africa-infrastructure-partners/about/?viewAsMember=true" target="_blank" title="LinkedIn" class="footer-social-btn"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://x.com/aip_africa26?s=21" target="_blank" title="X / Twitter" class="footer-social-btn"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.258 5.63 5.906-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://www.instagram.com/aip_africa26/" target="_blank" title="Instagram" class="footer-social-btn"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://substack.com/@aip_africa" target="_blank" title="Substack" class="footer-social-btn"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 17.64 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Platform</div>
+        <div class="footer-links">
+          <a href="sectors.html">Sectors</a>
+          <a href="services.html">Services</a>
+          <a href="insights.html">Insights</a>
+          <a href="https://app.africa-infra.com" target="_blank">Log In</a>
+          <a href="https://app.africa-infra.com" target="_blank">Get Started</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Legal</div>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          Routes des Almadies, Dakar, Senegal
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          info@africa-infra.com
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"></path></svg>
+          +221 77 486 79 27
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-text" data-i18n="footer_copy">© 2023–2026 Africa Infrastructure Partners. All rights reserved.</div>
+      <div class="footer-bottom-text" style="color:var(--gold); font-size:12px;" data-i18n="footer_tagline">Better tools for a better Africa</div>
+    </div>
+  </div>
+</footer>
+<script src="i18n.js"></script>
+<script>
+// Spotlight tabs
+document.querySelectorAll('.sp-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.sp-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.sp-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('sp-' + tab.dataset.tab).classList.add('active');
+  });
+});
+// Video list items
+document.querySelectorAll('.sp-video-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.sp-video-item').forEach(i => i.classList.remove('active-item'));
+    item.classList.add('active-item');
+  });
+});
+
+// ── Leaflet Pipeline Map (spotlight tab) ──
+(function() {
+  var mapLoaded = false;
+  function initSpotlightMap() {
+    if (mapLoaded) return;
+    mapLoaded = true;
+    var script = document.createElement('script');
+    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    script.onload = function() {
+      var map = L.map('aip-spotlight-map', {
+        center: [8, 18], zoom: 3,
+        zoomControl: true, attributionControl: false,
+        scrollWheelZoom: false
+      });
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 18
+      }).addTo(map);
+      var gold = '#c9a84c', blue = '#3b82f6', green = '#22c55e', purple = '#8b5cf6', teal = '#14b8a6', red = '#ef4444';
+      var projects = [
+        { lat:14.72, lng:-17.45, color:gold,   label:'Dakar Solar Farm II',      meta:'Senegal · Energy · $85M' },
+        { lat: 5.55, lng: -0.20, color:purple,  label:'Accra Digital Corridor',   meta:'Ghana · TMT · $60M' },
+        { lat:12.36, lng:-15.00, color:green,   label:'Bissau Water Network',     meta:'Guinea-Bissau · Water · $40M' },
+        { lat: 9.54, lng:-13.68, color:gold,    label:'Conakry Solar Hub',        meta:'Guinea · Energy · $55M' },
+        { lat: 8.48, lng:-13.23, color:teal,    label:'Freetown Health Campus',   meta:'Sierra Leone · Healthcare · $70M' },
+        { lat: 6.30, lng:-10.80, color:gold,    label:'Monrovia Energy Grid',     meta:'Liberia · Energy · $48M' },
+        { lat: 5.35, lng: -4.00, color:blue,    label:"Abidjan Port Expansion",   meta:"Côte d'Ivoire · Transport · $120M" },
+        { lat:13.51, lng:  2.12, color:green,   label:'Niamey Water Treatment',   meta:'Niger · Water · $35M' },
+      ];
+      projects.forEach(function(p) {
+        var icon = L.divIcon({
+          className: '',
+          html: '<div style="width:14px;height:14px;background:' + p.color + ';border-radius:50%;border:2px solid rgba(255,255,255,0.3);box-shadow:0 0 12px ' + p.color + '88;"></div>',
+          iconSize: [14,14], iconAnchor: [7,7]
+        });
+        L.marker([p.lat, p.lng], {icon:icon})
+          .addTo(map)
+          .bindPopup('<strong style="color:#c9a84c">' + p.label + '</strong><br><span style="font-size:12px;color:#8b9ab0">' + p.meta + '</span>', {
+            className:'aip-popup'
+          });
+      });
+    };
+    document.head.appendChild(script);
+  }
+  // Init when map tab is clicked
+  document.querySelectorAll('.sp-tab').forEach(function(tab) {
+    if (tab.dataset.tab === 'map') {
+      tab.addEventListener('click', function() { setTimeout(initSpotlightMap, 100); });
+    }
+  });
+})();
+</script>
+<style>
+.aip-popup .leaflet-popup-content-wrapper { background:#192341; border:1px solid #2a3a5c; border-radius:8px; color:#f8f8f5; }
+.aip-popup .leaflet-popup-tip { background:#192341; }
+</style>
+
+
+
+<!-- ── COOKIE CONSENT ─────────────────────────────────────────────── -->
+<div id="cookie-banner" style="
+  position:fixed;bottom:0;left:0;right:0;z-index:99999;
+  background:rgba(11,22,40,0.97);
+  border-top:1px solid rgba(201,168,76,0.25);
+  padding:20px 24px;
+  display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;
+  backdrop-filter:blur(12px);
+  font-size:13px;color:#8b9ab0;
+  transform:translateY(100%);transition:transform 0.4s ease;
+">
+  <div style="flex:1;min-width:260px;">
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:16px;font-weight:600;color:#f8f8f5;margin-bottom:6px;">We use cookies 🍪</div>
+    <p style="margin:0;line-height:1.6;">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behaviour or unique IDs on this site. Not consenting or withdrawing consent may adversely affect certain features and functions.</p>
+    <div style="margin-top:10px;font-size:11px;display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Privacy Policy</a>
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Terms of Service</a>
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Cookie Policy</a>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;align-self:center;">
+    <button onclick="acceptCookies()" style="
+      background:#c9a84c;color:#0b1628;border:none;border-radius:8px;
+      padding:10px 22px;font-weight:700;font-size:13px;cursor:pointer;
+      white-space:nowrap;transition:background 0.2s;
+    " onmouseover="this.style.background='#e0c07a'" onmouseout="this.style.background='#c9a84c'">Accept All</button>
+    <button onclick="declineCookies()" style="
+      background:transparent;color:#8b9ab0;border:1px solid rgba(255,255,255,0.12);
+      border-radius:8px;padding:9px 22px;font-size:13px;cursor:pointer;
+      white-space:nowrap;transition:all 0.2s;
+    " onmouseover="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color='#b0bfd4'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='#8b9ab0'">Decline</button>
+  </div>
+</div>
+
+<!-- Cookie Policy Modal -->
+<div id="cookie-modal" style="display:none;position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;padding:24px;">
+  <div style="background:#192341;border:1px solid rgba(201,168,76,0.2);border-radius:16px;max-width:540px;width:100%;padding:36px;position:relative;max-height:80vh;overflow-y:auto;">
+    <button onclick="document.getElementById('cookie-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;color:#8b9ab0;font-size:20px;cursor:pointer;line-height:1;">✕</button>
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;color:#f8f8f5;margin-bottom:16px;">Cookie &amp; Privacy Policy</div>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:12px;">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behaviour or unique IDs on this site. Not consenting or withdrawing consent may adversely affect certain features and functions.</p>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:12px;"><strong style="color:#f8f8f5;">What we collect:</strong> We may collect usage data, session identifiers, and anonymised analytics to improve platform performance and user experience. We do not sell personal data to third parties.</p>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:20px;"><strong style="color:#f8f8f5;">Your rights:</strong> You may withdraw consent at any time by clearing browser cookies or contacting us at <a href="mailto:info@africa-infra.com" style="color:#c9a84c;">info@africa-infra.com</a>.</p>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button onclick="declineCookies()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:#8b9ab0;border-radius:8px;padding:10px 18px;font-size:13px;cursor:pointer;">Decline</button>
+      <button onclick="acceptCookies()" style="background:#c9a84c;color:#0b1628;border:none;border-radius:8px;padding:10px 20px;font-weight:700;font-size:13px;cursor:pointer;">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var banner = document.getElementById('cookie-banner');
+  if (!localStorage.getItem('aip_cookie_consent')) {
+    setTimeout(function() { banner.style.transform = 'translateY(0)'; }, 800);
+  }
+})();
+function acceptCookies() {
+  localStorage.setItem('aip_cookie_consent', 'accepted');
+  document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+  document.getElementById('cookie-modal').style.display = 'none';
+}
+function declineCookies() {
+  localStorage.setItem('aip_cookie_consent', 'declined');
+  document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+  document.getElementById('cookie-modal').style.display = 'none';
+}
+function showCookiePolicy(e) {
+  e.preventDefault();
+  document.getElementById('cookie-modal').style.display = 'flex';
+}
+</script>
+</body></html>

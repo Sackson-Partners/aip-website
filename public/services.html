@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services – AIP Africa Infrastructure Partners</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.service-card {
+  background: var(--navy-card);
+  border: 1px solid var(--border-lt);
+  border-radius: 16px;
+  padding: 40px;
+  transition: all 0.25s;
+}
+.service-card:hover { border-color: var(--border); transform: translateY(-3px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+.service-card.featured { border-color: var(--border); background: linear-gradient(135deg, rgba(201,168,76,0.07), rgba(201,168,76,0.02)); }
+.service-num { font-family: var(--font-display); font-size: 48px; font-weight: 700; color: rgba(201,168,76,0.12); line-height: 1; margin-bottom: 4px; }
+.service-icon { width: 48px; height: 48px; background: rgba(201,168,76,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--gold); margin-bottom: 20px; }
+.service-title { font-family: var(--font-display); font-size: 26px; font-weight: 600; margin-bottom: 12px; }
+.service-desc { font-size: 14px; color: var(--muted-lt); line-height: 1.7; margin-bottom: 20px; }
+.service-list { display: flex; flex-direction: column; gap: 8px; }
+.service-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted-lt); }
+.service-item::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+/* Who we serve */
+.serve-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.serve-card {
+  background: var(--navy-card);
+  border: 1px solid var(--border-lt);
+  border-radius: 16px;
+  padding: 32px 28px;
+  text-align: center;
+  transition: all 0.25s;
+}
+.serve-card:hover { border-color: var(--border); }
+.serve-icon { width: 56px; height: 56px; background: rgba(201,168,76,0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); margin: 0 auto 20px; }
+.serve-title { font-family: var(--font-display); font-size: 19px; font-weight: 600; margin-bottom: 10px; }
+.serve-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+/* Process timeline */
+.timeline { position: relative; }
+.timeline::before { content: ''; position: absolute; left: 23px; top: 0; bottom: 0; width: 1px; background: var(--border-lt); }
+.timeline-item { display: flex; gap: 28px; margin-bottom: 40px; position: relative; }
+.timeline-dot {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--navy-card); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; z-index: 1; color: var(--gold); font-family: var(--font-display); font-size: 18px; font-weight: 600;
+}
+.timeline-content { padding-top: 10px; }
+.timeline-title { font-family: var(--font-display); font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+.timeline-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* Insight band */
+.insights-band {
+  background: var(--gold);
+  color: var(--navy);
+  border-radius: 20px;
+  padding: 48px 56px;
+  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  margin-top: 64px;
+}
+.insights-band h3 { font-family: var(--font-display); font-size: 32px; font-weight: 600; margin-bottom: 8px; }
+.insights-band p { font-size: 15px; opacity: 0.75; max-width: 480px; line-height: 1.6; }
+.insights-band .stat-big { font-family: var(--font-display); font-size: 56px; font-weight: 700; line-height: 1; }
+.insights-band .stat-lbl { font-size: 13px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.08em; }
+</style>
+
+<style>
+.footer-social-btn {
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,0.06);color:var(--muted-lt);
+  transition:background 0.2s,color 0.2s;text-decoration:none;
+}
+.footer-social-btn:hover { background:rgba(201,168,76,0.15);color:var(--gold); }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/home.html" class="nav-logo">
+      <div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="Africa Infrastructure Partners" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;"></div>
+    </a>
+    <div class="nav-links">
+      <a href="about.html" data-i18n="nav_about">About Us</a>
+      <a href="sectors.html" data-i18n="nav_sectors">Sectors</a>
+      <a href="services.html" class="active" data-i18n="nav_services">Services</a>
+      <a href="insights.html" data-i18n="nav_insights">Insights</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        </div>
+      <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold">AIP Platform →</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="section-label">Our Services</div>
+    <h1 class="display-xl" style="margin-bottom:20px;">End-to-end support from<br><em class="gold" style="font-style:italic">concept to capital</em></h1>
+    <p class="lead" style="margin:0 auto; text-align:center; max-width:580px;">We support the entire infrastructure investment lifecycle — from project discovery to deal closure — with cutting-edge technology and deep industry expertise.</p>
+  </div>
+</div>
+
+<!-- SERVICES GRID -->
+<section class="section">
+  <div class="container">
+    <div class="grid-3">
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+        <div class="service-title">Project Intelligence &amp; Pipeline Curation</div>
+        <div class="service-desc">Proprietary data and verified pipelines to identify high-potential opportunities before they reach the mainstream market.</div>
+        <div class="service-list">
+          <div class="service-item">Early-stage project scanning</div>
+          <div class="service-item">Risk-adjusted filtering</div>
+          <div class="service-item">Sector analytics &amp; market mapping</div>
+          <div class="service-item">Country risk intelligence</div>
+        </div>
+      </div>
+      <div class="service-card featured">
+        <div class="service-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="service-title">Project Preparation &amp; Bankability</div>
+        <div class="service-desc">Technical assistance to restructure projects and mitigate risks for financing — transforming concepts into investment-grade assets.</div>
+        <div class="service-list">
+          <div class="service-item">Feasibility review &amp; optimisation</div>
+          <div class="service-item">Risk matrix optimisation</div>
+          <div class="service-item">Financial modelling &amp; structuring</div>
+          <div class="service-item">Executive Investment Note (EIN) generation</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="service-title">PPP &amp; Procurement Advisory</div>
+        <div class="service-desc">Strategic guidance on structuring transparent and competitive tenders that attract quality bidders and achieve best value.</div>
+        <div class="service-list">
+          <div class="service-item">Tender documentation</div>
+          <div class="service-item">Bid evaluation &amp; scoring</div>
+          <div class="service-item">Regulatory compliance</div>
+          <div class="service-item">VfM &amp; affordability analysis</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <div class="service-title">Capital Matching &amp; Investor Relations</div>
+        <div class="service-desc">AI-powered matching connects verified projects with the right capital — DFIs, private equity, sovereign wealth, and pension funds.</div>
+        <div class="service-list">
+          <div class="service-item">Investor profiling &amp; targeting</div>
+          <div class="service-item">Mandate matching engine</div>
+          <div class="service-item">Deal room management</div>
+          <div class="service-item">Term sheet negotiation support</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+        <div class="service-title">PETFEL Due Diligence Engine</div>
+        <div class="service-desc">Our proprietary AI-powered due diligence framework scores projects across six dimensions: Political, Economic, Technical, Financial, Environmental, and Legal.</div>
+        <div class="service-list">
+          <div class="service-item">Multi-dimensional risk scoring</div>
+          <div class="service-item">Red-flag detection &amp; flagging</div>
+          <div class="service-item">Automated verification workflows</div>
+          <div class="service-item">Human analyst oversight layer</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg></div>
+        <div class="service-title">Market Intelligence &amp; Insights</div>
+        <div class="service-desc">Real-time data, policy briefs, and executive reports that keep investors and sponsors ahead of opportunities and regulatory changes.</div>
+        <div class="service-list">
+          <div class="service-item">Country risk dashboards</div>
+          <div class="service-item">Pipeline analytics</div>
+          <div class="service-item">Monthly investment briefs</div>
+          <div class="service-item">Ground Truth Podcast</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insights band -->
+    <div class="insights-band">
+      <div>
+        <h3>Partner with AIP Insights</h3>
+        <p>Local insights and knowledge on Africa's infrastructure pipelines to support decision-making. Gain access to exclusive market briefs and expert analysis.</p>
+        <a href="insights.html" class="btn" style="background:var(--navy); color:var(--white); margin-top:24px;">Access Insights →</a>
+      </div>
+      <div style="text-align:center; flex-shrink:0;">
+        <div class="stat-big">15k+</div>
+        <div class="stat-lbl">Subscribers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section class="section" style="background:var(--navy-mid); border-top:1px solid var(--border-lt); border-bottom:1px solid var(--border-lt);">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Who We Serve</div>
+      <h2 class="display-lg">Tailored solutions for every stakeholder<br>in the infrastructure value chain</h2>
+    </div>
+    <div class="serve-grid">
+      <div class="serve-card">
+        <div class="serve-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div class="serve-title">Governments &amp; PPP Units</div>
+        <div class="serve-desc">Structuring viable tenders and policy frameworks that attract private investment and deliver public outcomes.</div>
+      </div>
+      <div class="serve-card">
+        <div class="serve-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="serve-title">Sponsors &amp; Developers</div>
+        <div class="serve-desc">Accelerating project preparation and capital raising — from concept to bankable asset to financial close.</div>
+      </div>
+      <div class="serve-card">
+        <div class="serve-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <div class="serve-title">Institutional Investors</div>
+        <div class="serve-desc">Accessing de-risked, bankable deal flow with AI-verified due diligence, EIN reports, and full transparency.</div>
+      </div>
+      <div class="serve-card">
+        <div class="serve-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+        <div class="serve-title">EPCs &amp; Operators</div>
+        <div class="serve-desc">Connecting with shovel-ready infrastructure projects, tender opportunities, and corridor analysis across our active markets.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR PARTNERS -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Our Partners</div>
+      <h2 class="display-lg">A world-class ecosystem<br>of institutional partners</h2>
+      <p class="lead" style="margin:16px auto 0; text-align:center;">We collaborate with public, private, and institutional partners to ensure project success from concept to completion.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card" style="display:flex; gap:20px; align-items:flex-start;">
+        <div class="card-icon" style="flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
+        <div><div class="card-title" style="margin-bottom:6px;">Public Sector</div><div class="card-body">Governments, PPP Units, State-Owned Enterprises, and Investment Promotion Agencies across our 8 active African markets.</div></div>
+      </div>
+      <div class="card" style="display:flex; gap:20px; align-items:flex-start;">
+        <div class="card-icon" style="flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <div><div class="card-title" style="margin-bottom:6px;">Capital Partners</div><div class="card-body">DFIs, Sovereign Wealth Funds, Private Equity Funds, Pension Funds, and Impact Investors seeking African infrastructure exposure.</div></div>
+      </div>
+      <div class="card" style="display:flex; gap:20px; align-items:flex-start;">
+        <div class="card-icon" style="flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+        <div><div class="card-title" style="margin-bottom:6px;">Technical Partners</div><div class="card-body">EPC Contractors, Engineering Firms, Environmental Consultants, and Project Management companies operating across the continent.</div></div>
+      </div>
+      <div class="card" style="display:flex; gap:20px; align-items:flex-start;">
+        <div class="card-icon" style="flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div><div class="card-title" style="margin-bottom:6px;">Advisory Partners</div><div class="card-body">Legal Firms, Transaction Advisors, Tax Consultants, and Regulatory Specialists ensuring compliance and deal integrity.</div></div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:48px;">
+      <a href="contact.html" class="btn btn-gold btn-lg">Join Our Ecosystem →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="nav-logo" style="margin-bottom:16px;"><div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="AIP" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;"></div></div><p class="footer-desc">Connecting Africa's infrastructure projects with global capital.</p></div>
+      <div><div class="footer-heading">Platform</div><div class="footer-links"><a href="sectors.html">Sectors</a><a href="services.html">Services</a><a href="insights.html">Insights</a><a href="https://app.africa-infra.com" target="_blank">Log In</a></div></div>
+      <div><div class="footer-heading">Legal</div><div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a></div></div>
+      <div><div class="footer-heading">Contact</div><div class="footer-contact-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@africa-infra.com</div><div class="footer-contact-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Routes des Almadies, Dakar, Senegal</div></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-bottom-text">© 2023–2026 Africa Infrastructure Partners. All rights reserved.</div><div class="footer-bottom-text" style="color:var(--gold); font-size:12px;">Better tools for a better Africa</div></div>
+  </div>
+</footer>
+<script src="i18n.js"></script>
+
+<!-- ── COOKIE CONSENT ─────────────────────────────────────────────── -->
+<div id="cookie-banner" style="
+  position:fixed;bottom:0;left:0;right:0;z-index:99999;
+  background:rgba(11,22,40,0.97);
+  border-top:1px solid rgba(201,168,76,0.25);
+  padding:20px 24px;
+  display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;
+  backdrop-filter:blur(12px);
+  font-size:13px;color:#8b9ab0;
+  transform:translateY(100%);transition:transform 0.4s ease;
+">
+  <div style="flex:1;min-width:260px;">
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:16px;font-weight:600;color:#f8f8f5;margin-bottom:6px;">We use cookies 🍪</div>
+    <p style="margin:0;line-height:1.6;">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behaviour or unique IDs on this site. Not consenting or withdrawing consent may adversely affect certain features and functions.</p>
+    <div style="margin-top:10px;font-size:11px;display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Privacy Policy</a>
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Terms of Service</a>
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Cookie Policy</a>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;align-self:center;">
+    <button onclick="acceptCookies()" style="
+      background:#c9a84c;color:#0b1628;border:none;border-radius:8px;
+      padding:10px 22px;font-weight:700;font-size:13px;cursor:pointer;
+      white-space:nowrap;transition:background 0.2s;
+    " onmouseover="this.style.background='#e0c07a'" onmouseout="this.style.background='#c9a84c'">Accept All</button>
+    <button onclick="declineCookies()" style="
+      background:transparent;color:#8b9ab0;border:1px solid rgba(255,255,255,0.12);
+      border-radius:8px;padding:9px 22px;font-size:13px;cursor:pointer;
+      white-space:nowrap;transition:all 0.2s;
+    " onmouseover="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color='#b0bfd4'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='#8b9ab0'">Decline</button>
+  </div>
+</div>
+
+<!-- Cookie Policy Modal -->
+<div id="cookie-modal" style="display:none;position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;padding:24px;">
+  <div style="background:#192341;border:1px solid rgba(201,168,76,0.2);border-radius:16px;max-width:540px;width:100%;padding:36px;position:relative;max-height:80vh;overflow-y:auto;">
+    <button onclick="document.getElementById('cookie-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;color:#8b9ab0;font-size:20px;cursor:pointer;line-height:1;">✕</button>
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;color:#f8f8f5;margin-bottom:16px;">Cookie &amp; Privacy Policy</div>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:12px;">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behaviour or unique IDs on this site. Not consenting or withdrawing consent may adversely affect certain features and functions.</p>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:12px;"><strong style="color:#f8f8f5;">What we collect:</strong> We may collect usage data, session identifiers, and anonymised analytics to improve platform performance and user experience. We do not sell personal data to third parties.</p>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:20px;"><strong style="color:#f8f8f5;">Your rights:</strong> You may withdraw consent at any time by clearing browser cookies or contacting us at <a href="mailto:info@africa-infra.com" style="color:#c9a84c;">info@africa-infra.com</a>.</p>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button onclick="declineCookies()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:#8b9ab0;border-radius:8px;padding:10px 18px;font-size:13px;cursor:pointer;">Decline</button>
+      <button onclick="acceptCookies()" style="background:#c9a84c;color:#0b1628;border:none;border-radius:8px;padding:10px 20px;font-weight:700;font-size:13px;cursor:pointer;">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var banner = document.getElementById('cookie-banner');
+  if (!localStorage.getItem('aip_cookie_consent')) {
+    setTimeout(function() { banner.style.transform = 'translateY(0)'; }, 800);
+  }
+})();
+function acceptCookies() {
+  localStorage.setItem('aip_cookie_consent', 'accepted');
+  document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+  document.getElementById('cookie-modal').style.display = 'none';
+}
+function declineCookies() {
+  localStorage.setItem('aip_cookie_consent', 'declined');
+  document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+  document.getElementById('cookie-modal').style.display = 'none';
+}
+function showCookiePolicy(e) {
+  e.preventDefault();
+  document.getElementById('cookie-modal').style.display = 'flex';
+}
+</script>
+</body>
+</html>

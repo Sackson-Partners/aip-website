@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platform Demo – AIP Africa Infrastructure Partners</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── DEMO PAGE ── */
+.demo-hero {
+  padding: calc(var(--nav-h) + 80px) 0 80px;
+  text-align: center;
+  background: linear-gradient(160deg, #0e1d36 0%, #0b1628 60%, #071020 100%);
+  position: relative;
+  overflow: hidden;
+}
+.demo-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(201,168,76,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.demo-hero .container { position: relative; z-index: 1; }
+
+/* Step navigator */
+.step-nav {
+  display: flex;
+  gap: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border-lt);
+  background: var(--navy-card);
+  margin-bottom: 40px;
+  overflow-x: auto;
+}
+.step-btn {
+  flex: 1; min-width: 90px;
+  padding: 14px 8px;
+  background: none;
+  border: none;
+  border-right: 1px solid var(--border-lt);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  position: relative;
+}
+.step-btn:last-child { border-right: none; }
+.step-btn .step-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--border);
+  margin-bottom: 4px;
+  transition: color 0.2s;
+}
+.step-btn:hover { background: rgba(255,255,255,0.03); color: var(--muted-lt); }
+.step-btn:hover .step-num { color: var(--muted); }
+.step-btn.active { background: rgba(201,168,76,0.06); color: var(--gold); }
+.step-btn.active .step-num { color: var(--gold); }
+.step-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+}
+
+/* Progress bar */
+.demo-progress {
+  height: 3px;
+  background: var(--navy-light);
+  border-radius: 99px;
+  margin-bottom: 48px;
+  overflow: hidden;
+}
+.demo-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), #e0c07a);
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+/* Step panel */
+.step-panel { display: none; }
+.step-panel.active { display: block; }
+
+.step-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.step-phase-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 99px;
+  padding: 4px 14px;
+  margin-bottom: 20px;
+}
+
+.step-title {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.step-subtitle {
+  font-size: 14px;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.step-desc {
+  font-size: 15px;
+  color: var(--muted-lt);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.step-features {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.step-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--muted-lt);
+}
+.step-feature-check {
+  width: 18px; height: 18px;
+  background: rgba(201,168,76,0.12);
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+.step-feature-check svg { width: 10px; height: 10px; color: var(--gold); }
+
+/* Visual panel */
+.step-visual {
+  background: var(--navy-card);
+  border: 1px solid var(--border-lt);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.step-screen-bar {
+  background: #0d1830;
+  border-bottom: 1px solid var(--border-lt);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.s-dot { width: 9px; height: 9px; border-radius: 50%; }
+.step-screen-title {
+  font-size: 11px;
+  color: var(--muted);
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+.step-screen-body {
+  padding: 24px;
+  min-height: 340px;
+}
+
+/* Simulation elements */
+.sim-form { display: flex; flex-direction: column; gap: 14px; }
+.sim-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 4px; }
+.sim-input {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-lt);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--muted-lt);
+}
+.sim-input.filled { color: var(--white); border-color: rgba(201,168,76,0.3); }
+.sim-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.sim-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+.sim-badge-green { background: rgba(34,197,94,0.15); color: #4ade80; }
+.sim-badge-gold { background: rgba(201,168,76,0.15); color: var(--gold); }
+.sim-badge-blue { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.sim-badge-red { background: rgba(239,68,68,0.15); color: #f87171; }
+
+.sim-score-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.sim-score-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-lt);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+}
+.sim-score-val {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.sim-score-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+.sim-timeline { display: flex; flex-direction: column; gap: 0; }
+.sim-tl-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding-bottom: 20px;
+  position: relative;
+}
+.sim-tl-item::before {
+  content: '';
+  position: absolute;
+  left: 7px; top: 22px;
+  width: 1px; bottom: 0;
+  background: var(--border-lt);
+}
+.sim-tl-item:last-child::before { display: none; }
+.sim-tl-dot {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.sim-tl-dot.done { background: #22c55e; }
+.sim-tl-dot.active { background: var(--gold); box-shadow: 0 0 8px rgba(201,168,76,0.5); }
+.sim-tl-dot.pending { background: var(--border); }
+.sim-tl-text { font-size: 13px; color: var(--muted-lt); }
+.sim-tl-label { font-size: 11px; color: var(--muted); }
+
+.sim-investor-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-lt);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.sim-inv-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.sim-inv-name { font-size: 13px; color: var(--white); font-weight: 500; }
+.sim-inv-type { font-size: 11px; color: var(--muted); }
+.sim-inv-match { font-size: 12px; font-weight: 700; color: #4ade80; margin-left: auto; }
+
+.sim-document-list { display: flex; flex-direction: column; gap: 8px; }
+.sim-doc-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-lt);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.sim-doc-icon {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.sim-doc-name { font-size: 13px; color: var(--muted-lt); flex: 1; }
+.sim-doc-status { font-size: 11px; font-weight: 600; }
+
+/* Navigation buttons */
+.demo-nav-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+/* Process overview */
+.process-overview {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  background: var(--border-lt);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.process-step {
+  background: var(--navy-card);
+  padding: 20px 12px;
+  text-align: center;
+}
+.process-step-num {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: rgba(201,168,76,0.2);
+  margin-bottom: 6px;
+}
+.process-step-name {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .step-grid { grid-template-columns: 1fr; }
+  .process-overview { grid-template-columns: repeat(4, 1fr); }
+  .step-title { font-size: 28px; }
+}
+@media (max-width: 600px) {
+  .step-btn { min-width: 70px; font-size: 9px; }
+  .step-btn .step-num { font-size: 16px; }
+  .process-overview { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+
+<style>
+.footer-social-btn {
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,0.06);color:var(--muted-lt);
+  transition:background 0.2s,color 0.2s;text-decoration:none;
+}
+.footer-social-btn:hover { background:rgba(201,168,76,0.15);color:var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/home.html" class="nav-logo">
+      <div class="nav-logo-img-wrap">
+        <img src="aip-logo.jpeg" alt="Africa Infrastructure Partners" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;">
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="about.html" data-i18n="nav_about">About Us</a>
+      <a href="sectors.html" data-i18n="nav_sectors">Sectors</a>
+      <a href="services.html" data-i18n="nav_services">Services</a>
+      <a href="insights.html" data-i18n="nav_insights">Insights</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        </div>
+      <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold">AIP Platform →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="demo-hero">
+  <div class="container">
+    <div class="section-label">Platform Demo</div>
+    <h1 class="display-xl" style="margin-bottom:20px;">
+      From Project Intake to<br>
+      <em class="gold" style="font-style:italic">Deal Rooms</em>
+    </h1>
+    <p class="lead" style="max-width:600px; margin:0 auto 0;">
+      A step-by-step walkthrough of AIP's end-to-end infrastructure investment platform — see exactly how we transform raw project concepts into investment-grade, capital-ready opportunities.
+    </p>
+  </div>
+</div>
+
+<!-- DEMO SECTION -->
+<section class="section">
+  <div class="container">
+
+    <!-- Step Navigator -->
+    <div class="step-nav" id="step-nav">
+      <button class="step-btn active" data-step="0">
+        <span class="step-num">01</span>
+        Project Intake
+      </button>
+      <button class="step-btn" data-step="1">
+        <span class="step-num">02</span>
+        AI Screening
+      </button>
+      <button class="step-btn" data-step="2">
+        <span class="step-num">03</span>
+        Due Diligence
+      </button>
+      <button class="step-btn" data-step="3">
+        <span class="step-num">04</span>
+        Structuring
+      </button>
+      <button class="step-btn" data-step="4">
+        <span class="step-num">05</span>
+        Matching
+      </button>
+      <button class="step-btn" data-step="5">
+        <span class="step-num">06</span>
+        Deal Room
+      </button>
+      <button class="step-btn" data-step="6">
+        <span class="step-num">07</span>
+        Financial Close
+      </button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="demo-progress">
+      <div class="demo-progress-fill" id="demo-progress" style="width: 7%"></div>
+    </div>
+
+    <!-- ─── STEP 1: PROJECT INTAKE ─── -->
+    <div class="step-panel active" data-panel="0">
+      <div class="step-grid">
+        <div>
+          <div class="step-phase-tag">Phase 1 · Input</div>
+          <div class="step-title">Project Intake &amp; Registration</div>
+          <div class="step-subtitle">Structured submission for any project stage</div>
+          <p class="step-desc">Project sponsors, governments, and developers submit their infrastructure concepts through a guided intake form. AIP's platform accepts projects at any stage — from pre-feasibility concepts to shovel-ready assets — and immediately begins standardising the data for AI analysis.</p>
+          <div class="step-features">
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Guided structured submission form across 40+ data fields
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Document upload: feasibility studies, permits, land title, PPAs
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Sector classification &amp; automatic pipeline tagging
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Secure sponsor profile creation and verification
+            </div>
+          </div>
+        </div>
+        <div class="step-visual">
+          <div class="step-screen-bar">
+            <div class="s-dot" style="background:#ff5f57"></div>
+            <div class="s-dot" style="background:#febc2e"></div>
+            <div class="s-dot" style="background:#28c840"></div>
+            <div class="step-screen-title">app.africa-infra.com / submit-project</div>
+          </div>
+          <div class="step-screen-body">
+            <div style="font-size:12px; font-weight:600; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:16px;">New Project Submission</div>
+            <div class="sim-form">
+              <div>
+                <div class="sim-label">Project Name</div>
+                <div class="sim-input filled">Dakar Solar Farm Phase II</div>
+              </div>
+              <div class="sim-row">
+                <div>
+                  <div class="sim-label">Sector</div>
+                  <div class="sim-input filled">Energy &amp; Mining</div>
+                </div>
+                <div>
+                  <div class="sim-label">Country</div>
+                  <div class="sim-input filled">🇸🇳 Senegal</div>
+                </div>
+              </div>
+              <div class="sim-row">
+                <div>
+                  <div class="sim-label">Project Size</div>
+                  <div class="sim-input filled">$85,000,000</div>
+                </div>
+                <div>
+                  <div class="sim-label">Stage</div>
+                  <div class="sim-input filled">Pre-Feasibility</div>
+                </div>
+              </div>
+              <div>
+                <div class="sim-label">Documents Uploaded</div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:6px;">
+                  <span class="sim-badge sim-badge-green">✓ Concept Note</span>
+                  <span class="sim-badge sim-badge-green">✓ Land Title</span>
+                  <span class="sim-badge sim-badge-gold">⏳ Feasibility Study</span>
+                </div>
+              </div>
+              <div style="margin-top:8px;">
+                <button style="width:100%; background:var(--gold); color:#0b1628; border:none; border-radius:8px; padding:12px; font-weight:700; font-size:13px; cursor:pointer;">Submit Project for Screening →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── STEP 2: AI SCREENING ─── -->
+    <div class="step-panel" data-panel="1">
+      <div class="step-grid">
+        <div>
+          <div class="step-phase-tag">Phase 2 · AI Process</div>
+          <div class="step-title">AI-Powered Initial Screening</div>
+          <div class="step-subtitle">Risk-adjusted filtering in minutes, not months</div>
+          <p class="step-desc">Within minutes of submission, AIP's AI engine performs an initial viability screening — cross-referencing the project against sector benchmarks, country risk profiles, regulatory databases, and comparable transactions. Projects receive an initial AIP Level score from L1 (concept) to L4 (bankable).</p>
+          <div class="step-features">
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Automated cross-referencing with 10,000+ comparable transactions
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Country risk overlay: political, regulatory, currency, security
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Preliminary AIP Level assignment (L1–L4) with justification
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Red-flag detection: ownership conflicts, permit gaps, market risk
+            </div>
+          </div>
+        </div>
+        <div class="step-visual">
+          <div class="step-screen-bar">
+            <div class="s-dot" style="background:#ff5f57"></div>
+            <div class="s-dot" style="background:#febc2e"></div>
+            <div class="s-dot" style="background:#28c840"></div>
+            <div class="step-screen-title">AI Screening Engine — Live Results</div>
+          </div>
+          <div class="step-screen-body">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+              <div style="font-size:12px; font-weight:600; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em;">Dakar Solar Farm II — Screening</div>
+              <span class="sim-badge sim-badge-green">L2 Initial Pass</span>
+            </div>
+            <div class="sim-score-grid">
+              <div class="sim-score-card">
+                <div class="sim-score-val" style="color:#4ade80;">78</div>
+                <div class="sim-score-lbl">Viability</div>
+              </div>
+              <div class="sim-score-card">
+                <div class="sim-score-val" style="color:var(--gold);">62</div>
+                <div class="sim-score-lbl">Country Risk</div>
+              </div>
+              <div class="sim-score-card">
+                <div class="sim-score-val" style="color:#60a5fa;">71</div>
+                <div class="sim-score-lbl">Market Fit</div>
+              </div>
+              <div class="sim-score-card">
+                <div class="sim-score-val" style="color:#4ade80;">85</div>
+                <div class="sim-score-lbl">Tech Readiness</div>
+              </div>
+              <div class="sim-score-card">
+                <div class="sim-score-val" style="color:var(--gold);">58</div>
+                <div class="sim-score-lbl">Financial</div>
+              </div>
+              <div class="sim-score-card">
+                <div class="sim-score-val" style="color:#f87171;">44</div>
+                <div class="sim-score-lbl">Legal/Permit</div>
+              </div>
+            </div>
+            <div style="margin-top:16px; background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.2); border-radius:8px; padding:10px 14px;">
+              <div style="font-size:11px; font-weight:600; color:#f87171; margin-bottom:4px;">⚠ Red Flag Detected</div>
+              <div style="font-size:12px; color:var(--muted-lt);">Environmental Impact Assessment missing — required for DFI eligibility. Recommend immediate commission.</div>
+            </div>
+            <div style="margin-top:12px; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.2); border-radius:8px; padding:10px 14px;">
+              <div style="font-size:11px; font-weight:600; color:var(--gold); margin-bottom:4px;">→ Recommended Next Step</div>
+              <div style="font-size:12px; color:var(--muted-lt);">Proceed to full PETFEL due diligence. Assign AIP project preparation team.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── STEP 3: DUE DILIGENCE ─── -->
+    <div class="step-panel" data-panel="2">
+      <div class="step-grid">
+        <div>
+          <div class="step-phase-tag">Phase 3 · PETFEL Engine</div>
+          <div class="step-title">PETFEL Due Diligence</div>
+          <div class="step-subtitle">Six-dimension institutional-grade assessment</div>
+          <p class="step-desc">AIP's proprietary PETFEL framework scores projects across six critical dimensions — Political, Economic, Technical, Financial, Environmental, and Legal. Each dimension is verified by both AI workflows and a human analyst overlay, producing an audit-ready due diligence report used by DFIs, pension funds, and sovereign wealth funds.</p>
+          <div class="step-features">
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              P — Political: governance stability, regulatory framework, government support
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              E — Economic: macro-fiscal context, affordability, market demand
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              T — Technical: feasibility, engineering readiness, procurement status
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              F — Financial: model bankability, IRR, offtake risk, blended finance potential
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              E — Environmental: ESG compliance, climate risk, community impact
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              L — Legal: title clarity, concession validity, permit completeness
+            </div>
+          </div>
+        </div>
+        <div class="step-visual">
+          <div class="step-screen-bar">
+            <div class="s-dot" style="background:#ff5f57"></div>
+            <div class="s-dot" style="background:#febc2e"></div>
+            <div class="s-dot" style="background:#28c840"></div>
+            <div class="step-screen-title">PETFEL Engine — Dakar Solar Farm II</div>
+          </div>
+          <div class="step-screen-body">
+            <div style="margin-bottom:16px; display:flex; align-items:center; justify-content:space-between;">
+              <div style="font-size:12px; font-weight:600; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em;">PETFEL Score</div>
+              <span class="sim-badge sim-badge-gold">Overall: 68 / 100</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span style="font-size:12px; color:var(--muted-lt);">Political</span>
+                  <span style="font-size:12px; color:#4ade80; font-weight:600;">74</span>
+                </div>
+                <div style="height:4px; background:var(--border-lt); border-radius:99px; overflow:hidden;">
+                  <div style="width:74%; height:100%; background:#4ade80; border-radius:99px;"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span style="font-size:12px; color:var(--muted-lt);">Economic</span>
+                  <span style="font-size:12px; color:#4ade80; font-weight:600;">80</span>
+                </div>
+                <div style="height:4px; background:var(--border-lt); border-radius:99px; overflow:hidden;">
+                  <div style="width:80%; height:100%; background:#4ade80; border-radius:99px;"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span style="font-size:12px; color:var(--muted-lt);">Technical</span>
+                  <span style="font-size:12px; color:var(--gold); font-weight:600;">67</span>
+                </div>
+                <div style="height:4px; background:var(--border-lt); border-radius:99px; overflow:hidden;">
+                  <div style="width:67%; height:100%; background:var(--gold); border-radius:99px;"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span style="font-size:12px; color:var(--muted-lt);">Financial</span>
+                  <span style="font-size:12px; color:var(--gold); font-weight:600;">62</span>
+                </div>
+                <div style="height:4px; background:var(--border-lt); border-radius:99px; overflow:hidden;">
+                  <div style="width:62%; height:100%; background:var(--gold); border-radius:99px;"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span style="font-size:12px; color:var(--muted-lt);">Environmental</span>
+                  <span style="font-size:12px; color:#4ade80; font-weight:600;">71</span>
+                </div>
+                <div style="height:4px; background:var(--border-lt); border-radius:99px; overflow:hidden;">
+                  <div style="width:71%; height:100%; background:#4ade80; border-radius:99px;"></div>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                  <span style="font-size:12px; color:var(--muted-lt);">Legal</span>
+                  <span style="font-size:12px; color:#f87171; font-weight:600;">44</span>
+                </div>
+                <div style="height:4px; background:var(--border-lt); border-radius:99px; overflow:hidden;">
+                  <div style="width:44%; height:100%; background:#f87171; border-radius:99px;"></div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:16px; font-size:11px; color:var(--muted); border-top:1px solid var(--border-lt); padding-top:12px;">
+              Human analyst review: <span style="color:var(--gold);">In Progress</span> · Est. completion: 72hrs
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── STEP 4: STRUCTURING ─── -->
+    <div class="step-panel" data-panel="3">
+      <div class="step-grid">
+        <div>
+          <div class="step-phase-tag">Phase 4 · Advisory</div>
+          <div class="step-title">Project Preparation &amp; Structuring</div>
+          <div class="step-subtitle">Transforming concepts into bankable assets</div>
+          <p class="step-desc">AIP's technical advisory team works directly with project sponsors to address PETFEL gaps, optimise the financial structure, and produce the Executive Investment Note (EIN) — AIP's proprietary investment memorandum that meets institutional investor standards and DFI requirements.</p>
+          <div class="step-features">
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Financial model review, IRR optimisation, debt-equity structuring
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Risk matrix optimisation and mitigation strategies
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Executive Investment Note (EIN) generation — AI-assisted, analyst-verified
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              AIP Level upgrade: L2 → L3 / L4 (bankable) certification
+            </div>
+          </div>
+        </div>
+        <div class="step-visual">
+          <div class="step-screen-bar">
+            <div class="s-dot" style="background:#ff5f57"></div>
+            <div class="s-dot" style="background:#febc2e"></div>
+            <div class="s-dot" style="background:#28c840"></div>
+            <div class="step-screen-title">Project Preparation Workstream</div>
+          </div>
+          <div class="step-screen-body">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+              <div style="font-size:12px; font-weight:600; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em;">Preparation Timeline</div>
+              <span class="sim-badge sim-badge-blue">Week 3 of 8</span>
+            </div>
+            <div class="sim-timeline">
+              <div class="sim-tl-item">
+                <div class="sim-tl-dot done"></div>
+                <div>
+                  <div class="sim-tl-text">Gap analysis &amp; action plan delivered</div>
+                  <div class="sim-tl-label">Week 1 · Completed</div>
+                </div>
+              </div>
+              <div class="sim-tl-item">
+                <div class="sim-tl-dot done"></div>
+                <div>
+                  <div class="sim-tl-text">Financial model review &amp; restructuring</div>
+                  <div class="sim-tl-label">Week 2 · Completed</div>
+                </div>
+              </div>
+              <div class="sim-tl-item">
+                <div class="sim-tl-dot active"></div>
+                <div>
+                  <div class="sim-tl-text">EIA commission &amp; legal remediation</div>
+                  <div class="sim-tl-label">Weeks 3–5 · In Progress</div>
+                </div>
+              </div>
+              <div class="sim-tl-item">
+                <div class="sim-tl-dot pending"></div>
+                <div>
+                  <div class="sim-tl-text">Executive Investment Note (EIN) drafting</div>
+                  <div class="sim-tl-label">Weeks 6–7 · Pending</div>
+                </div>
+              </div>
+              <div class="sim-tl-item">
+                <div class="sim-tl-dot pending"></div>
+                <div>
+                  <div class="sim-tl-text">L4 Bankable certification &amp; market release</div>
+                  <div class="sim-tl-label">Week 8 · Pending</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── STEP 5: INVESTOR MATCHING ─── -->
+    <div class="step-panel" data-panel="4">
+      <div class="step-grid">
+        <div>
+          <div class="step-phase-tag">Phase 5 · Capital Matching</div>
+          <div class="step-title">AI Investor Matching Engine</div>
+          <div class="step-subtitle">Connecting verified projects with the right capital</div>
+          <p class="step-desc">Once a project achieves L3 or L4 status, AIP's mandate matching engine compares the project profile against 100+ verified investor mandates — including DFIs, private equity funds, sovereign wealth funds, and pension funds — generating a ranked shortlist of best-fit capital partners.</p>
+          <div class="step-features">
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              100+ verified investor mandates across DFIs, PE, SWF, pension funds
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Multi-factor mandate matching: ticket size, sector, country, return profile
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Ranked investor shortlist with match confidence scores
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Investor outreach and NDA management handled by AIP
+            </div>
+          </div>
+        </div>
+        <div class="step-visual">
+          <div class="step-screen-bar">
+            <div class="s-dot" style="background:#ff5f57"></div>
+            <div class="s-dot" style="background:#febc2e"></div>
+            <div class="s-dot" style="background:#28c840"></div>
+            <div class="step-screen-title">Investor Matching — Dakar Solar Farm II</div>
+          </div>
+          <div class="step-screen-body">
+            <div style="font-size:12px; font-weight:600; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:16px;">Top Matched Investors</div>
+            <div class="sim-investor-card">
+              <div class="sim-inv-avatar">IFC</div>
+              <div>
+                <div class="sim-inv-name">IFC / World Bank Group</div>
+                <div class="sim-inv-type">DFI · $20M–$150M · Renewable Energy</div>
+              </div>
+              <div class="sim-inv-match">94%</div>
+            </div>
+            <div class="sim-investor-card">
+              <div class="sim-inv-avatar">ADB</div>
+              <div>
+                <div class="sim-inv-name">African Development Bank</div>
+                <div class="sim-inv-type">DFI · $30M–$200M · West Africa Energy</div>
+              </div>
+              <div class="sim-inv-match">91%</div>
+            </div>
+            <div class="sim-investor-card">
+              <div class="sim-inv-avatar">PE</div>
+              <div>
+                <div class="sim-inv-name">Meridiam Africa Fund III</div>
+                <div class="sim-inv-type">Private Equity · $50M–$300M · Infrastructure</div>
+              </div>
+              <div class="sim-inv-match">87%</div>
+            </div>
+            <div class="sim-investor-card">
+              <div class="sim-inv-avatar">SWF</div>
+              <div>
+                <div class="sim-inv-name">PGGM Infrastructure Fund</div>
+                <div class="sim-inv-type">Pension Fund · $40M+ · Renewable + ESG</div>
+              </div>
+              <div class="sim-inv-match">82%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── STEP 6: DEAL ROOM ─── -->
+    <div class="step-panel" data-panel="5">
+      <div class="step-grid">
+        <div>
+          <div class="step-phase-tag">Phase 6 · Deal Execution</div>
+          <div class="step-title">Secure Deal Room</div>
+          <div class="step-subtitle">Institutional-grade transaction management</div>
+          <p class="step-desc">Matched investors are invited into AIP's secure Deal Room — a private, NDA-protected digital workspace where sponsors and investors can exchange documents, conduct Q&amp;A, track term sheet negotiations, and coordinate with legal and technical advisors — all in one verified environment.</p>
+          <div class="step-features">
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              NDA-protected virtual data room with full audit trail
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              EIN, PETFEL report, and all due diligence documents shared securely
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Term sheet negotiation support and redline tracking
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Multi-party coordination: sponsor, investors, legal, technical advisors
+            </div>
+          </div>
+        </div>
+        <div class="step-visual">
+          <div class="step-screen-bar">
+            <div class="s-dot" style="background:#ff5f57"></div>
+            <div class="s-dot" style="background:#febc2e"></div>
+            <div class="s-dot" style="background:#28c840"></div>
+            <div class="step-screen-title">Deal Room — Dakar Solar II · Confidential</div>
+          </div>
+          <div class="step-screen-body">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+              <div style="font-size:12px; font-weight:600; color:var(--gold); text-transform:uppercase; letter-spacing:0.1em; flex:1;">Document Repository</div>
+              <span class="sim-badge sim-badge-green">🔒 Secure</span>
+            </div>
+            <div class="sim-document-list">
+              <div class="sim-doc-item">
+                <div class="sim-doc-icon" style="background:rgba(201,168,76,0.1);">📄</div>
+                <div class="sim-doc-name">Executive Investment Note (EIN) v2.1</div>
+                <div class="sim-doc-status" style="color:#4ade80;">✓ Available</div>
+              </div>
+              <div class="sim-doc-item">
+                <div class="sim-doc-icon" style="background:rgba(59,130,246,0.1);">📊</div>
+                <div class="sim-doc-name">PETFEL Due Diligence Report</div>
+                <div class="sim-doc-status" style="color:#4ade80;">✓ Available</div>
+              </div>
+              <div class="sim-doc-item">
+                <div class="sim-doc-icon" style="background:rgba(34,197,94,0.1);">💰</div>
+                <div class="sim-doc-name">Financial Model (Base + Stress Cases)</div>
+                <div class="sim-doc-status" style="color:#4ade80;">✓ Available</div>
+              </div>
+              <div class="sim-doc-item">
+                <div class="sim-doc-icon" style="background:rgba(139,92,246,0.1);">⚖️</div>
+                <div class="sim-doc-name">Draft Term Sheet — IFC</div>
+                <div class="sim-doc-status" style="color:var(--gold);">⏳ Under Review</div>
+              </div>
+              <div class="sim-doc-item">
+                <div class="sim-doc-icon" style="background:rgba(107,114,128,0.1);">🌍</div>
+                <div class="sim-doc-name">Environmental Impact Assessment</div>
+                <div class="sim-doc-status" style="color:var(--gold);">⏳ Uploading</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── STEP 7: FINANCIAL CLOSE ─── -->
+    <div class="step-panel" data-panel="6">
+      <div class="step-grid">
+        <div>
+          <div class="step-phase-tag">Phase 7 · Output</div>
+          <div class="step-title">Financial Close &amp; Monitoring</div>
+          <div class="step-subtitle">From term sheet to construction — and beyond</div>
+          <p class="step-desc">AIP supports projects through to financial close — coordinating legal execution, condition precedent tracking, and funds flow. Post-close, AIP continues to provide project monitoring, ESG reporting, and investor relations support, ensuring transparency and accountability throughout construction and operations.</p>
+          <div class="step-features">
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Condition precedent (CP) checklist management and tracking
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Funds flow coordination and drawdown schedule management
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Post-close ESG reporting dashboard for investors
+            </div>
+            <div class="step-feature">
+              <div class="step-feature-check"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Construction monitoring &amp; milestone payment verification
+            </div>
+          </div>
+        </div>
+        <div class="step-visual">
+          <div class="step-screen-bar">
+            <div class="s-dot" style="background:#ff5f57"></div>
+            <div class="s-dot" style="background:#febc2e"></div>
+            <div class="s-dot" style="background:#28c840"></div>
+            <div class="step-screen-title">Financial Close — Dakar Solar Farm II</div>
+          </div>
+          <div class="step-screen-body">
+            <div style="text-align:center; padding:24px 0 20px;">
+              <div style="font-size:48px; margin-bottom:12px;">🎉</div>
+              <div style="font-family:var(--font-display); font-size:22px; font-weight:700; color:#4ade80; margin-bottom:8px;">Financial Close Achieved</div>
+              <div style="font-size:13px; color:var(--muted); margin-bottom:20px;">Dakar Solar Farm Phase II · $85M · 12 Apr 2026</div>
+            </div>
+            <div class="sim-score-grid">
+              <div class="sim-score-card">
+                <div class="sim-score-val" style="color:var(--gold);">$85M</div>
+                <div class="sim-score-lbl">Total Raised</div>
+              </div>
+              <div class="sim-score-card">
+                <div class="sim-score-val" style="color:#4ade80;">3</div>
+                <div class="sim-score-lbl">Co-investors</div>
+              </div>
+              <div class="sim-score-card">
+                <div class="sim-score-val" style="color:#60a5fa;">14 wks</div>
+                <div class="sim-score-lbl">Intake to Close</div>
+              </div>
+            </div>
+            <div style="margin-top:16px; display:flex; flex-direction:column; gap:6px;">
+              <div style="display:flex; justify-content:space-between; font-size:12px; padding:6px 0; border-bottom:1px solid var(--border-lt);">
+                <span style="color:var(--muted);">Lead Investor</span>
+                <span style="color:var(--white); font-weight:500;">IFC / World Bank</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:12px; padding:6px 0; border-bottom:1px solid var(--border-lt);">
+                <span style="color:var(--muted);">AIP Level at Close</span>
+                <span style="color:#4ade80; font-weight:600;">L4 — Bankable</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:12px; padding:6px 0;">
+                <span style="color:var(--muted);">Construction Start</span>
+                <span style="color:var(--white); font-weight:500;">Q3 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="demo-nav-btns">
+      <button class="btn btn-outline" id="btn-prev" onclick="changeStep(-1)" disabled>← Previous</button>
+      <button class="btn btn-gold" id="btn-next" onclick="changeStep(1)">Next Step →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS OVERVIEW -->
+<section class="section" style="background:var(--navy-mid); border-top:1px solid var(--border-lt); border-bottom:1px solid var(--border-lt);">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">End-to-End Process</div>
+      <h2 class="display-lg">The complete AIP journey</h2>
+      <p class="lead" style="margin:16px auto 0; text-align:center;">From raw concept to monitored investment in as few as 14 weeks.</p>
+    </div>
+    <div class="process-overview" style="margin-bottom:40px;">
+      <div class="process-step">
+        <div class="process-step-num">01</div>
+        <div class="process-step-name">Project Intake &amp; Registration</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">02</div>
+        <div class="process-step-name">AI Initial Screening</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">03</div>
+        <div class="process-step-name">PETFEL Due Diligence</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">04</div>
+        <div class="process-step-name">Project Preparation &amp; Structuring</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">05</div>
+        <div class="process-step-name">Investor Matching</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">06</div>
+        <div class="process-step-name">Secure Deal Room</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">07</div>
+        <div class="process-step-name">Financial Close &amp; Monitoring</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="container">
+    <div class="section-label">Get Started</div>
+    <h2 class="display-lg" style="margin-bottom:16px;">Ready to submit your project<br>or access the pipeline?</h2>
+    <p class="lead" style="margin:0 auto 40px; text-align:center;">Whether you're a project sponsor seeking capital or an investor seeking bankable deal flow, AIP is your platform.</p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold btn-lg">Submit a Project →</a>
+      <a href="contact.html" class="btn btn-outline btn-lg">Speak to Our Team</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="/home.html" class="nav-logo" style="margin-bottom:16px;">
+          <div class="nav-logo-img-wrap">
+            <img src="aip-logo.jpeg" alt="AIP" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;">
+          </div>
+        </a>
+        <p class="footer-desc">Connecting Africa's infrastructure projects with global capital. We structure, verify, and facilitate investments to drive sustainable development across the continent.</p>
+      </div>
+      <div>
+        <div class="footer-heading">Platform</div>
+        <div class="footer-links">
+          <a href="sectors.html">Sectors</a>
+          <a href="services.html">Services</a>
+          <a href="insights.html">Insights</a>
+          <a href="podcast.html">Podcast</a>
+          <a href="demo.html">Platform Demo</a>
+          <a href="https://app.africa-infra.com" target="_blank">Log In</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Legal</div>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Routes des Almadies, Dakar, Senegal
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          info@africa-infra.com
+        </div>
+        <div class="footer-contact-item">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+          +221 77 486 79 27
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-text">© 2023–2026 Africa Infrastructure Partners. All rights reserved.</div>
+      <div class="footer-bottom-text" style="color:var(--gold); font-size:12px;">Better tools for a better Africa</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+var currentStep = 0;
+var totalSteps = 7;
+
+function changeStep(dir) {
+  var panels = document.querySelectorAll('.step-panel');
+  var btns = document.querySelectorAll('.step-btn');
+  panels[currentStep].classList.remove('active');
+  btns[currentStep].classList.remove('active');
+  currentStep = Math.max(0, Math.min(totalSteps - 1, currentStep + dir));
+  panels[currentStep].classList.add('active');
+  btns[currentStep].classList.add('active');
+  document.getElementById('demo-progress').style.width = ((currentStep + 1) / totalSteps * 100) + '%';
+  document.getElementById('btn-prev').disabled = currentStep === 0;
+  document.getElementById('btn-next').disabled = currentStep === totalSteps - 1;
+  // Scroll to top of demo section
+  document.getElementById('step-nav').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+document.querySelectorAll('.step-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var target = parseInt(btn.dataset.step);
+    changeStep(target - currentStep);
+  });
+});
+</script>
+<script src="i18n.js"></script>
+
+<!-- ── COOKIE CONSENT ─────────────────────────────────────────────── -->
+<div id="cookie-banner" style="
+  position:fixed;bottom:0;left:0;right:0;z-index:99999;
+  background:rgba(11,22,40,0.97);
+  border-top:1px solid rgba(201,168,76,0.25);
+  padding:20px 24px;
+  display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;
+  backdrop-filter:blur(12px);
+  font-size:13px;color:#8b9ab0;
+  transform:translateY(100%);transition:transform 0.4s ease;
+">
+  <div style="flex:1;min-width:260px;">
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:16px;font-weight:600;color:#f8f8f5;margin-bottom:6px;">We use cookies 🍪</div>
+    <p style="margin:0;line-height:1.6;">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behaviour or unique IDs on this site. Not consenting or withdrawing consent may adversely affect certain features and functions.</p>
+    <div style="margin-top:10px;font-size:11px;display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Privacy Policy</a>
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Terms of Service</a>
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Cookie Policy</a>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;align-self:center;">
+    <button onclick="acceptCookies()" style="
+      background:#c9a84c;color:#0b1628;border:none;border-radius:8px;
+      padding:10px 22px;font-weight:700;font-size:13px;cursor:pointer;
+      white-space:nowrap;transition:background 0.2s;
+    " onmouseover="this.style.background='#e0c07a'" onmouseout="this.style.background='#c9a84c'">Accept All</button>
+    <button onclick="declineCookies()" style="
+      background:transparent;color:#8b9ab0;border:1px solid rgba(255,255,255,0.12);
+      border-radius:8px;padding:9px 22px;font-size:13px;cursor:pointer;
+      white-space:nowrap;transition:all 0.2s;
+    " onmouseover="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color='#b0bfd4'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='#8b9ab0'">Decline</button>
+  </div>
+</div>
+
+<!-- Cookie Policy Modal -->
+<div id="cookie-modal" style="display:none;position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;padding:24px;">
+  <div style="background:#192341;border:1px solid rgba(201,168,76,0.2);border-radius:16px;max-width:540px;width:100%;padding:36px;position:relative;max-height:80vh;overflow-y:auto;">
+    <button onclick="document.getElementById('cookie-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;color:#8b9ab0;font-size:20px;cursor:pointer;line-height:1;">✕</button>
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;color:#f8f8f5;margin-bottom:16px;">Cookie &amp; Privacy Policy</div>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:12px;">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behaviour or unique IDs on this site. Not consenting or withdrawing consent may adversely affect certain features and functions.</p>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:12px;"><strong style="color:#f8f8f5;">What we collect:</strong> We may collect usage data, session identifiers, and anonymised analytics to improve platform performance and user experience. We do not sell personal data to third parties.</p>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:20px;"><strong style="color:#f8f8f5;">Your rights:</strong> You may withdraw consent at any time by clearing browser cookies or contacting us at <a href="mailto:info@africa-infra.com" style="color:#c9a84c;">info@africa-infra.com</a>.</p>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button onclick="declineCookies()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:#8b9ab0;border-radius:8px;padding:10px 18px;font-size:13px;cursor:pointer;">Decline</button>
+      <button onclick="acceptCookies()" style="background:#c9a84c;color:#0b1628;border:none;border-radius:8px;padding:10px 20px;font-weight:700;font-size:13px;cursor:pointer;">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var banner = document.getElementById('cookie-banner');
+  if (!localStorage.getItem('aip_cookie_consent')) {
+    setTimeout(function() { banner.style.transform = 'translateY(0)'; }, 800);
+  }
+})();
+function acceptCookies() {
+  localStorage.setItem('aip_cookie_consent', 'accepted');
+  document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+  document.getElementById('cookie-modal').style.display = 'none';
+}
+function declineCookies() {
+  localStorage.setItem('aip_cookie_consent', 'declined');
+  document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+  document.getElementById('cookie-modal').style.display = 'none';
+}
+function showCookiePolicy(e) {
+  e.preventDefault();
+  document.getElementById('cookie-modal').style.display = 'flex';
+}
+</script>
+</body>
+</html>

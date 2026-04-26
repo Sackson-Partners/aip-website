@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sectors – AIP Africa Infrastructure Partners</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.sector-card {
+  background: var(--navy-card);
+  border: 1px solid var(--border-lt);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  transition: all 0.3s;
+}
+.sector-card:hover { border-color: var(--border); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.sector-header {
+  padding: 40px 48px 32px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 24px;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border-lt);
+}
+.sector-icon-wrap {
+  width: 52px; height: 52px;
+  background: rgba(201,168,76,0.12);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.sector-title { font-family: var(--font-display); font-size: 32px; font-weight: 600; margin-bottom: 8px; }
+.sector-desc { font-size: 15px; color: var(--muted-lt); line-height: 1.7; }
+.sector-body {
+  padding: 32px 48px 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+}
+.sector-snap-title {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sector-snap-title::before { content:''; width:16px; height:2px; background:var(--gold); }
+.snap-stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 0; }
+.snap-stat {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-lt);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 11px;
+  color: var(--muted-lt);
+  flex: 1;
+  min-width: 90px;
+  line-height: 1.4;
+}
+.snap-stat strong { display: block; color: var(--gold); font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.coverage-list, .delivers-list { display: flex; flex-direction: column; gap: 8px; }
+.coverage-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--muted-lt); line-height: 1.5; }
+.coverage-item::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--muted); flex-shrink: 0; margin-top: 6px; }
+.delivers-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--muted-lt); line-height: 1.5; }
+.delivers-check { color: var(--gold); flex-shrink: 0; font-size: 14px; }
+.sector-cta {
+  padding: 20px 48px 24px;
+  border-top: 1px solid var(--border-lt);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.sector-cta-text { font-size: 13px; color: var(--muted); }
+</style>
+
+<style>
+.footer-social-btn {
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,0.06);color:var(--muted-lt);
+  transition:background 0.2s,color 0.2s;text-decoration:none;
+}
+.footer-social-btn:hover { background:rgba(201,168,76,0.15);color:var(--gold); }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/home.html" class="nav-logo">
+      <div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="Africa Infrastructure Partners" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;"></div>
+    </a>
+    <div class="nav-links">
+      <a href="about.html" data-i18n="nav_about">About Us</a>
+      <a href="sectors.html" class="active" data-i18n="nav_sectors">Sectors</a>
+      <a href="services.html" data-i18n="nav_services">Services</a>
+      <a href="insights.html" data-i18n="nav_insights">Insights</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        </div>
+      <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold">AIP Platform →</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="section-label">Sectors we Operate In</div>
+    <h1 class="display-xl" style="margin-bottom:20px;">Verified, investment-ready<br>opportunities across <em class="gold" style="font-style:italic">Africa</em></h1>
+    <p class="lead" style="margin:0 auto; text-align:center; max-width:580px;">Access six high-impact sectors with deep coverage, AI-verified data, and end-to-end deal support.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    <!-- ENERGY -->
+    <div class="sector-card">
+      <div class="sector-header">
+        <div class="sector-icon-wrap"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div>
+          <div class="sector-title">Energy &amp; Mining</div>
+          <div class="sector-desc">Powering industrialisation and lighting up the continent. From utility-scale solar to off-grid solutions, AIP structures bankable energy deals across the full generation and distribution value chain. Beyond power, AIP actively covers <strong style="color:var(--muted-lt);">Mining &amp; Critical Minerals</strong> — including gold, lithium, cobalt, manganese, and rare earth extraction projects — connecting mining sponsors with project finance, streaming arrangements, and royalty capital. Africa holds over 30% of the world's critical mineral reserves, and AIP is uniquely positioned to structure investment-grade deals across the full mining value chain: exploration, extraction, processing, and logistics.</div>
+        </div>
+      </div>
+      <div class="sector-body">
+        <div>
+          <div class="sector-snap-title">Opportunity Snapshot</div>
+          <div class="snap-stats">
+            <div class="snap-stat"><strong>600M+</strong>people lack electricity access</div>
+            <div class="snap-stat"><strong>$190bn/yr</strong>investment needed</div>
+            <div class="snap-stat"><strong>60%</strong>world's best solar resources</div>
+          </div>
+        </div>
+        <div>
+          <div class="sector-snap-title">Key Coverage</div>
+          <div class="coverage-list">
+            <div class="coverage-item">Renewable Energy (Solar, Wind, Hydro)</div>
+            <div class="coverage-item">Transmission &amp; Grid Modernisation</div>
+            <div class="coverage-item">Off-grid &amp; Mini-grid Solutions</div>
+            <div class="coverage-item">Gas-to-Power Transitions</div>
+          </div>
+        </div>
+        <div>
+          <div class="sector-snap-title">AIP Delivers</div>
+          <div class="delivers-list">
+            <div class="delivers-item"><span class="delivers-check">✓</span>PPA bankability verification</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Sovereign guarantee alternatives</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Climate finance taxonomy alignment</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Off-taker risk structuring</div>
+          </div>
+        </div>
+      </div>
+      <div class="sector-cta">
+        <span class="sector-cta-text">150+ energy &amp; mining projects in the pipeline across 30 African markets</span>
+        <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold">Explore Projects →</a>
+      </div>
+    </div>
+
+    <!-- WATER -->
+    <div class="sector-card">
+      <div class="sector-header">
+        <div class="sector-icon-wrap"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg></div>
+        <div>
+          <div class="sector-title">Water &amp; Sanitation</div>
+          <div class="sector-desc">Ensuring sustainable access to life's most critical resource. AIP structures blended finance solutions for water treatment, distribution, and sanitation infrastructure across urban and rural markets.</div>
+        </div>
+      </div>
+      <div class="sector-body">
+        <div>
+          <div class="sector-snap-title">Opportunity Snapshot</div>
+          <div class="snap-stats">
+            <div class="snap-stat"><strong>Only 31%</strong>have safely managed drinking water</div>
+            <div class="snap-stat"><strong>6–13×</strong>acceleration needed for SDG targets</div>
+            <div class="snap-stat"><strong>$30bn/yr</strong>mobilisation goal</div>
+          </div>
+        </div>
+        <div>
+          <div class="sector-snap-title">Key Coverage</div>
+          <div class="coverage-list">
+            <div class="coverage-item">Water Treatment &amp; Desalination</div>
+            <div class="coverage-item">Urban Distribution Networks</div>
+            <div class="coverage-item">Sanitation &amp; Waste Management</div>
+            <div class="coverage-item">Agricultural Irrigation Systems</div>
+          </div>
+        </div>
+        <div>
+          <div class="sector-snap-title">AIP Delivers</div>
+          <div class="delivers-list">
+            <div class="delivers-item"><span class="delivers-check">✓</span>Tariff structuring &amp; subsidy models</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Municipal finance aggregation</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Impact measurement frameworks</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>DFI facility structuring</div>
+          </div>
+        </div>
+      </div>
+      <div class="sector-cta">
+        <span class="sector-cta-text">$30bn mobilisation gap addressable through blended finance</span>
+        <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold">Explore Projects →</a>
+      </div>
+    </div>
+
+    <!-- AGRICULTURE -->
+    <div class="sector-card">
+      <div class="sector-header">
+        <div class="sector-icon-wrap"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22V12M12 12C12 12 7 10 7 5c0 3 3 5 5 7zM12 12c0 0 5-2 5-7-2 3-5 5-5 7z"/></svg></div>
+        <div>
+          <div class="sector-title">Agriculture &amp; Food Systems</div>
+          <div class="sector-desc">Transforming subsistence into food security and global export power. AIP connects agri-logistics, processing, and food park projects with private equity, off-taker finance, and blended capital.</div>
+        </div>
+      </div>
+      <div class="sector-body">
+        <div>
+          <div class="sector-snap-title">Opportunity Snapshot</div>
+          <div class="snap-stats">
+            <div class="snap-stat"><strong>$110bn+</strong>food import bill projected</div>
+            <div class="snap-stat"><strong>20–40%</strong>post-harvest losses</div>
+            <div class="snap-stat"><strong>Only 6%</strong>of cultivated area irrigated</div>
+          </div>
+        </div>
+        <div>
+          <div class="sector-snap-title">Key Coverage</div>
+          <div class="coverage-list">
+            <div class="coverage-item">Agro-processing Zones &amp; Parks</div>
+            <div class="coverage-item">Cold Chain Logistics &amp; Warehousing</div>
+            <div class="coverage-item">Irrigation Infrastructure</div>
+            <div class="coverage-item">Fertiliser &amp; Input Production</div>
+          </div>
+        </div>
+        <div>
+          <div class="sector-snap-title">AIP Delivers</div>
+          <div class="delivers-list">
+            <div class="delivers-item"><span class="delivers-check">✓</span>Supply chain financing structures</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Offtake agreement verification</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Crop insurance integration</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Export corridor analysis</div>
+          </div>
+        </div>
+      </div>
+      <div class="sector-cta">
+        <span class="sector-cta-text">Africa's agricultural potential: 60% of the world's uncultivated arable land</span>
+        <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold">Explore Projects →</a>
+      </div>
+    </div>
+
+    <!-- TRANSPORT -->
+    <div class="sector-card">
+      <div class="sector-header">
+        <div class="sector-icon-wrap"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8zM2 19h20M5 19v3M19 19v3"/></svg></div>
+        <div>
+          <div class="sector-title">Transport, Logistics &amp; Real Assets</div>
+          <div class="sector-desc">Building the physical backbone of African economies. AIP structures PPP, BOT, and availability payment models for ports, roads, rail corridors, and industrial parks.</div>
+        </div>
+      </div>
+      <div class="sector-body">
+        <div>
+          <div class="sector-snap-title">Opportunity Snapshot</div>
+          <div class="snap-stats">
+            <div class="snap-stat"><strong>$181–221bn/yr</strong>infrastructure needs</div>
+            <div class="snap-stat"><strong>109%</strong>intra-African export growth potential</div>
+            <div class="snap-stat"><strong>51M+</strong>housing unit shortfall</div>
+          </div>
+        </div>
+        <div>
+          <div class="sector-snap-title">Key Coverage</div>
+          <div class="coverage-list">
+            <div class="coverage-item">Ports, Airports &amp; Railways</div>
+            <div class="coverage-item">Road Networks &amp; Urban Transit</div>
+            <div class="coverage-item">Industrial Parks &amp; SEZs</div>
+            <div class="coverage-item">Affordable Housing Developments</div>
+          </div>
+        </div>
+        <div>
+          <div class="sector-snap-title">AIP Delivers</div>
+          <div class="delivers-list">
+            <div class="delivers-item"><span class="delivers-check">✓</span>De-risked project structuring</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Traffic/demand risk mitigation</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Blended finance coordination</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Corridor economic analysis</div>
+          </div>
+        </div>
+      </div>
+      <div class="sector-cta">
+        <span class="sector-cta-text">AfCFTA creates $3.4 trillion in new intra-African trade opportunities</span>
+        <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold">Explore Projects →</a>
+      </div>
+    </div>
+
+    <!-- TMT -->
+    <div class="sector-card">
+      <div class="sector-header">
+        <div class="sector-icon-wrap"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg></div>
+        <div>
+          <div class="sector-title">TMT — Digital &amp; Connectivity</div>
+          <div class="sector-desc">Bridging the digital divide to enable the knowledge economy. AIP matches fibre, data centre, and tower infrastructure projects with infrastructure funds, strategic JVs, and DFI capital.</div>
+        </div>
+      </div>
+      <div class="sector-body">
+        <div>
+          <div class="sector-snap-title">Opportunity Snapshot</div>
+          <div class="snap-stats">
+            <div class="snap-stat"><strong>Only 38%</strong>online in Africa</div>
+            <div class="snap-stat"><strong>527M</strong>mobile subscribers</div>
+            <div class="snap-stat"><strong>$220bn</strong>economic value generated</div>
+          </div>
+        </div>
+        <div>
+          <div class="sector-snap-title">Key Coverage</div>
+          <div class="coverage-list">
+            <div class="coverage-item">Fibre Optic Backbones (Terrestrial/Subsea)</div>
+            <div class="coverage-item">Data Centres &amp; Cloud Infrastructure</div>
+            <div class="coverage-item">TowerCos &amp; Active Infrastructure</div>
+            <div class="coverage-item">Last-mile Connectivity Solutions</div>
+          </div>
+        </div>
+        <div>
+          <div class="sector-snap-title">AIP Delivers</div>
+          <div class="delivers-list">
+            <div class="delivers-item"><span class="delivers-check">✓</span>Spectrum license due diligence</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Anchor tenant verification</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Tech-enabled asset monitoring</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Co-location revenue modelling</div>
+          </div>
+        </div>
+      </div>
+      <div class="sector-cta">
+        <span class="sector-cta-text">Digital infrastructure investment gap: $100bn+ across Sub-Saharan Africa</span>
+        <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold">Explore Projects →</a>
+      </div>
+    </div>
+
+    <!-- HEALTHCARE -->
+    <div class="sector-card">
+      <div class="sector-header">
+        <div class="sector-icon-wrap"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div>
+          <div class="sector-title">Healthcare &amp; Social Infrastructures</div>
+          <div class="sector-desc">Strengthening resilience through modern medical infrastructure. AIP structures availability payment, DBFOM, and social bond models for hospitals, clinics, universities, and health PPPs.</div>
+        </div>
+      </div>
+      <div class="sector-body">
+        <div>
+          <div class="sector-snap-title">Opportunity Snapshot</div>
+          <div class="snap-stats">
+            <div class="snap-stat"><strong>6.1M</strong>health worker shortage by 2030</div>
+            <div class="snap-stat"><strong>25%</strong>disease burden, 3% workforce</div>
+            <div class="snap-stat"><strong>$259bn</strong>healthcare sector by 2030</div>
+          </div>
+        </div>
+        <div>
+          <div class="sector-snap-title">Key Coverage</div>
+          <div class="coverage-list">
+            <div class="coverage-item">Hospitals &amp; Specialist Clinics</div>
+            <div class="coverage-item">Diagnostic &amp; Laboratory Centers</div>
+            <div class="coverage-item">Pharmaceutical Manufacturing</div>
+            <div class="coverage-item">Health Tech &amp; Telemedicine Platforms</div>
+          </div>
+        </div>
+        <div>
+          <div class="sector-snap-title">AIP Delivers</div>
+          <div class="delivers-list">
+            <div class="delivers-item"><span class="delivers-check">✓</span>Equipment financing structures</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Operator due diligence</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Social impact bond structuring</div>
+            <div class="delivers-item"><span class="delivers-check">✓</span>Government availability payments</div>
+          </div>
+        </div>
+      </div>
+      <div class="sector-cta">
+        <span class="sector-cta-text">Africa needs 300,000+ new health facilities to meet the 2030 SDG targets</span>
+        <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold">Explore Projects →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<div style="background:var(--navy-mid); border-top:1px solid var(--border-lt); padding:80px 0; text-align:center;">
+  <div class="container">
+    <h2 class="display-md" style="margin-bottom:16px;">Ready to access <em class="gold" style="font-style:italic">verified projects?</em></h2>
+    <p style="color:var(--muted); margin-bottom:32px; font-size:16px;">Browse our curated pipeline and connect with investment-ready infrastructure opportunities.</p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      
+      <a href="contact.html" class="btn btn-outline btn-lg">Speak to Our Team</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="nav-logo" style="margin-bottom:16px;"><div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="AIP" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;"></div></div>
+        <p class="footer-desc">Connecting Africa's infrastructure projects with global capital. We structure, verify, and facilitate investments to drive sustainable development across the continent.</p>
+      </div>
+      <div><div class="footer-heading">Platform</div><div class="footer-links"><a href="sectors.html">Sectors</a><a href="services.html">Services</a><a href="insights.html">Insights</a><a href="https://app.africa-infra.com" target="_blank">Log In</a></div></div>
+      <div><div class="footer-heading">Legal</div><div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a></div></div>
+      <div><div class="footer-heading">Contact</div><div class="footer-contact-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@africa-infra.com</div><div class="footer-contact-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Routes des Almadies, Dakar, Senegal</div></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-bottom-text">© 2023–2026 Africa Infrastructure Partners. All rights reserved.</div><div class="footer-bottom-text" style="color:var(--gold); font-size:12px;">Better tools for a better Africa</div></div>
+  </div>
+</footer>
+<script src="i18n.js"></script>
+
+<!-- ── COOKIE CONSENT ─────────────────────────────────────────────── -->
+<div id="cookie-banner" style="
+  position:fixed;bottom:0;left:0;right:0;z-index:99999;
+  background:rgba(11,22,40,0.97);
+  border-top:1px solid rgba(201,168,76,0.25);
+  padding:20px 24px;
+  display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;
+  backdrop-filter:blur(12px);
+  font-size:13px;color:#8b9ab0;
+  transform:translateY(100%);transition:transform 0.4s ease;
+">
+  <div style="flex:1;min-width:260px;">
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:16px;font-weight:600;color:#f8f8f5;margin-bottom:6px;">We use cookies 🍪</div>
+    <p style="margin:0;line-height:1.6;">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behaviour or unique IDs on this site. Not consenting or withdrawing consent may adversely affect certain features and functions.</p>
+    <div style="margin-top:10px;font-size:11px;display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Privacy Policy</a>
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Terms of Service</a>
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Cookie Policy</a>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;align-self:center;">
+    <button onclick="acceptCookies()" style="
+      background:#c9a84c;color:#0b1628;border:none;border-radius:8px;
+      padding:10px 22px;font-weight:700;font-size:13px;cursor:pointer;
+      white-space:nowrap;transition:background 0.2s;
+    " onmouseover="this.style.background='#e0c07a'" onmouseout="this.style.background='#c9a84c'">Accept All</button>
+    <button onclick="declineCookies()" style="
+      background:transparent;color:#8b9ab0;border:1px solid rgba(255,255,255,0.12);
+      border-radius:8px;padding:9px 22px;font-size:13px;cursor:pointer;
+      white-space:nowrap;transition:all 0.2s;
+    " onmouseover="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color='#b0bfd4'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='#8b9ab0'">Decline</button>
+  </div>
+</div>
+
+<!-- Cookie Policy Modal -->
+<div id="cookie-modal" style="display:none;position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;padding:24px;">
+  <div style="background:#192341;border:1px solid rgba(201,168,76,0.2);border-radius:16px;max-width:540px;width:100%;padding:36px;position:relative;max-height:80vh;overflow-y:auto;">
+    <button onclick="document.getElementById('cookie-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;color:#8b9ab0;font-size:20px;cursor:pointer;line-height:1;">✕</button>
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;color:#f8f8f5;margin-bottom:16px;">Cookie &amp; Privacy Policy</div>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:12px;">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behaviour or unique IDs on this site. Not consenting or withdrawing consent may adversely affect certain features and functions.</p>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:12px;"><strong style="color:#f8f8f5;">What we collect:</strong> We may collect usage data, session identifiers, and anonymised analytics to improve platform performance and user experience. We do not sell personal data to third parties.</p>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:20px;"><strong style="color:#f8f8f5;">Your rights:</strong> You may withdraw consent at any time by clearing browser cookies or contacting us at <a href="mailto:info@africa-infra.com" style="color:#c9a84c;">info@africa-infra.com</a>.</p>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button onclick="declineCookies()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:#8b9ab0;border-radius:8px;padding:10px 18px;font-size:13px;cursor:pointer;">Decline</button>
+      <button onclick="acceptCookies()" style="background:#c9a84c;color:#0b1628;border:none;border-radius:8px;padding:10px 20px;font-weight:700;font-size:13px;cursor:pointer;">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var banner = document.getElementById('cookie-banner');
+  if (!localStorage.getItem('aip_cookie_consent')) {
+    setTimeout(function() { banner.style.transform = 'translateY(0)'; }, 800);
+  }
+})();
+function acceptCookies() {
+  localStorage.setItem('aip_cookie_consent', 'accepted');
+  document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+  document.getElementById('cookie-modal').style.display = 'none';
+}
+function declineCookies() {
+  localStorage.setItem('aip_cookie_consent', 'declined');
+  document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+  document.getElementById('cookie-modal').style.display = 'none';
+}
+function showCookiePolicy(e) {
+  e.preventDefault();
+  document.getElementById('cookie-modal').style.display = 'flex';
+}
+</script>
+</body>
+</html>

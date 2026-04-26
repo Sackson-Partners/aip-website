@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights – AIP Africa Infrastructure Partners</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.insights-hero {
+  padding-top: calc(var(--nav-h) + 72px);
+  padding-bottom: 72px;
+  background: var(--white-pure);
+  color: var(--navy);
+}
+.insights-hero .section-label { color: var(--gold-dk); border-color: rgba(168,136,47,0.3); }
+.insights-hero h1 { font-family: var(--font-display); font-size: clamp(52px, 7vw, 96px); font-weight: 700; line-height: 1; letter-spacing: -0.02em; }
+.insights-hero h1 .gold { color: var(--gold-dk); }
+.insights-hero p { color: #4a5a6e; font-size: 17px; line-height: 1.7; max-width: 560px; margin: 20px 0 32px; }
+
+/* Podcast banner */
+.podcast-banner {
+  background: var(--navy);
+  border-radius: 16px;
+  padding: 28px 36px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 64px;
+}
+.podcast-icon {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--navy);
+  flex-shrink: 0;
+}
+.podcast-title { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+.podcast-desc { font-size: 13px; color: var(--muted); }
+.podcast-btn { margin-left: auto; flex-shrink: 0; }
+
+/* Article grid */
+.articles-section { background: var(--white-pure); color: var(--navy); }
+.article-card {
+  background: #fff;
+  border: 1px solid #e5eaf2;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all 0.25s;
+  cursor: pointer;
+}
+.article-card:hover { border-color: #c5d0e0; box-shadow: 0 12px 40px rgba(11,22,40,0.1); transform: translateY(-2px); }
+.article-img {
+  height: 180px;
+  background: linear-gradient(135deg, #1a2540, #0b1628);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.article-img-pattern {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(201,168,76,0.04) 0, rgba(201,168,76,0.04) 1px, transparent 0, transparent 50%);
+  background-size: 20px 20px;
+}
+.article-img-label { position: relative; font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--border); padding: 4px 12px; border-radius: 100px; }
+.article-content { padding: 24px; }
+.article-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 12px;
+}
+.tag-update { background: rgba(201,136,47,0.1); color: #a87820; }
+.tag-report { background: rgba(11,22,40,0.06); color: #3a4a60; }
+.tag-analysis { background: rgba(34,100,197,0.1); color: #2264c5; }
+.article-title { font-family: var(--font-display); font-size: 19px; font-weight: 600; color: var(--navy); margin-bottom: 8px; line-height: 1.3; }
+.article-excerpt { font-size: 13px; color: #5a6a80; line-height: 1.6; margin-bottom: 16px; }
+.article-meta { display: flex; align-items: center; gap: 12px; font-size: 11px; color: #8090a8; }
+.article-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: #c0cad8; }
+
+/* Top stories sidebar */
+.stories-sidebar { display: flex; flex-direction: column; gap: 16px; }
+.story-item {
+  padding: 16px 0;
+  border-bottom: 1px solid #e8eef6;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  cursor: pointer;
+}
+.story-item:last-child { border-bottom: none; }
+.story-num { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: #dde4ee; line-height: 1; flex-shrink: 0; width: 32px; }
+.story-title { font-size: 14px; font-weight: 500; color: var(--navy); line-height: 1.4; margin-bottom: 6px; }
+.story-meta { font-size: 11px; color: #8090a8; }
+.story-tag { display: inline-block; font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border-radius: 100px; margin-bottom: 6px; }
+
+/* Newsletter */
+.newsletter-section {
+  background: var(--navy);
+  padding: 96px 0;
+  text-align: center;
+}
+.newsletter-form { display: flex; gap: 12px; max-width: 480px; margin: 32px auto 0; }
+.newsletter-input {
+  flex: 1;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 13px 20px;
+  font-size: 15px;
+  color: var(--white);
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.newsletter-input::placeholder { color: var(--muted); }
+.newsletter-input:focus { border-color: var(--gold); }
+.newsletter-trust { font-size: 12px; color: var(--muted); margin-top: 14px; }
+
+/* Category tabs */
+.category-tabs { display: flex; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
+.cat-tab {
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid #dde4ee;
+  color: #5a6a80;
+  background: transparent;
+}
+.cat-tab.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.cat-tab:hover:not(.active) { border-color: var(--navy); color: var(--navy); }
+</style>
+
+<style>
+.footer-social-btn {
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,0.06);color:var(--muted-lt);
+  transition:background 0.2s,color 0.2s;text-decoration:none;
+}
+.footer-social-btn:hover { background:rgba(201,168,76,0.15);color:var(--gold); }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/home.html" class="nav-logo">
+      <div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="Africa Infrastructure Partners" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;"></div>
+    </a>
+    <div class="nav-links">
+      <a href="about.html" data-i18n="nav_about">About Us</a>
+      <a href="sectors.html" data-i18n="nav_sectors">Sectors</a>
+      <a href="services.html" data-i18n="nav_services">Services</a>
+      <a href="insights.html" class="active" data-i18n="nav_insights">Insights</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        </div>
+      <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold">AIP Platform →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- INSIGHTS HERO — white background -->
+<div class="insights-hero">
+  <div class="container">
+    <div class="section-label">AIP Insights</div>
+    <h1><span>AIP</span> <em class="gold" style="font-style:italic">Insights</em></h1>
+    <p>Access up-to-date, local insights on Africa's infrastructure pipelines from our real-time analytics, policy briefs, and executive reports.</p>
+    <a href="#newsletter" class="btn btn-gold btn-lg">Subscribe for Free</a>
+
+    <!-- Podcast banner -->
+    <div class="podcast-banner" style="margin-top:48px;">
+      <div class="podcast-icon">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+      </div>
+      <div>
+        <div class="podcast-title">Ground Truth Podcast</div>
+        <div class="podcast-desc">Unscripted conversations with Africa's leaders on the real process of infrastructure delivery.</div>
+      </div>
+      <div class="podcast-btn">
+        <a href="podcast.html" class="btn btn-outline-gold">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Listen to Latest Episode
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLES -->
+<section class="section articles-section">
+  <div class="container">
+    <div style="display:grid; grid-template-columns:1fr 320px; gap:56px; align-items:start;">
+      <div>
+        <div class="category-tabs">
+          <button class="cat-tab active">All</button>
+          <button class="cat-tab">Energy</button>
+          <button class="cat-tab">Water</button>
+          <button class="cat-tab">Transport</button>
+          <button class="cat-tab">Policy</button>
+          <button class="cat-tab">Markets</button>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:24px;">
+          <div class="article-card" style="display:grid; grid-template-columns:200px 1fr;">
+            <div class="article-img"><div class="article-img-pattern"></div><div class="article-img-label">Energy</div></div>
+            <div class="article-content">
+              <span class="article-tag tag-update">Update</span>
+              <div class="article-title">Senegal's Renewable Energy Push: $4.2B Pipeline Opens to Global Investors</div>
+              <div class="article-excerpt">With COP30 approaching, Senegal has unlocked its largest solar and wind programme to date — and AIP has verified 14 bankable projects ready for capital commitment.</div>
+              <div class="article-meta"><span>02 Apr 2026</span><div class="article-meta-dot"></div><span>6 min read</span><div class="article-meta-dot"></div><span>Dr. B.Z. Sakor</span></div>
+            </div>
+          </div>
+          <div class="article-card" style="display:grid; grid-template-columns:200px 1fr;">
+            <div class="article-img" style="background:linear-gradient(135deg,#0f2434,#192d40)"><div class="article-img-pattern"></div><div class="article-img-label">Water</div></div>
+            <div class="article-content">
+              <span class="article-tag tag-report">Report</span>
+              <div class="article-title">Africa's Water Infrastructure Gap: The $30bn Blended Finance Opportunity</div>
+              <div class="article-excerpt">AIP's Q1 2026 sector report analyses the most critical bottlenecks in water financing and maps the emerging blended finance structures closing the gap.</div>
+              <div class="article-meta"><span>18 Mar 2026</span><div class="article-meta-dot"></div><span>12 min read</span><div class="article-meta-dot"></div><span>AIP Research</span></div>
+            </div>
+          </div>
+          <div class="article-card" style="display:grid; grid-template-columns:200px 1fr;">
+            <div class="article-img" style="background:linear-gradient(135deg,#1a2f1a,#0f2318)"><div class="article-img-pattern"></div><div class="article-img-label">Policy</div></div>
+            <div class="article-content">
+              <span class="article-tag tag-analysis">Analysis</span>
+              <div class="article-title">AfCFTA at Five: How the Continental Trade Agreement is Reshaping Infrastructure Investment</div>
+              <div class="article-excerpt">Five years on, the African Continental Free Trade Area is generating measurable corridor investment flows — particularly in logistics, digital, and energy transmission.</div>
+              <div class="article-meta"><span>05 Mar 2026</span><div class="article-meta-dot"></div><span>9 min read</span><div class="article-meta-dot"></div><span>V. Soko Sako</span></div>
+            </div>
+          </div>
+          <div class="article-card" style="display:grid; grid-template-columns:200px 1fr;">
+            <div class="article-img" style="background:linear-gradient(135deg,#1a1040,#110a28)"><div class="article-img-pattern"></div><div class="article-img-label">Digital</div></div>
+            <div class="article-content">
+              <span class="article-tag tag-update">Update</span>
+              <div class="article-title">Subsea Cable Boom: How West Africa's Digital Infrastructure is Reshaping the Investment Landscape</div>
+              <div class="article-excerpt">With seven new subsea cables set to land in West Africa by 2027, the downstream demand for data centres, fibre backhaul, and last-mile connectivity is creating urgent bankable opportunities.</div>
+              <div class="article-meta"><span>20 Feb 2026</span><div class="article-meta-dot"></div><span>8 min read</span><div class="article-meta-dot"></div><span>AIP Research</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div style="font-family:var(--font-display); font-size:20px; font-weight:600; color:var(--navy); margin-bottom:20px; padding-bottom:16px; border-bottom:2px solid var(--gold-dk);">Top Stories</div>
+        <div class="stories-sidebar">
+          <div class="story-item">
+            <div class="story-num">01</div>
+            <div>
+              <span class="story-tag tag-update">Update</span>
+              <div class="story-title">Nigeria Approves $8.2B Power Sector Privatisation Plan</div>
+              <div class="story-meta">02 Feb 2026</div>
+            </div>
+          </div>
+          <div class="story-item">
+            <div class="story-num">02</div>
+            <div>
+              <span class="story-tag tag-report">Report</span>
+              <div class="story-title">Kenya's SGR Extension: New PPP Model Signals Policy Shift</div>
+              <div class="story-meta">28 Jan 2026</div>
+            </div>
+          </div>
+          <div class="story-item">
+            <div class="story-num">03</div>
+            <div>
+              <span class="story-tag tag-analysis">Analysis</span>
+              <div class="story-title">DFI Appetite for African Infrastructure Reaches 10-Year High</div>
+              <div class="story-meta">15 Jan 2026</div>
+            </div>
+          </div>
+          <div class="story-item">
+            <div class="story-num">04</div>
+            <div>
+              <span class="story-tag tag-update">Update</span>
+              <div class="story-title">Morocco Positions as Africa's Clean Hydrogen Export Hub</div>
+              <div class="story-meta">08 Jan 2026</div>
+            </div>
+          </div>
+          <div class="story-item">
+            <div class="story-num">05</div>
+            <div>
+              <span class="story-tag tag-report">Report</span>
+              <div class="story-title">AIP Annual Review: 2025 in African Infrastructure Investment</div>
+              <div class="story-meta">02 Jan 2026</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:#f2f5f9; border-radius:12px; padding:24px; margin-top:32px;">
+          <div style="font-size:13px; font-weight:600; color:var(--navy); margin-bottom:8px;">Ground Truth Podcast</div>
+          <div style="font-size:12px; color:#5a6a80; line-height:1.6; margin-bottom:16px;">Latest episode: "The Real Cost of Infrastructure Risk in Francophone Africa"</div>
+          <a href="#" class="btn btn-outline-gold" style="width:100%; justify-content:center; color:var(--gold-dk); border-color:var(--gold-dk);">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Play Episode
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section" id="newsletter">
+  <div class="container">
+    <div class="section-label">Stay Informed</div>
+    <h2 class="display-lg" style="margin-bottom:12px;">Monthly, no noise —<br>just <em class="gold" style="font-style:italic">investable signal</em></h2>
+    <p style="color:var(--muted); font-size:16px;">Join 1,500+ investors and partners receiving our monthly synthesis of African infrastructure opportunities.</p>
+    <div class="newsletter-form">
+      <input type="email" class="newsletter-input" placeholder="Your email address">
+      <button class="btn btn-gold btn-lg">Subscribe</button>
+    </div>
+    <div class="newsletter-trust">Trusted by professionals across the world · Unsubscribe anytime</div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="nav-logo" style="margin-bottom:16px;"><div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="AIP" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;"></div></div><p class="footer-desc">Connecting Africa's infrastructure projects with global capital.</p></div>
+      <div><div class="footer-heading">Platform</div><div class="footer-links"><a href="sectors.html">Sectors</a><a href="services.html">Services</a><a href="insights.html">Insights</a><a href="https://app.africa-infra.com" target="_blank">Log In</a></div></div>
+      <div><div class="footer-heading">Legal</div><div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a></div></div>
+      <div><div class="footer-heading">Contact</div><div class="footer-contact-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@africa-infra.com</div><div class="footer-contact-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07"/></svg>+221 77 486 79 27</div></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-bottom-text">© 2023–2026 Africa Infrastructure Partners. All rights reserved.</div><div class="footer-bottom-text" style="color:var(--gold); font-size:12px;">Better tools for a better Africa</div></div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.cat-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+  });
+});
+</script>
+<script src="i18n.js"></script>
+
+<!-- ── COOKIE CONSENT ─────────────────────────────────────────────── -->
+<div id="cookie-banner" style="
+  position:fixed;bottom:0;left:0;right:0;z-index:99999;
+  background:rgba(11,22,40,0.97);
+  border-top:1px solid rgba(201,168,76,0.25);
+  padding:20px 24px;
+  display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;
+  backdrop-filter:blur(12px);
+  font-size:13px;color:#8b9ab0;
+  transform:translateY(100%);transition:transform 0.4s ease;
+">
+  <div style="flex:1;min-width:260px;">
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:16px;font-weight:600;color:#f8f8f5;margin-bottom:6px;">We use cookies 🍪</div>
+    <p style="margin:0;line-height:1.6;">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behaviour or unique IDs on this site. Not consenting or withdrawing consent may adversely affect certain features and functions.</p>
+    <div style="margin-top:10px;font-size:11px;display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Privacy Policy</a>
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Terms of Service</a>
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Cookie Policy</a>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;align-self:center;">
+    <button onclick="acceptCookies()" style="
+      background:#c9a84c;color:#0b1628;border:none;border-radius:8px;
+      padding:10px 22px;font-weight:700;font-size:13px;cursor:pointer;
+      white-space:nowrap;transition:background 0.2s;
+    " onmouseover="this.style.background='#e0c07a'" onmouseout="this.style.background='#c9a84c'">Accept All</button>
+    <button onclick="declineCookies()" style="
+      background:transparent;color:#8b9ab0;border:1px solid rgba(255,255,255,0.12);
+      border-radius:8px;padding:9px 22px;font-size:13px;cursor:pointer;
+      white-space:nowrap;transition:all 0.2s;
+    " onmouseover="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color='#b0bfd4'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='#8b9ab0'">Decline</button>
+  </div>
+</div>
+
+<!-- Cookie Policy Modal -->
+<div id="cookie-modal" style="display:none;position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;padding:24px;">
+  <div style="background:#192341;border:1px solid rgba(201,168,76,0.2);border-radius:16px;max-width:540px;width:100%;padding:36px;position:relative;max-height:80vh;overflow-y:auto;">
+    <button onclick="document.getElementById('cookie-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;color:#8b9ab0;font-size:20px;cursor:pointer;line-height:1;">✕</button>
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;color:#f8f8f5;margin-bottom:16px;">Cookie &amp; Privacy Policy</div>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:12px;">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behaviour or unique IDs on this site. Not consenting or withdrawing consent may adversely affect certain features and functions.</p>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:12px;"><strong style="color:#f8f8f5;">What we collect:</strong> We may collect usage data, session identifiers, and anonymised analytics to improve platform performance and user experience. We do not sell personal data to third parties.</p>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:20px;"><strong style="color:#f8f8f5;">Your rights:</strong> You may withdraw consent at any time by clearing browser cookies or contacting us at <a href="mailto:info@africa-infra.com" style="color:#c9a84c;">info@africa-infra.com</a>.</p>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button onclick="declineCookies()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:#8b9ab0;border-radius:8px;padding:10px 18px;font-size:13px;cursor:pointer;">Decline</button>
+      <button onclick="acceptCookies()" style="background:#c9a84c;color:#0b1628;border:none;border-radius:8px;padding:10px 20px;font-weight:700;font-size:13px;cursor:pointer;">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var banner = document.getElementById('cookie-banner');
+  if (!localStorage.getItem('aip_cookie_consent')) {
+    setTimeout(function() { banner.style.transform = 'translateY(0)'; }, 800);
+  }
+})();
+function acceptCookies() {
+  localStorage.setItem('aip_cookie_consent', 'accepted');
+  document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+  document.getElementById('cookie-modal').style.display = 'none';
+}
+function declineCookies() {
+  localStorage.setItem('aip_cookie_consent', 'declined');
+  document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+  document.getElementById('cookie-modal').style.display = 'none';
+}
+function showCookiePolicy(e) {
+  e.preventDefault();
+  document.getElementById('cookie-modal').style.display = 'flex';
+}
+</script>
+</body>
+</html>

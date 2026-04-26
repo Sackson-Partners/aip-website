@@ -46,7 +46,7 @@ export const translations = {
         feature2Title: "Verified and Faster Deal Matching",
         feature2Desc: "Connect investors and projects at the right time",
         feature3Title: "Gateway into Africa",
-        feature3Desc: "Access infrastructure opportunities across all 54 African nations",
+        feature3Desc: "Access infrastructure opportunities across our 8 active partner countries",
         feature4Title: "Market Intelligence",
         feature4Desc: "Real-time data and insights to make informed investment decisions"
       },
@@ -171,7 +171,7 @@ export const translations = {
         feature2Title: "Mise en Relation Vérifiée et Plus Rapide",
         feature2Desc: "Connectez investisseurs et projets au bon moment",
         feature3Title: "Passerelle vers l'Afrique",
-        feature3Desc: "Accédez aux opportunités d'infrastructures dans les 54 nations africaines",
+        feature3Desc: "Accédez aux opportunités d'infrastructures dans nos 8 pays partenaires actifs",
         feature4Title: "Intelligence de Marché",
         feature4Desc: "Données et analyses en temps réel pour des décisions éclairées"
       },

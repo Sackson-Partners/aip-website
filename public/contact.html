@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact – AIP Africa Infrastructure Partners</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  align-items: flex-start;
+}
+.contact-info-title { font-family: var(--font-display); font-size: 48px; font-weight: 600; line-height: 1.1; margin-bottom: 16px; }
+.contact-info-desc { font-size: 16px; color: var(--muted-lt); line-height: 1.7; margin-bottom: 48px; }
+
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.contact-detail-icon {
+  width: 44px; height: 44px;
+  background: rgba(201,168,76,0.1);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.contact-detail-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.contact-detail-value { font-size: 15px; color: var(--white); line-height: 1.5; }
+.contact-detail-value a { color: var(--gold); }
+
+/* Form */
+.contact-form {
+  background: var(--navy-card);
+  border: 1px solid var(--border-lt);
+  border-radius: 20px;
+  padding: 48px;
+}
+.form-title { font-family: var(--font-display); font-size: 28px; font-weight: 600; margin-bottom: 6px; }
+.form-subtitle { font-size: 14px; color: var(--muted); margin-bottom: 36px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { margin-bottom: 20px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label { display: block; font-size: 12px; font-weight: 500; color: var(--muted-lt); margin-bottom: 8px; letter-spacing: 0.04em; }
+.form-label span { color: var(--gold); }
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 13px 16px;
+  font-size: 14px;
+  color: var(--white);
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  appearance: none;
+}
+.form-input::placeholder, .form-textarea::placeholder { color: var(--muted); }
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.04);
+}
+.form-select { cursor: pointer; }
+.form-select option { background: var(--navy-mid); color: var(--white); }
+.form-textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+.form-check { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 28px; }
+.form-check input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--gold); margin-top: 2px; flex-shrink: 0; cursor: pointer; }
+.form-check-label { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.form-submit { width: 100%; padding: 16px; font-size: 15px; font-weight: 600; border-radius: 10px; }
+
+/* Info cards */
+.info-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 80px; }
+.info-card {
+  background: var(--navy-card);
+  border: 1px solid var(--border-lt);
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  transition: all 0.2s;
+}
+.info-card:hover { border-color: var(--border); }
+.info-card-icon { color: var(--gold); margin: 0 auto 16px; }
+.info-card-value { font-family: var(--font-display); font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+.info-card-label { font-size: 12px; color: var(--muted); }
+
+/* Schedule call */
+.call-section {
+  background: var(--navy-mid);
+  border: 1px solid var(--border-lt);
+  border-radius: 20px;
+  padding: 56px;
+  text-align: center;
+  margin-top: 80px;
+}
+.call-section h3 { font-family: var(--font-display); font-size: 36px; font-weight: 600; margin-bottom: 12px; }
+.call-section p { font-size: 15px; color: var(--muted-lt); margin-bottom: 32px; }
+
+/* Profiles select */
+.profile-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 8px; }
+.profile-option {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--muted-lt);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.profile-option:hover, .profile-option.selected { background: rgba(201,168,76,0.08); border-color: var(--border); color: var(--white); }
+.profile-option.selected .profile-dot { background: var(--gold); }
+.profile-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border-lt); flex-shrink: 0; transition: background 0.2s; }
+</style>
+
+<style>
+.footer-social-btn {
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,0.06);color:var(--muted-lt);
+  transition:background 0.2s,color 0.2s;text-decoration:none;
+}
+.footer-social-btn:hover { background:rgba(201,168,76,0.15);color:var(--gold); }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/home.html" class="nav-logo">
+      <div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="Africa Infrastructure Partners" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;"></div>
+    </a>
+    <div class="nav-links">
+      <a href="about.html" data-i18n="nav_about">About Us</a>
+      <a href="sectors.html" data-i18n="nav_sectors">Sectors</a>
+      <a href="services.html" data-i18n="nav_services">Services</a>
+      <a href="insights.html" data-i18n="nav_insights">Insights</a>
+      <a href="contact.html" class="active" data-i18n="nav_contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        </div>
+      <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold">AIP Platform →</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero" style="padding-bottom:60px;">
+  <div class="container" style="text-align:center;">
+    <div class="section-label">Contact</div>
+    <h1 class="display-xl" style="margin-bottom:16px;">How can we <em class="gold" style="font-style:italic">help?</em></h1>
+    <p class="lead" style="margin:0 auto; text-align:center;">Tell us about your organisation and what you're looking for. Our team typically responds within 24 hours.</p>
+  </div>
+</div>
+
+<!-- INFO CARDS -->
+<div style="background:var(--navy-mid); border-bottom:1px solid var(--border-lt); padding:48px 0;">
+  <div class="container">
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-card-icon">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="info-card-value">info@africa-infra.com</div>
+        <div class="info-card-label">General Enquiries</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+        </div>
+        <div class="info-card-value">+221 77 486 79 27</div>
+        <div class="info-card-label">Call Our Team</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="info-card-value">Routes des Almadies</div>
+        <div class="info-card-label">Dakar, Senegal</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTACT SECTION -->
+<section class="section">
+  <div class="container">
+    <div class="contact-layout">
+      <!-- Left info -->
+      <div>
+        <div class="contact-info-title">Let's build Africa's infrastructure <em class="gold" style="font-style:italic">together.</em></div>
+        <div class="contact-info-desc">Whether you need capital, verified projects, strategic advisory, or partnership opportunities — our team is ready to assist. We serve governments, investors, sponsors, EPCs, and development partners across our 8 active African markets.</div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div>
+            <div class="contact-detail-label">Investor Relations</div>
+            <div class="contact-detail-value"><a href="mailto:investors@africa-infra.com">investors@africa-infra.com</a></div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/></svg>
+          </div>
+          <div>
+            <div class="contact-detail-label">Project Submissions</div>
+            <div class="contact-detail-value"><a href="mailto:projects@africa-infra.com">projects@africa-infra.com</a></div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+          </div>
+          <div>
+            <div class="contact-detail-label">Partnership &amp; Country Partners</div>
+            <div class="contact-detail-value"><a href="mailto:partnerships@africa-infra.com">partnerships@africa-infra.com</a></div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="contact-detail-label">Press &amp; Media</div>
+            <div class="contact-detail-value"><a href="mailto:press@africa-infra.com">press@africa-infra.com</a></div>
+          </div>
+        </div>
+
+        <!-- Response time badge -->
+        <div style="display:flex; align-items:center; gap:12px; margin-top:40px; padding:20px 24px; background:rgba(201,168,76,0.06); border:1px solid var(--border); border-radius:12px;">
+          <div style="width:8px; height:8px; border-radius:50%; background:#22c55e; flex-shrink:0; animation:pulse 2s infinite;"></div>
+          <div>
+            <div style="font-size:13px; font-weight:500; color:var(--white);">Response within 24 hours</div>
+            <div style="font-size:12px; color:var(--muted);">Our partnerships team is online Mon–Fri, 8am–6pm WAT</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="contact-form">
+        <div class="form-title">Send us a message</div>
+        <div class="form-subtitle">Fill in the details below and we'll be in touch shortly.</div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name <span>*</span></label>
+            <input type="text" class="form-input" placeholder="John Doe">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address <span>*</span></label>
+            <input type="email" class="form-input" placeholder="john@company.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Organisation <span>*</span></label>
+            <input type="text" class="form-input" placeholder="Company Name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-input" placeholder="+1 234 567 890">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">I am a… <span>*</span></label>
+          <div class="profile-grid">
+            <div class="profile-option selected" onclick="selectProfile(this)"><div class="profile-dot"></div>Government / PPP Unit</div>
+            <div class="profile-option" onclick="selectProfile(this)"><div class="profile-dot"></div>Sponsor / Developer</div>
+            <div class="profile-option" onclick="selectProfile(this)"><div class="profile-dot"></div>Institutional Investor</div>
+            <div class="profile-option" onclick="selectProfile(this)"><div class="profile-dot"></div>EPC / Operator</div>
+            <div class="profile-option" onclick="selectProfile(this)"><div class="profile-dot"></div>DFI / Development Partner</div>
+            <div class="profile-option" onclick="selectProfile(this)"><div class="profile-dot"></div>Other</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Subject</label>
+          <select class="form-select">
+            <option value="" disabled selected>Select a topic</option>
+            <option>Project Submission</option>
+            <option>Investment Opportunity</option>
+            <option>Partnership Inquiry</option>
+            <option>Platform Access</option>
+            <option>Advisory Services</option>
+            <option>Media / Press</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Please provide details about your inquiry, project, or how we can help…"></textarea>
+        </div>
+
+        <div class="form-check">
+          <input type="checkbox" id="consent">
+          <label class="form-check-label" for="consent">By submitting, you confirm you are authorised to share this information and agree to be contacted by AIP at info@africa-infra.com regarding your inquiry.</label>
+        </div>
+
+        <button class="btn btn-gold form-submit">
+          Send Message
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Schedule a call -->
+    <div class="call-section">
+      <div style="width:52px; height:52px; background:rgba(201,168,76,0.1); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; color:var(--gold);">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <h3>Prefer a quick call?</h3>
+      <p>Schedule a 15-minute introductory call with our partnerships team — no commitment required.</p>
+      <a href="#" class="btn btn-outline-gold btn-lg">Schedule a Call →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="nav-logo" style="margin-bottom:16px;"><div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="AIP" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;"></div></div><p class="footer-desc">Connecting Africa's infrastructure projects with global capital.</p></div>
+      <div><div class="footer-heading">Platform</div><div class="footer-links"><a href="sectors.html">Sectors</a><a href="services.html">Services</a><a href="insights.html">Insights</a><a href="https://app.africa-infra.com" target="_blank">Log In</a></div></div>
+      <div><div class="footer-heading">Legal</div><div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a></div></div>
+      <div><div class="footer-heading">Contact</div><div class="footer-contact-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@africa-infra.com</div><div class="footer-contact-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Routes des Almadies, Dakar, Senegal</div></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-bottom-text">© 2023–2026 Africa Infrastructure Partners. All rights reserved.</div><div class="footer-bottom-text" style="color:var(--gold); font-size:12px;">Better tools for a better Africa</div></div>
+  </div>
+</footer>
+
+<script>
+function selectProfile(el) {
+  document.querySelectorAll('.profile-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+document.querySelector('.form-submit').addEventListener('click', function(e) {
+  e.preventDefault();
+  const btn = this;
+  btn.textContent = 'Message Sent ✓';
+  btn.style.background = '#22c55e';
+  btn.style.color = '#fff';
+  setTimeout(() => {
+    btn.innerHTML = 'Send Message <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+    btn.style.background = '';
+    btn.style.color = '';
+  }, 3000);
+});
+</script>
+<script src="i18n.js"></script>
+
+<!-- ── COOKIE CONSENT ─────────────────────────────────────────────── -->
+<div id="cookie-banner" style="
+  position:fixed;bottom:0;left:0;right:0;z-index:99999;
+  background:rgba(11,22,40,0.97);
+  border-top:1px solid rgba(201,168,76,0.25);
+  padding:20px 24px;
+  display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;
+  backdrop-filter:blur(12px);
+  font-size:13px;color:#8b9ab0;
+  transform:translateY(100%);transition:transform 0.4s ease;
+">
+  <div style="flex:1;min-width:260px;">
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:16px;font-weight:600;color:#f8f8f5;margin-bottom:6px;">We use cookies 🍪</div>
+    <p style="margin:0;line-height:1.6;">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behaviour or unique IDs on this site. Not consenting or withdrawing consent may adversely affect certain features and functions.</p>
+    <div style="margin-top:10px;font-size:11px;display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Privacy Policy</a>
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Terms of Service</a>
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Cookie Policy</a>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;align-self:center;">
+    <button onclick="acceptCookies()" style="
+      background:#c9a84c;color:#0b1628;border:none;border-radius:8px;
+      padding:10px 22px;font-weight:700;font-size:13px;cursor:pointer;
+      white-space:nowrap;transition:background 0.2s;
+    " onmouseover="this.style.background='#e0c07a'" onmouseout="this.style.background='#c9a84c'">Accept All</button>
+    <button onclick="declineCookies()" style="
+      background:transparent;color:#8b9ab0;border:1px solid rgba(255,255,255,0.12);
+      border-radius:8px;padding:9px 22px;font-size:13px;cursor:pointer;
+      white-space:nowrap;transition:all 0.2s;
+    " onmouseover="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color='#b0bfd4'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='#8b9ab0'">Decline</button>
+  </div>
+</div>
+
+<!-- Cookie Policy Modal -->
+<div id="cookie-modal" style="display:none;position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;padding:24px;">
+  <div style="background:#192341;border:1px solid rgba(201,168,76,0.2);border-radius:16px;max-width:540px;width:100%;padding:36px;position:relative;max-height:80vh;overflow-y:auto;">
+    <button onclick="document.getElementById('cookie-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;color:#8b9ab0;font-size:20px;cursor:pointer;line-height:1;">✕</button>
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;color:#f8f8f5;margin-bottom:16px;">Cookie &amp; Privacy Policy</div>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:12px;">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behaviour or unique IDs on this site. Not consenting or withdrawing consent may adversely affect certain features and functions.</p>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:12px;"><strong style="color:#f8f8f5;">What we collect:</strong> We may collect usage data, session identifiers, and anonymised analytics to improve platform performance and user experience. We do not sell personal data to third parties.</p>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:20px;"><strong style="color:#f8f8f5;">Your rights:</strong> You may withdraw consent at any time by clearing browser cookies or contacting us at <a href="mailto:info@africa-infra.com" style="color:#c9a84c;">info@africa-infra.com</a>.</p>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button onclick="declineCookies()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:#8b9ab0;border-radius:8px;padding:10px 18px;font-size:13px;cursor:pointer;">Decline</button>
+      <button onclick="acceptCookies()" style="background:#c9a84c;color:#0b1628;border:none;border-radius:8px;padding:10px 20px;font-weight:700;font-size:13px;cursor:pointer;">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var banner = document.getElementById('cookie-banner');
+  if (!localStorage.getItem('aip_cookie_consent')) {
+    setTimeout(function() { banner.style.transform = 'translateY(0)'; }, 800);
+  }
+})();
+function acceptCookies() {
+  localStorage.setItem('aip_cookie_consent', 'accepted');
+  document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+  document.getElementById('cookie-modal').style.display = 'none';
+}
+function declineCookies() {
+  localStorage.setItem('aip_cookie_consent', 'declined');
+  document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+  document.getElementById('cookie-modal').style.display = 'none';
+}
+function showCookiePolicy(e) {
+  e.preventDefault();
+  document.getElementById('cookie-modal').style.display = 'flex';
+}
+</script>
+</body>
+</html>

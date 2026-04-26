@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Loader2, ArrowRight, Zap, Droplets, Sprout, Truck, Wifi, HeartPulse, CheckCircle2, BarChart3, Layers } from 'lucide-react';
+import { Loader2, ArrowRight, Zap, Droplets, Sprout, Truck, Wifi, HeartPulse, CheckCircle2, BarChart3, Layers, Map } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { aipApi } from '@/lib/aipApi';
 import { useLanguage } from '@/contexts/LanguageContext';
+import AfricaPipelineMap from '@/components/AfricaPipelineMap';
 
 const SectorsPage = () => {
   const [sectors, setSectors] = useState([]);
@@ -17,43 +18,43 @@ const SectorsPage = () => {
 
   const staticSectorData = [
     {
-      name: "Energy",
+      name: "Energy & Mining",
       slug: "energy",
-      description: "Powering industrialization and lighting up the continent.",
+      description: "Powering industrialisation and lighting up the continent.",
       icon_name: "Zap",
-      image_url: "https://images.unsplash.com/photo-1697869162556-ab57db502c09",
+      cta_text: "150+ energy & mining projects in the pipeline",
       snapshot: [
-        { label: "600m people lack electricity access", value: "" }, 
-        { label: ">$190bn/year investment needed", value: "" },
-        { label: "60% of world's best solar resources", value: "" }
+        { label: "people lack electricity access", value: "600M+" },
+        { label: "investment needed per year", value: ">$190bn" },
+        { label: "world's best solar resources", value: "60%" }
       ],
       key_coverage: ["Renewable Energy (Solar, Wind, Hydro)", "Transmission & Grid Modernization", "Off-grid & Mini-grid Solutions", "Gas-to-Power Transitions"],
-      aip_delivers: ["PPA bankability verification", "Sovereign guarantee alternatives", "Climate finance taxonomy alignment"]
+      aip_delivers: ["PPA bankability verification", "Sovereign guarantee alternatives", "Climate finance taxonomy alignment", "Off-taker risk structuring"]
     },
     {
       name: "Water & Sanitation",
       slug: "water",
       description: "Ensuring sustainable access to life's most critical resource.",
       icon_name: "Droplets",
-      image_url: "https://images.unsplash.com/photo-1614195975309-a3baf592274f",
+      cta_text: "$30bn mobilisation gap addressable through blended finance",
       snapshot: [
-         { label: "Only 31% have safely managed drinking water", value: "" },
-         { label: "6-13x acceleration needed for SDG targets", value: "" },
-         { label: "$30bn/year mobilization goal", value: "" }
+        { label: "have safely managed drinking water", value: "Only 31%" },
+        { label: "acceleration needed for SDG targets", value: "6–13×" },
+        { label: "mobilisation goal per year", value: "$30bn" }
       ],
       key_coverage: ["Water Treatment & Desalination", "Urban Distribution Networks", "Sanitation & Waste Management", "Agricultural Irrigation Systems"],
-      aip_delivers: ["Tariff structuring & subsidy models", "Municipal finance aggregation", "Impact measurement frameworks"]
+      aip_delivers: ["Tariff structuring & subsidy models", "Municipal finance aggregation", "Impact measurement frameworks", "DFI facility structuring"]
     },
     {
       name: "Agriculture & Food Systems",
       slug: "agriculture",
       description: "Transforming subsistence into food security and global export power.",
       icon_name: "Sprout",
-      image_url: "https://images.unsplash.com/photo-1547059503-d1705f0bbdb2",
+      cta_text: "$110bn+ food import bill projected — AIP structures agro-finance solutions",
       snapshot: [
-         { label: "$110bn+ food import bill projected", value: "" },
-         { label: "20-40% post-harvest losses", value: "" },
-         { label: "Only 6% of cultivated area irrigated", value: "" }
+        { label: "food import bill projected", value: "$110bn+" },
+        { label: "post-harvest losses", value: "20-40%" },
+        { label: "of cultivated area irrigated", value: "Only 6%" }
       ],
       key_coverage: ["Agro-processing Zones & Parks", "Cold Chain Logistics & Warehousing", "Irrigation Infrastructure", "Fertilizer & Input Production"],
       aip_delivers: ["Supply chain financing structures", "Offtake agreement verification", "Crop insurance integration"]
@@ -63,11 +64,11 @@ const SectorsPage = () => {
       slug: "transport",
       description: "Building the physical backbone of African economies.",
       icon_name: "Truck",
-      image_url: "https://images.unsplash.com/photo-1558318830-853081b6bb6e",
+      cta_text: "$181–221bn/year infrastructure needs — AIP structures bankable transport deals",
       snapshot: [
-        { label: "$181–$221bn/year infrastructure needs", value: "" },
-        { label: "109% intra-African export growth potential", value: "" },
-        { label: "51m+ housing unit shortfall", value: "" }
+        { label: "per year infrastructure needs", value: "$181–221bn" },
+        { label: "intra-African export growth potential", value: "109%" },
+        { label: "housing unit shortfall", value: "51m+" }
       ],
       key_coverage: ["Ports, Airports & Railways", "Road Networks & Urban Transit", "Industrial Parks & SEZs", "Affordable Housing Developments"],
       aip_delivers: ["De-risked project structuring", "Traffic/Demand risk mitigation strategies", "Blended finance coordination"]
@@ -77,28 +78,28 @@ const SectorsPage = () => {
       slug: "tmt",
       description: "Bridging the digital divide to enable the knowledge economy.",
       icon_name: "Wifi",
-      image_url: "https://images.unsplash.com/photo-1594915440248-1e419eba6611",
+      cta_text: "Only 38% of Africa is online — AIP structures digital infrastructure deals",
       snapshot: [
-        { label: "Only 38% online in Africa", value: "" },
-        { label: "527m mobile subscribers", value: "" },
-        { label: "220bn economic value generated", value: "" }
+        { label: "online in Africa", value: "Only 38%" },
+        { label: "mobile subscribers", value: "527m" },
+        { label: "economic value generated", value: "$220bn" }
       ],
       key_coverage: ["Fiber Optic Backbones (Terrestrial/Subsea)", "Data Centers & Cloud Infrastructure", "TowerCos & Active Infrastructure", "Last-mile Connectivity Solutions"],
       aip_delivers: ["Spectrum license due diligence", "Anchor tenant verification", "Tech-enabled asset monitoring"]
     },
     {
-      name: "Healthcare",
+      name: "Healthcare & Social Infrastructures",
       slug: "healthcare",
-      description: "Strengthening resilience through modern medical infrastructure.",
+      description: "Strengthening resilience through modern medical, education and social infrastructure.",
       icon_name: "HeartPulse",
-      image_url: "https://images.unsplash.com/photo-1607838720191-0d8eba3e9040",
+      cta_text: "$259bn sector by 2030 — AIP structures healthcare & social infrastructure deals",
       snapshot: [
-        { label: "6.1m health worker shortage by 2030", value: "" },
-        { label: "25% disease burden, 3% workforce", value: "" },
-        { label: "$259bn sector by 2030", value: "" }
+        { label: "health worker shortage by 2030", value: "6.1m" },
+        { label: "disease burden, only 3% workforce", value: "25%" },
+        { label: "sector size by 2030", value: "$259bn" }
       ],
-      key_coverage: ["Hospitals & Specialist Clinics", "Diagnostic & Laboratory Centers", "Pharmaceutical Manufacturing", "Health Tech & Telemedicine Platforms"],
-      aip_delivers: ["Equipment financing structures", "Operator due diligence", "Social impact bond structuring"]
+      key_coverage: ["Hospitals & Specialist Clinics", "Educational Institutions & Schools", "Diagnostic & Laboratory Centers", "Health Tech & Telemedicine Platforms"],
+      aip_delivers: ["Equipment financing structures", "Operator due diligence", "Government availability payments", "Social impact bond structuring"]
     }
   ];
 
@@ -107,23 +108,21 @@ const SectorsPage = () => {
       try {
         setLoading(true);
         const data = await aipApi.fetchSectorsCatalog();
-        
         if (data && data.length > 0) {
-           const mergedData = data.map(dbSector => {
-              const staticMatch = staticSectorData.find(s => s.name.includes(dbSector.name) || dbSector.name.includes(s.name));
-              return {
-                 ...staticMatch,
-                 ...dbSector,
-                 slug: dbSector.slug || staticMatch?.slug || dbSector.name.toLowerCase().replace(/\s+/g, '-'),
-                 image_url: staticMatch?.image_url || dbSector.image_url,
-                 snapshot: dbSector.snapshot || staticMatch?.snapshot || [],
-                 key_coverage: dbSector.key_coverage || staticMatch?.key_coverage || [],
-                 aip_delivers: dbSector.aip_delivers || staticMatch?.aip_delivers || []
-              };
-           });
-           setSectors(mergedData.slice(0, 6));
+          const mergedData = data.map(dbSector => {
+            const staticMatch = staticSectorData.find(s => s.name.includes(dbSector.name) || dbSector.name.includes(s.name));
+            return {
+              ...staticMatch,
+              ...dbSector,
+              slug: dbSector.slug || staticMatch?.slug || dbSector.name.toLowerCase().replace(/\s+/g, '-'),
+              snapshot: dbSector.snapshot || staticMatch?.snapshot || [],
+              key_coverage: dbSector.key_coverage || staticMatch?.key_coverage || [],
+              aip_delivers: dbSector.aip_delivers || staticMatch?.aip_delivers || []
+            };
+          });
+          setSectors(mergedData.slice(0, 6));
         } else {
-           setSectors(staticSectorData);
+          setSectors(staticSectorData);
         }
       } catch (err) {
         console.error('Error fetching sectors:', err);
@@ -132,24 +131,20 @@ const SectorsPage = () => {
         setLoading(false);
       }
     };
-
     fetchSectors();
   }, []);
 
   const getIcon = (name) => {
+    const cls = "w-6 h-6";
     switch (name) {
-      case 'Zap': return <Zap className="w-6 h-6" />;
-      case 'Droplets': return <Droplets className="w-6 h-6" />;
-      case 'Sprout': return <Sprout className="w-6 h-6" />;
-      case 'Truck': return <Truck className="w-6 h-6" />;
-      case 'Wifi': return <Wifi className="w-6 h-6" />;
-      case 'HeartPulse': return <HeartPulse className="w-6 h-6" />;
-      default: return <Zap className="w-6 h-6" />;
+      case 'Zap': return <Zap className={cls} />;
+      case 'Droplets': return <Droplets className={cls} />;
+      case 'Sprout': return <Sprout className={cls} />;
+      case 'Truck': return <Truck className={cls} />;
+      case 'Wifi': return <Wifi className={cls} />;
+      case 'HeartPulse': return <HeartPulse className={cls} />;
+      default: return <Zap className={cls} />;
     }
-  };
-
-  const handleSectorClick = (slug) => {
-    navigate(`/sectors/${slug}/projects`);
   };
 
   return (
@@ -159,135 +154,143 @@ const SectorsPage = () => {
         <meta name="description" content={t.sectors.metaDesc} />
       </Helmet>
 
-      <div className="min-h-screen bg-[#0F1419] font-sans text-gray-300">
+      <div className="min-h-screen bg-[#0b1628] font-sans text-[#8b9ab0]">
         <Navigation />
 
-        {/* Hero Section */}
-        <div className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-[#0F1419] text-center">
-            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <h1 className="text-5xl md:text-7xl font-bold font-serif text-white mb-6">
-                {t.sectors.title1} <span className="text-[#D4AF37]">{t.sectors.title2}</span>
-              </h1>
-              <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed">
-                {t.sectors.subtitle}
-              </p>
-            </motion.div>
+        {/* Hero */}
+        <div className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 text-center overflow-hidden">
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#c9a84c]/5 rounded-full blur-[120px] pointer-events-none" />
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative z-10 max-w-4xl mx-auto">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-[#c9a84c] font-semibold mb-6 px-3 py-1 border border-[#c9a84c]/30 rounded-full">
+              Sectors we Operate In
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold font-serif text-[#f8f8f5] mb-6 leading-tight">
+              Verified, investment-ready opportunities across{' '}
+              <em className="text-[#c9a84c] not-italic">Africa</em>
+            </h1>
+            <p className="text-lg text-[#b0bfd4] max-w-2xl mx-auto leading-relaxed">
+              Access six high-impact sectors with deep coverage, AI-verified data, and end-to-end deal support.
+            </p>
+          </motion.div>
         </div>
 
-        {/* Sectors Grid */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8 relative z-10 bg-[#0F1419]">
+        {/* Sectors List */}
+        <section className="py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             {loading ? (
-               <div className="flex flex-col items-center justify-center py-20">
-                  <Loader2 className="w-10 h-10 animate-spin text-[#D4AF37] mb-4" />
-                  <p>{t.sectors.loading}</p>
-               </div>
+              <div className="flex flex-col items-center justify-center py-20">
+                <Loader2 className="w-10 h-10 animate-spin text-[#c9a84c] mb-4" />
+                <p className="text-[#8b9ab0]">{t.sectors.loading}</p>
+              </div>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="space-y-8">
                 {sectors.map((sector, index) => (
-                    <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="group relative bg-[#151a21] rounded-xl overflow-hidden border border-white/10 hover:border-[#D4AF37]/50 shadow-lg hover:shadow-2xl hover:shadow-[#D4AF37]/10 transition-all duration-300 flex flex-col cursor-pointer"
-                        onClick={() => handleSectorClick(sector.slug)}
-                    >
-                        {/* Image Header */}
-                        <div className="relative h-64 overflow-hidden bg-gray-800">
-                            {sector.image_url ? (
-                                <img 
-                                  src={sector.image_url} 
-                                  alt={sector.name} 
-                                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                  onError={(e) => {
-                                      e.target.onerror = null;
-                                      e.target.src = "https://horizons-cdn.hostinger.com/02be81db-dbc5-44e9-9552-e26b6e734eb6/9cd474c237641b769f66d7b88ac4554b.png";
-                                  }}
-                                />
-                            ) : (
-                                <div className="w-full h-full flex items-center justify-center bg-[#1a2029] text-gray-600">{t.sectors.noImage}</div>
-                            )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#151a21] via-transparent to-transparent opacity-90" />
-                            
-                            <div className="absolute top-4 left-4">
-                                <div className="w-10 h-10 rounded-lg bg-[#0F1419]/80 backdrop-blur border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37]">
-                                    {getIcon(sector.icon_name || sector.icon)}
-                                </div>
-                            </div>
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.07 }}
+                    className="bg-[#192341] border border-white/8 rounded-2xl overflow-hidden hover:border-[#c9a84c]/30 hover:shadow-2xl hover:shadow-black/30 transition-all duration-300"
+                  >
+                    {/* Header */}
+                    <div className="px-10 py-8 grid grid-cols-[auto_1fr] gap-6 items-start border-b border-white/8">
+                      <div className="w-12 h-12 bg-[#c9a84c]/12 rounded-xl flex items-center justify-center text-[#c9a84c] flex-shrink-0">
+                        {getIcon(sector.icon_name || sector.icon)}
+                      </div>
+                      <div>
+                        <h2 className="text-3xl font-serif font-semibold text-[#f8f8f5] mb-2">{sector.name}</h2>
+                        <p className="text-sm text-[#b0bfd4] leading-relaxed">{sector.description}</p>
+                      </div>
+                    </div>
+
+                    {/* Body: 3 columns */}
+                    <div className="px-10 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+                      {/* Opportunity Snapshot */}
+                      <div>
+                        <div className="flex items-center gap-2 text-[#c9a84c] text-xs font-semibold uppercase tracking-[0.14em] mb-4">
+                          <span className="w-4 h-px bg-[#c9a84c]" />
+                          Opportunity Snapshot
                         </div>
-
-                        {/* Content Body */}
-                        <div className="p-6 md:p-8 -mt-20 relative z-10">
-                             <h3 className="text-3xl font-serif font-bold text-white mb-2 drop-shadow-md group-hover:text-[#D4AF37] transition-colors">
-                                {sector.name}
-                            </h3>
-                            <p className="text-gray-300 mb-8 leading-relaxed font-medium text-lg drop-shadow-sm">
-                                {sector.description}
-                            </p>
-
-                            {/* Opportunity Snapshot */}
-                            <div className="mb-8">
-                                <div className="flex items-center gap-2 mb-4 text-[#D4AF37] text-xs font-bold uppercase tracking-widest">
-                                    <BarChart3 className="w-4 h-4" /> {t.sectors.opportunitySnapshot}
-                                </div>
-                                <div className="grid grid-cols-3 gap-2">
-                                    {(sector.snapshot || []).map((stat, i) => (
-                                        <div key={i} className="bg-[#0F1419] p-3 rounded border border-white/5 text-center">
-                                            <p className="text-xs text-gray-300 font-medium leading-tight">
-                                                {typeof stat === 'string' ? stat : (stat.label || stat.value)}
-                                            </p>
-                                        </div>
-                                    ))}
-                                </div>
+                        <div className="flex flex-col gap-3">
+                          {(sector.snapshot || []).map((stat, i) => (
+                            <div key={i} className="bg-white/3 border border-white/8 rounded-lg px-3 py-2.5 text-xs text-[#b0bfd4] leading-snug">
+                              {typeof stat === 'string' ? stat : (
+                                <>
+                                  <strong className="block text-[#c9a84c] text-sm font-semibold mb-0.5">{stat.value}</strong>
+                                  {stat.label}
+                                </>
+                              )}
                             </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                                {/* Key Coverage */}
-                                <div>
-                                    <div className="flex items-center gap-2 mb-3 text-white text-xs font-bold uppercase tracking-widest">
-                                        <Layers className="w-4 h-4 text-[#D4AF37]" /> {t.sectors.keyCoverage}
-                                    </div>
-                                    <ul className="space-y-2">
-                                        {(sector.key_coverage || []).slice(0, 4).map((item, i) => (
-                                            <li key={i} className="flex items-start gap-2 text-sm text-gray-500">
-                                                <span className="w-1 h-1 rounded-full bg-[#D4AF37] mt-2 shrink-0" />
-                                                <span>{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-
-                                {/* AIP Delivers */}
-                                <div>
-                                    <div className="flex items-center gap-2 mb-3 text-white text-xs font-bold uppercase tracking-widest">
-                                        <CheckCircle2 className="w-4 h-4 text-[#D4AF37]" /> {t.sectors.aipDelivers}
-                                    </div>
-                                    <ul className="space-y-2">
-                                        {(sector.aip_delivers || []).slice(0, 3).map((item, i) => (
-                                            <li key={i} className="flex items-start gap-2 text-sm text-gray-500">
-                                                <CheckCircle2 className="w-3.5 h-3.5 text-[#D4AF37] mt-0.5 shrink-0" />
-                                                <span>{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <Button 
-                              asChild
-                              className="w-full bg-[#D4AF37] text-[#0F1419] hover:bg-white hover:text-[#0F1419] font-bold py-6 text-lg rounded-lg shadow-lg shadow-[#D4AF37]/10 transition-all duration-300 group-hover:scale-[1.02]"
-                            >
-                              <Link to={`/sectors/${sector.slug}/projects`} onClick={(e) => e.stopPropagation()}>
-                                {t.sectors.exploreProjects} <ArrowRight className="w-5 h-5 ml-2" />
-                              </Link>
-                            </Button>
+                          ))}
                         </div>
-                    </motion.div>
+                      </div>
+
+                      {/* Key Coverage */}
+                      <div>
+                        <div className="flex items-center gap-2 text-[#c9a84c] text-xs font-semibold uppercase tracking-[0.14em] mb-4">
+                          <span className="w-4 h-px bg-[#c9a84c]" />
+                          Key Coverage
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          {(sector.key_coverage || []).map((item, i) => (
+                            <div key={i} className="flex items-start gap-2 text-sm text-[#b0bfd4] leading-relaxed">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#8b9ab0] mt-1.5 flex-shrink-0" />
+                              {item}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* AIP Delivers */}
+                      <div>
+                        <div className="flex items-center gap-2 text-[#c9a84c] text-xs font-semibold uppercase tracking-[0.14em] mb-4">
+                          <span className="w-4 h-px bg-[#c9a84c]" />
+                          AIP Delivers
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          {(sector.aip_delivers || []).map((item, i) => (
+                            <div key={i} className="flex items-start gap-2 text-sm text-[#b0bfd4] leading-relaxed">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-[#c9a84c] mt-0.5 flex-shrink-0" />
+                              {item}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Footer CTA */}
+                    <div className="px-10 py-5 border-t border-white/8 flex items-center justify-between gap-4">
+                      <span className="text-xs text-[#8b9ab0]">{sector.cta_text || `Explore ${sector.name} projects`}</span>
+                      <Link
+                        to={`/sectors/${sector.slug}/projects`}
+                        className="inline-flex items-center gap-2 bg-[#c9a84c] text-[#0b1628] hover:bg-[#e0c07a] font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors duration-200 flex-shrink-0"
+                      >
+                        Explore Projects <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </motion.div>
                 ))}
-                </div>
+              </div>
             )}
+          </div>
+        </section>
+
+        {/* Africa Pipeline Map */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#111e38]/30 border-t border-white/5 mt-12">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#c9a84c] font-semibold mb-4 px-3 py-1 border border-[#c9a84c]/30 rounded-full">
+                <Map className="w-3.5 h-3.5" /> Live Coverage
+              </div>
+              <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#f8f8f5] mb-4">
+                Africa Infrastructure Pipeline Map
+              </h2>
+              <p className="text-[#8b9ab0] max-w-2xl mx-auto">
+                Explore AIP's active project pipeline and partner countries across Sub-Saharan Africa — powered by OpenStreetMap.
+              </p>
+            </div>
+            <AfricaPipelineMap />
           </div>
         </section>
 

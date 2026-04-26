@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us – AIP Africa Infrastructure Partners</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.founder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.founder-card {
+  background: var(--navy-card);
+  border: 1px solid var(--border-lt);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.founder-card:hover { border-color: var(--border); transform: translateY(-4px); box-shadow: 0 24px 64px rgba(0,0,0,0.4); }
+.founder-photo {
+  width: 100%; height: 320px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: grayscale(20%);
+  transition: filter 0.3s;
+}
+.founder-card:hover .founder-photo { filter: grayscale(0%); }
+.founder-info { padding: 28px 32px 32px; }
+.founder-name { font-family: var(--font-display); font-size: 28px; font-weight: 600; margin-bottom: 4px; }
+.founder-role { color: var(--gold); font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+.founder-schools { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+.founder-bio { font-size: 14px; color: var(--muted-lt); line-height: 1.7; margin-bottom: 20px; }
+.founder-linkedin {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--muted); border: 1px solid var(--border-lt);
+  padding: 8px 16px; border-radius: 100px; transition: all 0.2s;
+}
+.founder-linkedin:hover { color: var(--gold); border-color: var(--border); }
+
+/* Team cards */
+.team-card {
+  background: var(--navy-card);
+  border: 1px solid var(--border-lt);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.2s;
+}
+.team-card:hover { border-color: var(--border); transform: translateY(-2px); }
+.team-avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--navy-light);
+  border: 2px solid var(--border);
+  margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--gold);
+  overflow: hidden;
+}
+.team-avatar img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+.team-name { font-family: var(--font-display); font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+.team-role { font-size: 12px; color: var(--gold); font-weight: 500; margin-bottom: 6px; }
+.team-country { font-size: 11px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* Country partners */
+.country-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.country-card {
+  background: var(--navy-card);
+  border: 1px solid var(--border-lt);
+  border-radius: 12px;
+  padding: 20px 24px;
+  transition: all 0.2s;
+}
+.country-card:hover { border-color: var(--border); }
+.country-flag { font-size: 28px; margin-bottom: 10px; }
+.country-name { font-family: var(--font-display); font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+.country-rep { font-size: 12px; color: var(--muted-lt); margin-bottom: 4px; }
+.country-status { font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; }
+.country-card.coming { opacity: 0.5; }
+.country-card.coming .country-status { color: var(--muted); }
+
+/* Values */
+.values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border-radius: 16px; overflow: hidden; }
+.value-item {
+  padding: 48px 40px;
+  background: var(--navy-card);
+  border-right: 1px solid var(--border-lt);
+  border-bottom: 1px solid var(--border-lt);
+}
+.value-item:nth-child(3n) { border-right: none; }
+.value-num { font-family: var(--font-display); font-size: 64px; font-weight: 700; color: rgba(201,168,76,0.08); line-height: 1; margin-bottom: 8px; }
+.value-title { font-family: var(--font-display); font-size: 22px; font-weight: 600; margin-bottom: 12px; }
+.value-body { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* Board */
+.board-card {
+  background: var(--navy-card);
+  border: 1px solid var(--border-lt);
+  border-radius: 12px;
+  padding: 28px 28px 28px 28px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  transition: all 0.2s;
+}
+.board-card:hover { border-color: var(--border); }
+.board-avatar {
+  width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0;
+  background: var(--navy-light);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 18px; color: var(--gold);
+}
+.board-name { font-family: var(--font-display); font-size: 18px; font-weight: 600; margin-bottom: 3px; }
+.board-role { font-size: 12px; color: var(--gold); margin-bottom: 6px; }
+.board-bio { font-size: 13px; color: var(--muted); line-height: 1.6; }
+</style>
+
+<style>
+.footer-social-btn {
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,0.06);color:var(--muted-lt);
+  transition:background 0.2s,color 0.2s;text-decoration:none;
+}
+.footer-social-btn:hover { background:rgba(201,168,76,0.15);color:var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/home.html" class="nav-logo">
+      <div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="Africa Infrastructure Partners" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;"></div>
+    </a>
+    <div class="nav-links">
+      <a href="about.html" class="active" data-i18n="nav_about">About Us</a>
+      <a href="sectors.html" data-i18n="nav_sectors">Sectors</a>
+      <a href="services.html" data-i18n="nav_services">Services</a>
+      <a href="insights.html" data-i18n="nav_insights">Insights</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        </div>
+      <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold">AIP Platform →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="section-label">About Us</div>
+    <h1 class="display-xl" style="margin-bottom:20px;">The digital bridge connecting<br><em class="gold" style="font-style:italic">Africa's infrastructure</em><br>with global capital</h1>
+    <p class="lead" style="margin:0 auto; text-align:center; max-width:620px;">An independent investment and advisory platform dedicated to closing Africa's infrastructure delivery gap — built with institutional-grade rigour and AI-first intelligence.</p>
+  </div>
+</div>
+
+<!-- WHO WE ARE -->
+<section class="section">
+  <div class="container">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
+      <div>
+        <div class="section-label">Who We Are</div>
+        <h2 class="display-md" style="margin-bottom:24px;">Beyond a marketplace — a complete ecosystem for delivery</h2>
+        <p style="font-size:16px; color:var(--muted-lt); line-height:1.8; margin-bottom:20px;">We are an independent investment and advisory platform dedicated to closing Africa's infrastructure delivery gap. We support the development, verification, and financing of high-quality infrastructure projects across the continent, going beyond a marketplace to build a complete ecosystem for delivery.</p>
+        <p style="font-size:16px; color:var(--muted-lt); line-height:1.8;">By leveraging advanced technology, data analytics, and deep industry expertise, we remove the traditional frictions associated with investing in African infrastructure — equipping project owners with the tools to become bankable, while providing global investors with a transparent, de-risked pipeline of high-impact opportunities.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div class="card" style="text-align:center;">
+          <div class="stat-number">$300M+</div>
+          <div class="stat-label" style="margin-top:8px;">Projects Listed</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="stat-number">4</div>
+          <div class="stat-label" style="margin-top:8px;">Countries Covered</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="stat-number">100+</div>
+          <div class="stat-label" style="margin-top:8px;">Global Investors</div>
+        </div>
+        <div class="card" style="text-align:center;">
+          <div class="stat-number">70%</div>
+          <div class="stat-label" style="margin-top:8px;">Faster Time to Investment</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section" style="background:var(--navy-mid); border-top:1px solid var(--border-lt); border-bottom:1px solid var(--border-lt); padding:0;">
+  <div class="values-grid">
+    <div class="value-item">
+      <div class="value-num">01</div>
+      <div class="value-title">Transparency &amp; Trust</div>
+      <div class="value-body">We believe that radical transparency is the key to unlocking capital. Our platform provides verifiable data and clear audit trails for every stakeholder in the value chain.</div>
+    </div>
+    <div class="value-item">
+      <div class="value-num">02</div>
+      <div class="value-title">Pan-African Impact</div>
+      <div class="value-body">We are committed to sustainable development that transcends borders, fostering economic growth and improving quality of life across our active markets on the continent.</div>
+    </div>
+    <div class="value-item" style="border-right:none;">
+      <div class="value-num">03</div>
+      <div class="value-title">Innovation with Purpose</div>
+      <div class="value-body">We harness technology not for its own sake, but to solve real-world problems — reducing costs, accelerating timelines, and mitigating risks for infrastructure delivery.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDERS -->
+<section class="section" id="founders">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Leadership</div>
+      <h2 class="display-lg">Our Founders</h2>
+    </div>
+    <div class="founder-grid">
+      <div class="founder-card">
+        <img src="uploads/Photo.png" alt="Vamo Soko Sako" class="founder-photo">
+        <div class="founder-info">
+          <div class="founder-name">Vamo Soko Sako</div>
+          <div class="founder-role">Founder &amp; Chief Executive Officer</div>
+          <div class="founder-schools">INSEAD · Sorbonne</div>
+          <p class="founder-bio">Vamo brings over two decades of experience in African infrastructure finance and project structuring. He has advised governments and private sponsors across the energy, infrastructure, Mining, and digital sectors, closing deals across sub-Saharan Africa. His vision is to make Africa's infrastructure investment ecosystem as transparent and accessible as any global market.</p>
+          <a href="#" class="founder-linkedin">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            Connect on LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="founder-card">
+        <img src="uploads/PHOTO-2026-03-03-15-06-47.jpg" alt="Dr. Bintu Zahara Sakor" class="founder-photo">
+        <div class="founder-info">
+          <div class="founder-name">Dr. Bintu Zahara Sakor</div>
+          <div class="founder-role">Co-Founder &amp; Head of Research</div>
+          <div class="founder-schools">Harvard · University of Oslo · PRIO</div>
+          <p class="founder-bio">Dr. Sakor leads AIP's research and verification frameworks, drawing on her academic work in conflict-sensitive development and political economy across fragile states. Her proprietary PETFEL methodology combines AI-driven risk assessment with deep field knowledge, setting the standard for due diligence in African infrastructure investment.</p>
+          <a href="#" class="founder-linkedin">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            Connect on LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANAGEMENT TEAM -->
+<section class="section" style="background:var(--navy-mid); border-top:1px solid var(--border-lt); border-bottom:1px solid var(--border-lt);">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Management Team</div>
+      <h2 class="display-lg">Our Leadership Team</h2>
+      <p class="lead" style="margin:16px auto 0; text-align:center;">Seasoned professionals combining deep African market knowledge with global institutional expertise.</p>
+    </div>
+    <div class="grid-4">
+      <div class="team-card">
+        <div class="team-avatar">CIO</div>
+        <div class="team-role" style="font-size:13px; margin-bottom:0;">Chief Investment Officer</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">CP</div>
+        <div class="team-role" style="font-size:13px; margin-bottom:0;">Chief of Products</div>
+      </div>
+
+
+      <div class="team-card">
+        <div class="team-avatar">DD</div>
+        <div class="team-role" style="font-size:13px; margin-bottom:0;">Senior Analyst</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">MS</div>
+        <div class="team-role" style="font-size:13px; margin-bottom:0;">Marketing &amp; Sales</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">PP</div>
+        <div class="team-role" style="font-size:13px; margin-bottom:0;">Public &amp; Private Partnership</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">CE</div>
+        <div class="team-role" style="font-size:13px; margin-bottom:0;">Communication &amp; Events</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- COUNTRY PARTNERS -->
+<section class="section" style="background:var(--navy-mid); border-top:1px solid var(--border-lt);" id="partners">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Pan-African Network</div>
+      <h2 class="display-lg">Country Partners</h2>
+      <p class="lead" style="margin:16px auto 0; text-align:center;">On-the-ground expertise across the continent, with dedicated partners in every market where we operate.</p>
+    </div>
+    <div style="margin-bottom:16px; font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:var(--gold); font-weight:600;">● 4 Active Markets</div>
+    <div class="country-grid">
+      <div class="country-card">
+        <div class="country-flag">🇬🇳</div>
+        <div class="country-name">Guinea</div>
+        <div class="country-status">● Active Partner</div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇬🇭</div>
+        <div class="country-name">Ghana</div>
+        <div class="country-status">● Active Partner</div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇸🇳</div>
+        <div class="country-name">Senegal</div>
+        <div class="country-status">● HQ · Dakar</div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇨🇮</div>
+        <div class="country-name">Côte d'Ivoire</div>
+        <div class="country-status">● Active Partner</div>
+      </div>
+
+
+
+
+    </div>
+    <div style="margin-top:32px; margin-bottom:16px; font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:var(--muted); font-weight:600;">○ Coming Soon — 15 Markets</div>
+    <div class="country-grid">
+      <div class="country-card coming">
+        <div class="country-flag">🇳🇬</div>
+        <div class="country-name">Nigeria</div>
+        <div class="country-status">○ Coming Soon</div>
+      </div>
+      <div class="country-card coming">
+        <div class="country-flag">🇲🇱</div>
+        <div class="country-name">Mali</div>
+        <div class="country-status">○ Coming Soon</div>
+      </div>
+      <div class="country-card coming">
+        <div class="country-flag">🇧🇫</div>
+        <div class="country-name">Burkina Faso</div>
+        <div class="country-status">○ Coming Soon</div>
+      </div>
+      <div class="country-card coming">
+        <div class="country-flag">🇦🇴</div>
+        <div class="country-name">Angola</div>
+        <div class="country-status">○ Coming Soon</div>
+      </div>
+      <div class="country-card coming">
+        <div class="country-flag">🇰🇪</div>
+        <div class="country-name">Kenya</div>
+        <div class="country-status">○ Coming Soon</div>
+      </div>
+      <div class="country-card coming">
+        <div class="country-flag">🇨🇩</div>
+        <div class="country-name">DRC</div>
+        <div class="country-status">○ Coming Soon</div>
+      </div>
+      <div class="country-card coming">
+        <div class="country-flag">🇹🇿</div>
+        <div class="country-name">Tanzania</div>
+        <div class="country-status">○ Coming Soon</div>
+      </div>
+      <div class="country-card coming">
+        <div class="country-flag">🇪🇹</div>
+        <div class="country-name">Ethiopia</div>
+        <div class="country-status">○ Coming Soon</div>
+      </div>
+      <div class="country-card coming">
+        <div class="country-flag">🇿🇦</div>
+        <div class="country-name">South Africa</div>
+        <div class="country-status">○ Coming Soon</div>
+      </div>
+      <div class="country-card coming">
+        <div class="country-flag">🇷🇼</div>
+        <div class="country-name">Rwanda</div>
+        <div class="country-status">○ Coming Soon</div>
+      </div>
+      <div class="country-card coming">
+        <div class="country-flag">🇱🇷</div>
+        <div class="country-name">Liberia</div>
+        <div class="country-status">○ Coming Soon</div>
+      </div>
+      <div class="country-card coming">
+        <div class="country-flag">🇸🇱</div>
+        <div class="country-name">Sierra Leone</div>
+        <div class="country-status">○ Coming Soon</div>
+      </div>
+      <div class="country-card coming">
+        <div class="country-flag">🇬🇼</div>
+        <div class="country-name">Guinea-Bissau</div>
+        <div class="country-status">○ Coming Soon</div>
+      </div>
+      <div class="country-card coming">
+        <div class="country-flag">🇳🇪</div>
+        <div class="country-name">Niger</div>
+        <div class="country-status">○ Coming Soon</div>
+      </div>
+      <div class="country-card coming">
+        <div class="country-flag">🇧🇼</div>
+        <div class="country-name">Botswana</div>
+        <div class="country-status">○ Coming Soon</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:40px;">
+      <p style="font-size:14px; color:var(--muted); margin-bottom:20px;">Interested in becoming a country partner? We are actively expanding our network across our 8 active African markets.</p>
+      <a href="contact.html" class="btn btn-outline-gold btn-lg">Become a Country Partner →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="/home.html" class="nav-logo" style="margin-bottom:16px;">
+          <div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="AIP" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;"></div>
+        </a>
+        <p class="footer-desc">Connecting Africa's infrastructure projects with global capital. We structure, verify, and facilitate investments to drive sustainable development across the continent.</p>
+        <div class="footer-social" style="margin-top:24px;display:flex;gap:6px;flex-wrap:wrap;">
+          <a href="https://www.linkedin.com/company/africa-infrastructure-partners/about/?viewAsMember=true" target="_blank" title="LinkedIn" class="footer-social-btn"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://x.com/aip_africa26?s=21" target="_blank" title="X / Twitter" class="footer-social-btn"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.258 5.63 5.906-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://www.instagram.com/aip_africa26/" target="_blank" title="Instagram" class="footer-social-btn"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://substack.com/@aip_africa" target="_blank" title="Substack" class="footer-social-btn"><svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 17.64 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Platform</div>
+        <div class="footer-links">
+          <a href="sectors.html">Sectors</a>
+          <a href="services.html">Services</a>
+          <a href="insights.html">Insights</a>
+          <a href="https://app.africa-infra.com" target="_blank">Log In</a>
+          <a href="https://app.africa-infra.com" target="_blank">Get Started</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Legal</div>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <div class="footer-contact-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Routes des Almadies, Dakar, Senegal</div>
+        <div class="footer-contact-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@africa-infra.com</div>
+        <div class="footer-contact-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.02 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>+221 77 486 79 27</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-text">© 2023–2026 Africa Infrastructure Partners. All rights reserved.</div>
+      <div class="footer-bottom-text" style="color:var(--gold); font-size:12px;">Better tools for a better Africa</div>
+    </div>
+  </div>
+</footer>
+<script src="i18n.js"></script>
+
+<!-- ── COOKIE CONSENT ─────────────────────────────────────────────── -->
+<div id="cookie-banner" style="
+  position:fixed;bottom:0;left:0;right:0;z-index:99999;
+  background:rgba(11,22,40,0.97);
+  border-top:1px solid rgba(201,168,76,0.25);
+  padding:20px 24px;
+  display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap;
+  backdrop-filter:blur(12px);
+  font-size:13px;color:#8b9ab0;
+  transform:translateY(100%);transition:transform 0.4s ease;
+">
+  <div style="flex:1;min-width:260px;">
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:16px;font-weight:600;color:#f8f8f5;margin-bottom:6px;">We use cookies 🍪</div>
+    <p style="margin:0;line-height:1.6;">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behaviour or unique IDs on this site. Not consenting or withdrawing consent may adversely affect certain features and functions.</p>
+    <div style="margin-top:10px;font-size:11px;display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Privacy Policy</a>
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Terms of Service</a>
+      <a href="#" onclick="showCookiePolicy(event)" style="color:#c9a84c;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Cookie Policy</a>
+    </div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;align-self:center;">
+    <button onclick="acceptCookies()" style="
+      background:#c9a84c;color:#0b1628;border:none;border-radius:8px;
+      padding:10px 22px;font-weight:700;font-size:13px;cursor:pointer;
+      white-space:nowrap;transition:background 0.2s;
+    " onmouseover="this.style.background='#e0c07a'" onmouseout="this.style.background='#c9a84c'">Accept All</button>
+    <button onclick="declineCookies()" style="
+      background:transparent;color:#8b9ab0;border:1px solid rgba(255,255,255,0.12);
+      border-radius:8px;padding:9px 22px;font-size:13px;cursor:pointer;
+      white-space:nowrap;transition:all 0.2s;
+    " onmouseover="this.style.borderColor='rgba(255,255,255,0.3)';this.style.color='#b0bfd4'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)';this.style.color='#8b9ab0'">Decline</button>
+  </div>
+</div>
+
+<!-- Cookie Policy Modal -->
+<div id="cookie-modal" style="display:none;position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,0.7);align-items:center;justify-content:center;padding:24px;">
+  <div style="background:#192341;border:1px solid rgba(201,168,76,0.2);border-radius:16px;max-width:540px;width:100%;padding:36px;position:relative;max-height:80vh;overflow-y:auto;">
+    <button onclick="document.getElementById('cookie-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;color:#8b9ab0;font-size:20px;cursor:pointer;line-height:1;">✕</button>
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;color:#f8f8f5;margin-bottom:16px;">Cookie &amp; Privacy Policy</div>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:12px;">To provide the best experiences, we use technologies like cookies to store and/or access device information. Consenting to these technologies will allow us to process data such as browsing behaviour or unique IDs on this site. Not consenting or withdrawing consent may adversely affect certain features and functions.</p>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:12px;"><strong style="color:#f8f8f5;">What we collect:</strong> We may collect usage data, session identifiers, and anonymised analytics to improve platform performance and user experience. We do not sell personal data to third parties.</p>
+    <p style="font-size:13px;color:#8b9ab0;line-height:1.7;margin-bottom:20px;"><strong style="color:#f8f8f5;">Your rights:</strong> You may withdraw consent at any time by clearing browser cookies or contacting us at <a href="mailto:info@africa-infra.com" style="color:#c9a84c;">info@africa-infra.com</a>.</p>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button onclick="declineCookies()" style="background:none;border:1px solid rgba(255,255,255,0.15);color:#8b9ab0;border-radius:8px;padding:10px 18px;font-size:13px;cursor:pointer;">Decline</button>
+      <button onclick="acceptCookies()" style="background:#c9a84c;color:#0b1628;border:none;border-radius:8px;padding:10px 20px;font-weight:700;font-size:13px;cursor:pointer;">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var banner = document.getElementById('cookie-banner');
+  if (!localStorage.getItem('aip_cookie_consent')) {
+    setTimeout(function() { banner.style.transform = 'translateY(0)'; }, 800);
+  }
+})();
+function acceptCookies() {
+  localStorage.setItem('aip_cookie_consent', 'accepted');
+  document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+  document.getElementById('cookie-modal').style.display = 'none';
+}
+function declineCookies() {
+  localStorage.setItem('aip_cookie_consent', 'declined');
+  document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+  document.getElementById('cookie-modal').style.display = 'none';
+}
+function showCookiePolicy(e) {
+  e.preventDefault();
+  document.getElementById('cookie-modal').style.display = 'flex';
+}
+</script>
+</body>
+</html>

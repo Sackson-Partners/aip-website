@@ -208,6 +208,31 @@ if (window.navigation && window.self !== window.top) {
 }
 `;
 
+// Dev server plugin: route public paths to static HTML files (mirrors vercel.json)
+const staticPageRoutingPlugin = {
+	name: 'static-page-routing',
+	configureServer(server) {
+		const staticRoutes = {
+			'/': '/home.html',
+			'/podcast': '/podcast.html',
+			'/demo': '/demo.html',
+			'/about': '/about.html',
+			'/sectors': '/sectors.html',
+			'/services': '/services.html',
+			'/insights': '/insights.html',
+			'/contact': '/contact.html',
+		};
+		server.middlewares.use((req, _res, next) => {
+			const url = req.url?.split('?')[0];
+			const target = staticRoutes[url];
+			if (target) {
+				req.url = target;
+			}
+			next();
+		});
+	}
+};
+
 const addTransformIndexHtml = {
 	name: 'add-transform-index-html',
 	transformIndexHtml(html) {
@@ -280,6 +305,7 @@ logger.error = (msg, options) => {
 export default defineConfig({
 	customLogger: logger,
 	plugins: [
+		staticPageRoutingPlugin,
 		...(isDev ? [inlineEditPlugin(), editModeDevPlugin(), iframeRouteRestorationPlugin(), selectionModePlugin()] : []),
 		react(),
 		addTransformIndexHtml

@@ -59,16 +59,23 @@ module.exports = {
     			}
     		},
     		fontFamily: {
-    			serif: [
+    			display: [
+    				'Cormorant Garamond',
     				'Georgia',
-    				'Cambria',
-    				'Times New Roman"',
-    				'Times',
+    				'serif'
+    			],
+    			serif: [
+    				'Cormorant Garamond',
+    				'Georgia',
     				'serif'
     			],
     			sans: [
-    				'DM Sans"',
+    				'DM Sans',
     				'system-ui',
+    				'sans-serif'
+    			],
+    			arabic: [
+    				'Noto Sans Arabic',
     				'sans-serif'
     			]
     		},

@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Zap, Globe, TrendingUp, Check, ArrowRight, Sparkles, Laptop, Database } from 'lucide-react';
+import { Shield, Zap, Globe, TrendingUp, Check, ArrowRight, Sparkles, Laptop, Database, Upload, Cpu, Link2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -84,9 +84,8 @@ const PublicHomePage = () => {
                   </Button>
                 </a>
                 
-                {/* See How It Works remains visible in the Hero Section as requested */}
-                <Button 
-                   onClick={() => navigate('/how-it-works')}
+                <Button
+                   onClick={() => navigate('/demo')}
                   className="bg-transparent border-2 border-white/20 text-white hover:bg-white/10 font-bold text-lg px-8 py-7 rounded-lg transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2"
                 >
                     <Laptop className="w-5 h-5" />
@@ -166,6 +165,65 @@ const PublicHomePage = () => {
                     ))}
                 </div>
             </div>
+        </section>
+
+        {/* How It Works — 3-step section */}
+        <section className="py-24 bg-[#0F1419] relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-[#D4AF37] font-semibold mb-4 px-3 py-1 border border-[#D4AF37]/30 rounded-full">
+                How It Works
+              </div>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4">From Submission to Investment</h2>
+              <p className="text-gray-400 max-w-xl mx-auto">Three steps from raw project to matched capital.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 relative">
+              {/* Connector lines (desktop only) */}
+              <div className="hidden md:block absolute top-12 left-1/3 right-1/3 h-px bg-[#D4AF37]/20 z-0" />
+              {[
+                {
+                  step: "01",
+                  tag: "Input",
+                  icon: Upload,
+                  title: "Project Submission",
+                  desc: "Project sponsors, governments, and developers submit their infrastructure projects through the AIP platform."
+                },
+                {
+                  step: "02",
+                  tag: "AI Process",
+                  icon: Cpu,
+                  title: "AI Agent Due Diligence",
+                  desc: "Our proprietary PETFEL engine runs multi-dimensional due diligence, powered by AI and human analyst oversight."
+                },
+                {
+                  step: "03",
+                  tag: "Output",
+                  icon: Link2,
+                  title: "Capital Matching & EIN",
+                  desc: "Verified projects receive an Executive Investment Note and are matched with the right investors from our global network."
+                }
+              ].map((step, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ delay: idx * 0.15, duration: 0.6 }}
+                  className="relative z-10 px-8 py-8 text-center md:text-left"
+                >
+                  <div className="text-7xl font-serif font-bold text-[#D4AF37]/10 leading-none mb-1 select-none">{step.step}</div>
+                  <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-[#D4AF37] mb-4">
+                    <span className="w-3 h-px bg-[#D4AF37]" />
+                    {step.tag}
+                  </div>
+                  <div className="w-12 h-12 bg-[#D4AF37]/10 rounded-xl flex items-center justify-center text-[#D4AF37] mb-4 mx-auto md:mx-0">
+                    <step.icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-xl font-serif font-semibold text-white mb-3">{step.title}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">{step.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* Built for Modern Infrastructure delivery Section */}

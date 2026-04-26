@@ -32,6 +32,7 @@ import ProjectsDataPage from '@/pages/ProjectsDataPage';
 import AccessDataPage from '@/pages/AccessDataPage';
 import GetStartedPage from '@/pages/GetStartedPage';
 import RequestDemoPage from '@/pages/RequestDemoPage';
+import DemoPage from '@/pages/DemoPage';
 import GroundTruthPage from '@/pages/GroundTruthPage';
 import AuthCallback from '@/pages/AuthCallback';
 
@@ -100,6 +101,7 @@ function App() {
                 <Route path="/get-started" element={<GetStartedPage />} />
                 <Route path="/request-demo" element={<RequestDemoPage />} />
                 <Route path="/auth/callback" element={<AuthCallback />} />
+                <Route path="/demo" element={<DemoPage />} />
                 
                 {/* Admin Routes */}
                 <Route 
