@@ -324,13 +324,16 @@ export default defineConfig({
 		},
 	},
 	build: {
-		rollupOptions: {
-			external: [
-				'@babel/parser',
-				'@babel/traverse',
-				'@babel/generator',
-				'@babel/types'
-			]
-		}
-	}
+                rollupOptions: {
+                        input: {
+                                app: path.resolve(__dirname, '_app.html'),
+                        },
+                        external: [
+                                '@babel/parser',
+                                '@babel/traverse',
+                                '@babel/generator',
+                                '@babel/types'
+                        ]
+                }
+        }
 });
