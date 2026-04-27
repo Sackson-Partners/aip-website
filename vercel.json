@@ -11,6 +11,7 @@
     { "source": "/services", "destination": "/services.html" },
     { "source": "/insights", "destination": "/insights.html" },
     { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/how-it-works", "destination": "/how-it-works.html" },
     { "source": "/", "destination": "/home.html" }
   ],
   "headers": [

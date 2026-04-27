@@ -48,6 +48,12 @@
 .hero-title { margin-bottom: 24px; }
 .hero-lead { font-size: 18px; color: var(--muted-lt); line-height: 1.7; font-weight: 300; margin-bottom: 40px; }
 .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.hero-stats-row { display: flex; align-items: center; gap: 0; margin-top: 32px; flex-wrap: wrap; }
+.hero-stat-item { display: flex; flex-direction: column; gap: 2px; padding: 0 20px; }
+.hero-stat-item:first-child { padding-left: 0; }
+.hero-stat-num { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--gold); line-height: 1; }
+.hero-stat-lbl { font-size: 11px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.hero-stat-sep { width: 1px; height: 32px; background: var(--border-lt); flex-shrink: 0; }
 .hero-visual {
   position: relative;
 }
@@ -680,7 +686,7 @@
   <div class="nav-inner">
     <a href="/home.html" class="nav-logo">
       <div class="nav-logo-img-wrap">
-        <img src="aip-logo.jpeg" alt="Africa Infrastructure Partners" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;">
+        <img src="aip-logo.jpeg" alt="Africa Infrastructure Partners" class="nav-logo-img" style="height:50px;width:auto;max-height:50px;object-fit:contain;display:block;">
       </div>
     </a>
     <div class="nav-links">
@@ -717,7 +723,16 @@
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>
             Access Project Data
           </a>
-          <a href="#how-it-works" class="btn btn-outline btn-lg">See How It Works</a>
+          <a href="/how-it-works" class="btn btn-outline btn-lg">See How It Works</a>
+        </div>
+        <div class="hero-stats-row">
+          <div class="hero-stat-item"><span class="hero-stat-num">$300M+</span><span class="hero-stat-lbl">Projects Listed</span></div>
+          <div class="hero-stat-sep"></div>
+          <div class="hero-stat-item"><span class="hero-stat-num">150+</span><span class="hero-stat-lbl">Active Projects</span></div>
+          <div class="hero-stat-sep"></div>
+          <div class="hero-stat-item"><span class="hero-stat-num">4</span><span class="hero-stat-lbl">African Nations</span></div>
+          <div class="hero-stat-sep"></div>
+          <div class="hero-stat-item"><span class="hero-stat-num">100+</span><span class="hero-stat-lbl">Global Investors</span></div>
         </div>
       </div>
       <div class="hero-visual">
@@ -770,8 +785,8 @@
   </div>
 </section>
 
-<!-- DYNAMIC SPOTLIGHT SECTION -->
-<section class="spotlight-section">
+<!-- SPOTLIGHT SECTION REMOVED -->
+<section style="display:none">
   <div class="container">
     <div class="spotlight-tabs">
       <button class="sp-tab" data-tab="video">
@@ -926,29 +941,6 @@
   </div>
 </section>
 
-<!-- STATS BAR -->
-<div class="stats-bar">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-number">$300M+</div>
-        <div class="stat-label">Projects Listed</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">150+</div>
-        <div class="stat-label">Active Projects</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">4</div>
-        <div class="stat-label">African Nations</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">100+</div>
-        <div class="stat-label">Global Investors</div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- PROBLEM / CHALLENGE -->
 <section class="section" style="background:var(--navy-mid); border-top:1px solid var(--border-lt); border-bottom:1px solid var(--border-lt);">
@@ -977,6 +969,42 @@
   </div>
 </section>
 
+<!-- SERVICES -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">What We Offer</div>
+      <h2 class="display-lg">Three pillars of<br><em class="gold" style="font-style:italic">infrastructure delivery</em></h2>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="card-title">Data Marketplace Platform</div>
+        <div class="card-body">Verified, investment-grade project data across Africa's infrastructure pipeline — accessible on demand from a single trusted source.</div>
+      </div>
+      <div class="card" style="border-color:var(--border); background:linear-gradient(135deg, rgba(201,168,76,0.06) 0%, rgba(201,168,76,0.02) 100%);">
+        <div class="card-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="card-title">Advisory</div>
+        <div class="card-body">End-to-end support for governments, sponsors, and investors — from project structuring and PETFEL due diligence to capital matching and deal closure.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        </div>
+        <div class="card-title">Insight</div>
+        <div class="card-body">Real-time policy briefs, country-risk dashboards, and the Ground Truth Podcast — keeping decision-makers ahead of Africa's infrastructure market.</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:40px;">
+      <a href="services.html" class="btn btn-outline-gold btn-lg">View All Services →</a>
+    </div>
+  </div>
+</section>
+
 <!-- WHY AIP -->
 <section class="section">
   <div class="container">
@@ -985,33 +1013,29 @@
       <h2 class="display-lg">Advanced technology meets<br>infrastructure expertise</h2>
     </div>
     <div class="grid-4">
-      <div class="card">
-        <div class="card-icon">
+      <div class="card" style="text-align:center; padding:32px 24px;">
+        <div class="card-icon" style="margin:0 auto 20px;">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
         </div>
         <div class="card-title">Reduce Due Diligence Time</div>
-        <div class="card-body">Comprehensive risk assessment and verification using human intelligence combined with advanced AI—reducing time to investment by 70%.</div>
       </div>
-      <div class="card">
-        <div class="card-icon">
+      <div class="card" style="text-align:center; padding:32px 24px;">
+        <div class="card-icon" style="margin:0 auto 20px;">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
         </div>
         <div class="card-title">Verified Deal Matching</div>
-        <div class="card-body">AI-powered matching connects investors and projects at the right time, with verified data and clear audit trails for every stakeholder.</div>
       </div>
-      <div class="card">
-        <div class="card-icon">
+      <div class="card" style="text-align:center; padding:32px 24px;">
+        <div class="card-icon" style="margin:0 auto 20px;">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
         </div>
         <div class="card-title">Gateway into Africa</div>
-        <div class="card-body">Access verified, investment-ready infrastructure opportunities across our 8 active African markets from a single trusted platform.</div>
       </div>
-      <div class="card">
-        <div class="card-icon">
+      <div class="card" style="text-align:center; padding:32px 24px;">
+        <div class="card-icon" style="margin:0 auto 20px;">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
         </div>
         <div class="card-title">Market Intelligence</div>
-        <div class="card-body">Real-time data and insights including PETFEL scores, EIN reports, and country-risk analysis to make informed investment decisions.</div>
       </div>
     </div>
   </div>
@@ -1021,13 +1045,54 @@
 <section class="section" id="how-it-works" style="background:var(--navy-mid); border-top:1px solid var(--border-lt); border-bottom:1px solid var(--border-lt);">
   <div class="container">
     <div class="section-header">
-      <div class="section-label" data-i18n="hiw_label">How It Works</div>
-      <h2 class="display-lg" data-i18n="hiw_title">From project submission to capital deployment</h2>
-      <p class="lead" style="margin:16px auto 0; text-align:center" data-i18n="hiw_desc">AIP's proprietary AI pipeline transforms complex infrastructure deals into standardised, investor-grade assets.</p>
+      <div class="section-label">How It Works</div>
+      <h2 class="display-lg">From submission to<br><em class="gold" style="font-style:italic">investment</em></h2>
     </div>
+    <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:0; position:relative; max-width:900px; margin:0 auto;">
+      <div style="position:absolute; top:28px; left:10%; right:10%; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); opacity:0.3; pointer-events:none;"></div>
+      <div style="text-align:center; padding:0 12px;">
+        <div style="width:56px; height:56px; background:rgba(201,168,76,0.12); border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; color:var(--gold);">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <div style="font-family:var(--font-display); font-size:16px; font-weight:600; color:var(--white); margin-bottom:8px;">Project Intake</div>
+        <div style="font-size:12px; color:var(--muted); line-height:1.6;">Sponsors submit projects via the AIP platform</div>
+      </div>
+      <div style="text-align:center; padding:0 12px;">
+        <div style="width:56px; height:56px; background:rgba(201,168,76,0.12); border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; color:var(--gold);">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div style="font-family:var(--font-display); font-size:16px; font-weight:600; color:var(--white); margin-bottom:8px;">Verification</div>
+        <div style="font-size:12px; color:var(--muted); line-height:1.6;">PETFEL AI + human analysts validate each project</div>
+      </div>
+      <div style="text-align:center; padding:0 12px;">
+        <div style="width:56px; height:56px; background:rgba(201,168,76,0.12); border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; color:var(--gold);">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg>
+        </div>
+        <div style="font-family:var(--font-display); font-size:16px; font-weight:600; color:var(--white); margin-bottom:8px;">Data Rooms</div>
+        <div style="font-size:12px; color:var(--muted); line-height:1.6;">Secure document exchange for qualified investors</div>
+      </div>
+      <div style="text-align:center; padding:0 12px;">
+        <div style="width:56px; height:56px; background:rgba(201,168,76,0.12); border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; color:var(--gold);">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <div style="font-family:var(--font-display); font-size:16px; font-weight:600; color:var(--white); margin-bottom:8px;">Due Diligence</div>
+        <div style="font-size:12px; color:var(--muted); line-height:1.6;">EIN report generated, risk scored across 6 dimensions</div>
+      </div>
+      <div style="text-align:center; padding:0 12px;">
+        <div style="width:56px; height:56px; background:rgba(201,168,76,0.12); border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; color:var(--gold);">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <div style="font-family:var(--font-display); font-size:16px; font-weight:600; color:var(--white); margin-bottom:8px;">Deal Rooms</div>
+        <div style="font-size:12px; color:var(--muted); line-height:1.6;">Capital matched, term sheets negotiated to close</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:48px;">
+      <a href="/how-it-works" class="btn btn-outline-gold btn-lg">See Full Process →</a>
+    </div>
+  </div>
 
-    <!-- FULL PROCESS DIAGRAM -->
-    <div class="hiw-diagram">
+    <!-- FULL PROCESS DIAGRAM (hidden) -->
+    <div class="hiw-diagram" style="display:none;">
 
       <!-- ROW 1: INPUT -->
       <div class="hiw-input-row">
@@ -1271,7 +1336,7 @@
       <div>
         <a href="/home.html" class="nav-logo" style="margin-bottom:16px;">
           <div class="nav-logo-img-wrap">
-            <img src="aip-logo.jpeg" alt="AIP" class="nav-logo-img" style="height:26px;width:auto;max-height:26px;object-fit:contain;display:block;">
+            <img src="aip-logo.jpeg" alt="AIP" class="nav-logo-img" style="height:50px;width:auto;max-height:50px;object-fit:contain;display:block;">
           </div>
         </a>
         <p class="footer-desc">Connecting Africa's infrastructure projects with global capital. We structure, verify, and facilitate investments to drive sustainable development across the continent.</p>
