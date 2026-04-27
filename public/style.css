@@ -330,7 +330,7 @@ footer {
   height: 36px;
   overflow: hidden;
 }
-.nav-logo-img { height: 26px; width: auto; max-height: 26px; object-fit: contain; display: block; }
+.nav-logo-img { height: 36px; width: auto; max-height: 36px; object-fit: contain; display: block; }
 
 /* ── LANG SWITCHER ────────────────────────────── */
 .lang-switcher { display: flex; align-items: center; gap: 4px; }

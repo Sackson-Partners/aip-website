@@ -69,6 +69,19 @@
 .hero-badge-text { font-size: 12px; color: var(--muted-lt); }
 .hero-badge-text strong { color: var(--white); display: block; font-size: 13px; }
 
+/* Hero Image Carousel */
+.hero-carousel { position:relative; width:100%; height:480px; border-radius:16px; overflow:hidden; box-shadow:0 32px 80px rgba(0,0,0,0.55); border:1px solid rgba(255,255,255,0.08); }
+.carousel-slide { position:absolute; inset:0; opacity:0; transition:opacity 0.7s ease; }
+.carousel-slide.active { opacity:1; }
+.carousel-img { width:100%; height:100%; object-fit:cover; display:block; }
+.carousel-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.12) 55%, transparent 100%); }
+.carousel-caption { position:absolute; bottom:52px; left:18px; font-size:13px; color:#fff; background:rgba(0,0,0,0.45); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.1); padding:5px 14px; border-radius:100px; font-weight:500; }
+.carousel-dots { position:absolute; bottom:14px; left:50%; transform:translateX(-50%); display:flex; gap:6px; z-index:5; }
+.carousel-dot { height:6px; width:6px; border-radius:100px; border:none; background:rgba(255,255,255,0.4); cursor:pointer; transition:all 0.3s; padding:0; }
+.carousel-dot.active { background:#fff; width:22px; }
+.carousel-live-badge { position:absolute; top:14px; right:14px; display:flex; align-items:center; gap:6px; background:rgba(0,0,0,0.5); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.1); border-radius:100px; padding:5px 12px; font-size:11px; color:#fff; font-weight:600; letter-spacing:0.06em; z-index:5; }
+.carousel-live-dot { width:7px; height:7px; background:#22c55e; border-radius:50%; animation:pulse 2s infinite; }
+
 /* App preview mockup */
 .app-preview {
   background: var(--navy-mid);
@@ -660,7 +673,7 @@
 .footer-social-btn:hover { background:rgba(201,168,76,0.15);color:var(--gold); }
 </style>
 </head>
-<body class="ltr" data-cc-id="cc-1" style="background-color: rgb(12, 24, 42); cursor: crosshair;">
+<body class="ltr" data-cc-id="cc-1" style="background-color: rgb(12, 24, 42); cursor: default;">
 
 <!-- NAV -->
 <nav>
@@ -694,81 +707,62 @@
       <div>
         <div class="hero-eyebrow">Accelerating Africa's infrastructure pipeline delivery</div>
         <h1 class="display-xl hero-title">
-          Connect Africa's<br>
+          Connecting Africa's<br>
           <em class="gold" style="font-style:italic">Infrastructure</em><br>
           with Global Capital
         </h1>
-        <p class="hero-lead">An independent investment and advisory platform that identifies, structures, and connects commercially viable African infrastructure projects with global capital—reducing friction, risk, and time to investment.</p>
+        <p class="hero-lead">We are an independent investment and advisory platform that identifies, structures, and connects commercially viable African infrastructure projects with global capital—reducing friction, risk, and time to investment.</p>
         <div class="hero-actions">
           <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold btn-lg">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>
             Access Project Data
           </a>
-          <a href="demo.html" class="btn btn-outline btn-lg">See How It Works</a>
+          <a href="#how-it-works" class="btn btn-outline btn-lg">See How It Works</a>
         </div>
       </div>
       <div class="hero-visual">
-        <div class="app-preview">
-          <div class="app-bar">
-            <div class="app-bar-dot" style="background:#ff5f57"></div>
-            <div class="app-bar-dot" style="background:#febc2e"></div>
-            <div class="app-bar-dot" style="background:#28c840"></div>
-            <div class="app-bar-url">app.africa-infra.com / dashboard</div>
+        <div class="hero-carousel">
+          <div class="carousel-slide active">
+            <img src="images/infra-1.jpg" alt="Bridge construction project in Africa" class="carousel-img">
+            <div class="carousel-overlay"></div>
+            <div class="carousel-caption">Civil Engineering</div>
           </div>
-          <div class="app-body">
-            <div class="app-sidebar">
-              <div class="app-sidebar-icon active">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
-              </div>
-              <div class="app-sidebar-icon">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"></path></svg>
-              </div>
-              <div class="app-sidebar-icon">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg>
-              </div>
-              <div class="app-sidebar-icon">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path></svg>
-              </div>
-            </div>
-            <div class="app-main">
-              <div class="app-section-title">Pipeline Overview</div>
-              <div class="app-project-row">
-                <div class="app-project-dot" style="background:#c9a84c"></div>
-                <div class="app-project-name">Dakar Solar Farm Phase II</div>
-                <span class="app-project-tag tag-green">L4 Bankable</span>
-              </div>
-              <div class="app-project-row">
-                <div class="app-project-dot" style="background:#3b82f6"></div>
-                <div class="app-project-name">Lagos Port Expansion</div>
-                <span class="app-project-tag tag-gold">Due Diligence</span>
-              </div>
-              <div class="app-project-row">
-                <div class="app-project-dot" style="background:#8b5cf6"></div>
-                <div class="app-project-name">Nairobi Digital Corridor</div>
-                <span class="app-project-tag tag-blue">Screening</span>
-              </div>
-              <div class="app-score-row">
-                <div class="app-score-card">
-                  <div class="app-score-num">87</div>
-                  <div class="app-score-lbl">PETFEL Score</div>
-                </div>
-                <div class="app-score-card">
-                  <div class="app-score-num">$2.4B</div>
-                  <div class="app-score-lbl">Pipeline Value</div>
-                </div>
-                <div class="app-score-card">
-                  <div class="app-score-num">8</div>
-                  <div class="app-score-lbl">Countries</div>
-                </div>
-              </div>
-            </div>
+          <div class="carousel-slide">
+            <img src="images/infra-2.jpg" alt="Power transmission infrastructure in Africa" class="carousel-img">
+            <div class="carousel-overlay"></div>
+            <div class="carousel-caption">Energy &amp; Power</div>
           </div>
-        </div>
-        <div class="hero-badge">
-          <div class="hero-badge-dot"></div>
-          <div class="hero-badge-text">
-            <strong>Live Platform Active</strong>
-            app.africa-infra.com
+          <div class="carousel-slide">
+            <img src="images/infra-3.jpg" alt="Construction site in Africa" class="carousel-img">
+            <div class="carousel-overlay"></div>
+            <div class="carousel-caption">Construction</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="images/infra-4.jpg" alt="Hydropower dam in Africa" class="carousel-img">
+            <div class="carousel-overlay"></div>
+            <div class="carousel-caption">Water Infrastructure</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="images/infra-5.jpg" alt="Road and bridge infrastructure in Africa" class="carousel-img">
+            <div class="carousel-overlay"></div>
+            <div class="carousel-caption">Transport Infrastructure</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="images/infra-6.jpg" alt="Nairobi urban development aerial view" class="carousel-img">
+            <div class="carousel-overlay"></div>
+            <div class="carousel-caption">Urban Development</div>
+          </div>
+          <div class="carousel-dots" id="carouselDots">
+            <button class="carousel-dot active" data-index="0"></button>
+            <button class="carousel-dot" data-index="1"></button>
+            <button class="carousel-dot" data-index="2"></button>
+            <button class="carousel-dot" data-index="3"></button>
+            <button class="carousel-dot" data-index="4"></button>
+            <button class="carousel-dot" data-index="5"></button>
+          </div>
+          <div class="carousel-live-badge">
+            <div class="carousel-live-dot"></div>
+            Live Projects
           </div>
         </div>
       </div>
@@ -955,6 +949,33 @@
     </div>
   </div>
 </div>
+
+<!-- PROBLEM / CHALLENGE -->
+<section class="section" style="background:var(--navy-mid); border-top:1px solid var(--border-lt); border-bottom:1px solid var(--border-lt);">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">The Challenge</div>
+      <h2 class="display-lg">Despite a strong pipeline of projects</h2>
+    </div>
+    <div class="grid-3" style="margin-bottom:48px;">
+      <div class="card" style="text-align:center;">
+        <div class="stat-number">$500B</div>
+        <div class="stat-label" style="margin-top:8px;">of annually GDP lost regionally</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="stat-number">74M</div>
+        <div class="stat-label" style="margin-top:8px;">jobs are lost as a result</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <div class="stat-number">1M</div>
+        <div class="stat-label" style="margin-top:8px;">lives are lost each year</div>
+      </div>
+    </div>
+    <p style="text-align:center; font-size:17px; color:var(--muted-lt); max-width:820px; margin:0 auto; line-height:1.8;">
+      Africa faces annual infrastructure needs of $130–170B and a financing gap exceeding $100B. The real challenge is delivery, not project availability—driven by fragmented information, high perceived risk, limited private investment, and low trust.
+    </p>
+  </div>
+</section>
 
 <!-- WHY AIP -->
 <section class="section">
@@ -1448,5 +1469,25 @@ function showCookiePolicy(e) {
   e.preventDefault();
   document.getElementById('cookie-modal').style.display = 'flex';
 }
+
+// Infrastructure photo carousel
+(function() {
+  var slides = document.querySelectorAll('.carousel-slide');
+  var dots = document.querySelectorAll('.carousel-dot');
+  if (!slides.length) return;
+  var current = 0;
+  function goTo(idx) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = idx;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+  dots.forEach(function(dot, i) {
+    dot.addEventListener('click', function() { goTo(i); clearInterval(timer); timer = setInterval(advance, 4000); });
+  });
+  function advance() { goTo((current + 1) % slides.length); }
+  var timer = setInterval(advance, 4000);
+})();
 </script>
 </body></html>
