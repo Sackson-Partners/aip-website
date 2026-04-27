@@ -75,13 +75,73 @@
   transition:background 0.2s,color 0.2s;text-decoration:none;
 }
 .footer-social-btn:hover { background:rgba(201,168,76,0.15);color:var(--gold); }
+
+/* Spotlight */
+.spotlight-section { background:var(--navy); border-bottom:1px solid var(--border-lt); padding:0 0 48px; }
+.spotlight-tabs { display:flex; gap:0; border-bottom:1px solid var(--border-lt); margin-bottom:32px; }
+.sp-tab { display:flex; align-items:center; gap:8px; font-family:var(--font-body); font-size:13px; font-weight:500; color:var(--muted); background:none; border:none; padding:18px 28px; cursor:pointer; border-bottom:2px solid transparent; transition:all 0.2s; margin-bottom:-1px; }
+.sp-tab:hover { color:var(--white); }
+.sp-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
+.sp-panel { display:none; }
+.sp-panel.active { display:block; }
+.sp-video-grid { display:grid; grid-template-columns:1fr 320px; gap:20px; }
+.sp-video-player { position:relative; height:360px; border-radius:14px; overflow:hidden; background:linear-gradient(135deg,#0d1e36,#1a2f50); border:1px solid var(--border-lt); cursor:pointer; }
+.sp-video-bg { position:absolute; inset:0; }
+.sp-video-shimmer { position:absolute; inset:0; background:linear-gradient(135deg,rgba(201,168,76,0.04) 0%,transparent 60%,rgba(201,168,76,0.02) 100%); }
+.sp-video-grid-lines { position:absolute; inset:0; background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.02) 0,rgba(255,255,255,0.02) 1px,transparent 0,transparent 40px),repeating-linear-gradient(90deg,rgba(255,255,255,0.02) 0,rgba(255,255,255,0.02) 1px,transparent 0,transparent 40px); }
+.sp-video-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(to top,rgba(11,22,40,0.9) 0%,transparent 60%); z-index:2; }
+.sp-play-btn { width:72px; height:72px; border-radius:50%; background:rgba(201,168,76,0.9); color:var(--navy); display:flex; align-items:center; justify-content:center; margin-bottom:120px; transition:transform 0.2s,background 0.2s; box-shadow:0 0 0 8px rgba(201,168,76,0.2); }
+.sp-video-player:hover .sp-play-btn { transform:scale(1.08); background:var(--gold); }
+.sp-video-meta { position:absolute; bottom:24px; left:24px; right:24px; }
+.sp-video-tag { display:inline-block; font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; background:var(--gold); color:var(--navy); padding:3px 10px; border-radius:100px; margin-bottom:8px; }
+.sp-video-title { font-family:var(--font-display); font-size:22px; font-weight:600; color:var(--white); margin-bottom:4px; }
+.sp-video-sub { font-size:13px; color:var(--muted-lt); }
+.sp-video-list { display:flex; flex-direction:column; gap:8px; }
+.sp-video-item { display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--navy-card); border:1px solid var(--border-lt); border-radius:10px; cursor:pointer; transition:all 0.2s; flex:1; }
+.sp-video-item:hover,.sp-video-item.active-item { border-color:var(--border); background:rgba(201,168,76,0.05); }
+.sp-video-thumb { width:40px; height:40px; border-radius:8px; flex-shrink:0; }
+.sp-video-thumb.energy{background:linear-gradient(135deg,#1a2f4a,#0f1e32);} .sp-video-thumb.water{background:linear-gradient(135deg,#0f2434,#192d40);} .sp-video-thumb.digital{background:linear-gradient(135deg,#1a1040,#110a28);} .sp-video-thumb.agri{background:linear-gradient(135deg,#1a2f1a,#0f2318);} .sp-video-thumb.health{background:linear-gradient(135deg,#2a1020,#1a0a14);}
+.sp-vi-title { font-size:13px; color:var(--white); font-weight:500; margin-bottom:2px; flex:1; }
+.sp-vi-meta { font-size:11px; color:var(--muted); }
+.sp-vi-tag { font-size:10px; font-weight:600; padding:2px 8px; border-radius:100px; flex-shrink:0; }
+.tag-gold{background:rgba(201,168,76,0.15);color:var(--gold);} .tag-blue{background:rgba(59,130,246,0.15);color:#60a5fa;} .tag-green{background:rgba(34,197,94,0.12);color:#4ade80;}
+.sp-map-wrap { display:grid; grid-template-columns:1fr 220px; gap:24px; align-items:start; }
+.sp-map-container { position:relative; background:var(--navy-card); border:1px solid var(--border-lt); border-radius:14px; padding:24px; }
+.map-legend { position:absolute; top:24px; right:24px; background:rgba(11,22,40,0.9); border:1px solid var(--border-lt); border-radius:10px; padding:14px 16px; }
+.map-legend-title { font-size:9px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+.map-legend-item { display:flex; align-items:center; gap:8px; font-size:11px; color:var(--muted-lt); margin-bottom:6px; }
+.legend-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.energy-d{background:#c9a84c;} .water-d{background:#3b82f6;} .transport-d{background:#8b5cf6;} .digital-d{background:#06b6d4;} .agri-d{background:#22c55e;} .health-d{background:#f43f5e;}
+.sp-map-stats { display:flex; flex-direction:column; gap:12px; }
+.map-stat-card { background:var(--navy-card); border:1px solid var(--border-lt); border-radius:10px; padding:16px 20px; text-align:center; }
+.map-stat-num { font-family:var(--font-display); font-size:28px; font-weight:700; color:var(--gold); line-height:1; }
+.map-stat-lbl { font-size:11px; color:var(--muted); margin-top:4px; }
+.sp-insights-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.sp-insight-card { background:var(--navy-card); border:1px solid var(--border-lt); border-radius:14px; padding:32px; display:flex; flex-direction:column; gap:12px; transition:all 0.2s; text-decoration:none; color:inherit; }
+.sp-insight-card:hover { border-color:var(--border); transform:translateY(-2px); }
+.featured-insight { background:linear-gradient(160deg,rgba(201,168,76,0.07),rgba(201,168,76,0.02)); border-color:var(--border); }
+.sp-insight-tag { font-size:10px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); }
+.sp-insight-title { font-family:var(--font-display); font-size:22px; font-weight:600; color:var(--white); line-height:1.2; }
+.sp-insight-meta { font-size:12px; color:var(--muted); }
+.sp-insight-excerpt { font-size:14px; color:var(--muted-lt); line-height:1.7; flex:1; }
+.sp-insight-arrow { font-size:13px; color:var(--gold); margin-top:auto; }
+.sp-insights-right { display:flex; flex-direction:column; gap:0; background:var(--navy-card); border:1px solid var(--border-lt); border-radius:14px; overflow:hidden; }
+.sp-insight-row { display:flex; align-items:center; gap:12px; padding:16px 20px; border-bottom:1px solid var(--border-lt); text-decoration:none; color:inherit; transition:background 0.2s; }
+.sp-insight-row:last-of-type { border-bottom:none; }
+.sp-insight-row:hover { background:rgba(255,255,255,0.03); }
+.sp-insight-row-tag { font-size:9px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:3px 8px; border-radius:100px; flex-shrink:0; }
+.energy-tag{background:rgba(201,168,76,0.12);color:var(--gold);} .water-tag{background:rgba(59,130,246,0.12);color:#60a5fa;} .policy-tag{background:rgba(139,92,246,0.12);color:#a78bfa;} .digital-tag{background:rgba(6,182,212,0.12);color:#22d3ee;}
+.sp-insight-row-title { font-size:13px; color:var(--white); font-weight:500; flex:1; line-height:1.4; }
+.sp-insight-row-date { font-size:11px; color:var(--muted); flex-shrink:0; }
+.aip-popup .leaflet-popup-content-wrapper { background:#192341; border:1px solid #2a3a5c; border-radius:8px; color:#f8f8f5; }
+.aip-popup .leaflet-popup-tip { background:#192341; }
 </style>
 </head>
 <body>
 <nav>
   <div class="nav-inner">
     <a href="/home.html" class="nav-logo">
-      <div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="Africa Infrastructure Partners" class="nav-logo-img" style="height:50px;width:auto;max-height:50px;object-fit:contain;display:block;"></div>
+      <div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="Africa Infrastructure Partners" class="nav-logo-img" style="height:56px;width:auto;max-height:56px;object-fit:contain;display:block;"></div>
     </a>
     <div class="nav-links">
       <a href="about.html" data-i18n="nav_about">About Us</a>
@@ -107,6 +167,87 @@
     <p class="lead" style="margin:0 auto; text-align:center; max-width:580px;">We support the entire infrastructure investment lifecycle — from project discovery to deal closure — with cutting-edge technology and deep industry expertise.</p>
   </div>
 </div>
+
+<!-- SPOTLIGHT -->
+<section class="spotlight-section">
+  <div class="container">
+    <div class="spotlight-tabs">
+      <button class="sp-tab" data-tab="video"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Infrastructure Projects</button>
+      <button class="sp-tab" data-tab="map"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Africa Pipeline Map</button>
+      <button class="sp-tab active" data-tab="insights"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>Latest Insights</button>
+    </div>
+    <!-- VIDEO TAB -->
+    <div class="sp-panel" id="sp-video">
+      <div class="sp-video-grid">
+        <div class="sp-video-main">
+          <div class="sp-video-player">
+            <div class="sp-video-overlay">
+              <div class="sp-play-btn"><svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+              <div class="sp-video-meta">
+                <div class="sp-video-tag">Featured Project</div>
+                <div class="sp-video-title">Dakar Solar Farm Phase II — $180M IPP</div>
+                <div class="sp-video-sub">Senegal · Energy · L3 Feasibility</div>
+              </div>
+            </div>
+            <div class="sp-video-bg"><div class="sp-video-shimmer"></div><div class="sp-video-grid-lines"></div></div>
+          </div>
+        </div>
+        <div class="sp-video-list">
+          <div class="sp-video-item active-item"><div class="sp-video-thumb energy"></div><div><div class="sp-vi-title">Lagos Port Expansion</div><div class="sp-vi-meta">Nigeria · Transport · $420M</div></div><div class="sp-vi-tag tag-gold">L4</div></div>
+          <div class="sp-video-item"><div class="sp-video-thumb water"></div><div><div class="sp-vi-title">Nairobi Water PPP</div><div class="sp-vi-meta">Kenya · Water · $95M</div></div><div class="sp-vi-tag tag-blue">L3</div></div>
+          <div class="sp-video-item"><div class="sp-video-thumb digital"></div><div><div class="sp-vi-title">Accra Digital Corridor</div><div class="sp-vi-meta">Ghana · TMT · $60M</div></div><div class="sp-vi-tag tag-green">L2</div></div>
+          <div class="sp-video-item"><div class="sp-video-thumb agri"></div><div><div class="sp-vi-title">Abidjan Agri-Hub</div><div class="sp-vi-meta">Côte d'Ivoire · Agriculture · $45M</div></div><div class="sp-vi-tag tag-blue">L2</div></div>
+          <div class="sp-video-item"><div class="sp-video-thumb health"></div><div><div class="sp-vi-title">Casablanca Health Campus</div><div class="sp-vi-meta">Morocco · Healthcare · $130M</div></div><div class="sp-vi-tag tag-gold">L3</div></div>
+          <div style="margin-top:auto; padding-top:16px; border-top:1px solid var(--border-lt);"><a href="https://app.africa-infra.com" target="_blank" class="btn btn-outline-gold" style="width:100%; justify-content:center; font-size:13px;">View All Projects →</a></div>
+        </div>
+      </div>
+    </div>
+    <!-- MAP TAB -->
+    <div class="sp-panel" id="sp-map">
+      <div class="sp-map-wrap">
+        <div class="sp-map-container">
+          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+          <div id="aip-spotlight-map" style="width:100%; height:100%; min-height:420px; background:#0b1628;"></div>
+          <div class="map-legend">
+            <div class="map-legend-title">Active Pipeline</div>
+            <div class="map-legend-item"><span class="legend-dot energy-d"></span>Energy &amp; Mining</div>
+            <div class="map-legend-item"><span class="legend-dot water-d"></span>Water &amp; Sanitation</div>
+            <div class="map-legend-item"><span class="legend-dot transport-d"></span>Transport</div>
+            <div class="map-legend-item"><span class="legend-dot digital-d"></span>TMT / Digital</div>
+            <div class="map-legend-item"><span class="legend-dot agri-d"></span>Agriculture</div>
+            <div class="map-legend-item"><span class="legend-dot health-d"></span>Healthcare &amp; Social</div>
+          </div>
+        </div>
+        <div class="sp-map-stats">
+          <div class="map-stat-card"><div class="map-stat-num">150+</div><div class="map-stat-lbl">Active Projects</div></div>
+          <div class="map-stat-card"><div class="map-stat-num">8</div><div class="map-stat-lbl">Countries Active</div></div>
+          <div class="map-stat-card"><div class="map-stat-num">$2.4B</div><div class="map-stat-lbl">Pipeline Value</div></div>
+          <div class="map-stat-card"><div class="map-stat-num">6</div><div class="map-stat-lbl">Sectors</div></div>
+          <a href="https://app.africa-infra.com" target="_blank" class="btn btn-gold" style="width:100%; justify-content:center; margin-top:8px;">Access Full Map →</a>
+        </div>
+      </div>
+    </div>
+    <!-- INSIGHTS TAB -->
+    <div class="sp-panel active" id="sp-insights">
+      <div class="sp-insights-grid">
+        <a href="insights.html" class="sp-insight-card featured-insight">
+          <div class="sp-insight-tag">Latest Report</div>
+          <div class="sp-insight-title">Senegal's Renewable Energy Push: $4.2B Pipeline Opens to Global Investors</div>
+          <div class="sp-insight-meta">02 Apr 2026 · 6 min read · Dr. B.Z. Sakor</div>
+          <div class="sp-insight-excerpt">With COP30 approaching, Senegal has unlocked its largest solar and wind programme — 14 bankable projects now ready for capital commitment.</div>
+          <div class="sp-insight-arrow">Read More →</div>
+        </a>
+        <div class="sp-insights-right">
+          <a href="insights.html" class="sp-insight-row"><div class="sp-insight-row-tag energy-tag">Energy</div><div class="sp-insight-row-title">Nigeria Approves $8.2B Power Sector Privatisation</div><div class="sp-insight-row-date">02 Feb 2026</div></a>
+          <a href="insights.html" class="sp-insight-row"><div class="sp-insight-row-tag water-tag">Water</div><div class="sp-insight-row-title">Africa's Water Infrastructure Gap: The $30bn Blended Finance Opportunity</div><div class="sp-insight-row-date">18 Mar 2026</div></a>
+          <a href="insights.html" class="sp-insight-row"><div class="sp-insight-row-tag policy-tag">Policy</div><div class="sp-insight-row-title">AfCFTA at Five: How Trade is Reshaping Infrastructure Investment</div><div class="sp-insight-row-date">05 Mar 2026</div></a>
+          <a href="insights.html" class="sp-insight-row"><div class="sp-insight-row-tag digital-tag">Digital</div><div class="sp-insight-row-title">West Africa's Subsea Cable Boom: Downstream Investment Opportunities</div><div class="sp-insight-row-date">20 Feb 2026</div></a>
+          <a href="insights.html" class="btn btn-outline-gold" style="display:flex;align-items:center;justify-content:center;margin:16px 20px;gap:8px;"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>All Insights</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- SERVICES GRID -->
 <section class="section">
@@ -262,7 +403,7 @@
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <div><div class="nav-logo" style="margin-bottom:16px;"><div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="AIP" class="nav-logo-img" style="height:50px;width:auto;max-height:50px;object-fit:contain;display:block;"></div></div><p class="footer-desc">Connecting Africa's infrastructure projects with global capital.</p></div>
+      <div><div class="nav-logo" style="margin-bottom:16px;"><div class="nav-logo-img-wrap"><img src="aip-logo.jpeg" alt="AIP" class="nav-logo-img" style="height:56px;width:auto;max-height:56px;object-fit:contain;display:block;"></div></div><p class="footer-desc">Connecting Africa's infrastructure projects with global capital.</p></div>
       <div><div class="footer-heading">Platform</div><div class="footer-links"><a href="sectors.html">Sectors</a><a href="services.html">Services</a><a href="insights.html">Insights</a><a href="https://app.africa-infra.com" target="_blank">Log In</a></div></div>
       <div><div class="footer-heading">Legal</div><div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie Policy</a></div></div>
       <div><div class="footer-heading">Contact</div><div class="footer-contact-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>info@africa-infra.com</div><div class="footer-contact-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Routes des Almadies, Dakar, Senegal</div></div>
@@ -271,6 +412,49 @@
   </div>
 </footer>
 <script src="i18n.js"></script>
+<script>
+// Spotlight tabs
+document.querySelectorAll('.sp-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.sp-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.sp-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('sp-' + tab.dataset.tab).classList.add('active');
+  });
+});
+document.querySelectorAll('.sp-video-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.sp-video-item').forEach(i => i.classList.remove('active-item'));
+    item.classList.add('active-item');
+  });
+});
+(function() {
+  var mapLoaded = false;
+  function initSpotlightMap() {
+    if (mapLoaded) return; mapLoaded = true;
+    var script = document.createElement('script');
+    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    script.onload = function() {
+      var map = L.map('aip-spotlight-map', { center:[8,18], zoom:3, zoomControl:true, attributionControl:false, scrollWheelZoom:false });
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { maxZoom:18 }).addTo(map);
+      var gold='#c9a84c',blue='#3b82f6',green='#22c55e',purple='#8b5cf6',teal='#14b8a6';
+      [{ lat:14.72,lng:-17.45,color:gold,label:'Dakar Solar Farm II',meta:'Senegal · Energy · $85M' },
+       { lat:5.55,lng:-0.20,color:purple,label:'Accra Digital Corridor',meta:'Ghana · TMT · $60M' },
+       { lat:12.36,lng:-15.00,color:green,label:'Bissau Water Network',meta:'Guinea-Bissau · Water · $40M' },
+       { lat:9.54,lng:-13.68,color:gold,label:'Conakry Solar Hub',meta:'Guinea · Energy · $55M' },
+       { lat:5.35,lng:-4.00,color:blue,label:'Abidjan Port Expansion',meta:"Côte d'Ivoire · Transport · $120M" }
+      ].forEach(function(p) {
+        var icon = L.divIcon({ className:'', html:'<div style="width:14px;height:14px;background:'+p.color+';border-radius:50%;border:2px solid rgba(255,255,255,0.3);box-shadow:0 0 12px '+p.color+'88;"></div>', iconSize:[14,14], iconAnchor:[7,7] });
+        L.marker([p.lat,p.lng],{icon:icon}).addTo(map).bindPopup('<strong style="color:#c9a84c">'+p.label+'</strong><br><span style="font-size:12px;color:#8b9ab0">'+p.meta+'</span>',{className:'aip-popup'});
+      });
+    };
+    document.head.appendChild(script);
+  }
+  document.querySelectorAll('.sp-tab').forEach(function(tab) {
+    if (tab.dataset.tab === 'map') tab.addEventListener('click', function() { setTimeout(initSpotlightMap, 100); });
+  });
+})();
+</script>
 
 <!-- ── COOKIE CONSENT ─────────────────────────────────────────────── -->
 <div id="cookie-banner" style="

@@ -322,15 +322,15 @@ footer {
 /* ── LOGO IMAGE ───────────────────────────────── */
 .nav-logo-img-wrap {
   background: #fff;
-  border-radius: 6px;
-  padding: 3px 8px;
+  border-radius: 8px;
+  padding: 4px 10px;
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  height: 36px;
+  height: 56px;
   overflow: hidden;
 }
-.nav-logo-img { height: 50px; width: auto; max-height: 50px; object-fit: contain; display: block; }
+.nav-logo-img { height: 56px; width: auto; max-height: 56px; object-fit: contain; display: block; }
 
 /* ── LANG SWITCHER ────────────────────────────── */
 .lang-switcher { display: flex; align-items: center; gap: 4px; }

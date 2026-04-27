@@ -48,12 +48,11 @@
 .hero-title { margin-bottom: 24px; }
 .hero-lead { font-size: 18px; color: var(--muted-lt); line-height: 1.7; font-weight: 300; margin-bottom: 40px; }
 .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-.hero-stats-row { display: flex; align-items: center; gap: 0; margin-top: 32px; flex-wrap: wrap; }
-.hero-stat-item { display: flex; flex-direction: column; gap: 2px; padding: 0 20px; }
-.hero-stat-item:first-child { padding-left: 0; }
-.hero-stat-num { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--gold); line-height: 1; }
-.hero-stat-lbl { font-size: 11px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
-.hero-stat-sep { width: 1px; height: 32px; background: var(--border-lt); flex-shrink: 0; }
+.hero-stats-full { display: flex; align-items: stretch; border-top: 1px solid var(--border-lt); margin-top: 64px; }
+.hero-stat-item { display: flex; flex-direction: column; gap: 6px; padding: 28px 0; flex: 1; text-align: center; border-right: 1px solid var(--border-lt); }
+.hero-stat-item:last-child { border-right: none; }
+.hero-stat-num { font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--gold); line-height: 1; }
+.hero-stat-lbl { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
 .hero-visual {
   position: relative;
 }
@@ -686,7 +685,7 @@
   <div class="nav-inner">
     <a href="/home.html" class="nav-logo">
       <div class="nav-logo-img-wrap">
-        <img src="aip-logo.jpeg" alt="Africa Infrastructure Partners" class="nav-logo-img" style="height:50px;width:auto;max-height:50px;object-fit:contain;display:block;">
+        <img src="aip-logo.jpeg" alt="Africa Infrastructure Partners" class="nav-logo-img" style="height:56px;width:auto;max-height:56px;object-fit:contain;display:block;">
       </div>
     </a>
     <div class="nav-links">
@@ -724,15 +723,6 @@
             Access Project Data
           </a>
           <a href="/how-it-works" class="btn btn-outline btn-lg">See How It Works</a>
-        </div>
-        <div class="hero-stats-row">
-          <div class="hero-stat-item"><span class="hero-stat-num">$300M+</span><span class="hero-stat-lbl">Projects Listed</span></div>
-          <div class="hero-stat-sep"></div>
-          <div class="hero-stat-item"><span class="hero-stat-num">150+</span><span class="hero-stat-lbl">Active Projects</span></div>
-          <div class="hero-stat-sep"></div>
-          <div class="hero-stat-item"><span class="hero-stat-num">4</span><span class="hero-stat-lbl">African Nations</span></div>
-          <div class="hero-stat-sep"></div>
-          <div class="hero-stat-item"><span class="hero-stat-num">100+</span><span class="hero-stat-lbl">Global Investors</span></div>
         </div>
       </div>
       <div class="hero-visual">
@@ -781,6 +771,13 @@
           </div>
         </div>
       </div>
+    </div>
+    <!-- FULL-WIDTH STATS ROW -->
+    <div class="hero-stats-full">
+      <div class="hero-stat-item"><span class="hero-stat-num">$300M+</span><span class="hero-stat-lbl">Projects Listed</span></div>
+      <div class="hero-stat-item"><span class="hero-stat-num">150+</span><span class="hero-stat-lbl">Active Projects</span></div>
+      <div class="hero-stat-item"><span class="hero-stat-num">4</span><span class="hero-stat-lbl">African Nations</span></div>
+      <div class="hero-stat-item"><span class="hero-stat-num">100+</span><span class="hero-stat-lbl">Global Investors</span></div>
     </div>
   </div>
 </section>
@@ -1005,42 +1002,6 @@
   </div>
 </section>
 
-<!-- WHY AIP -->
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">Why Choose AIP</div>
-      <h2 class="display-lg">Advanced technology meets<br>infrastructure expertise</h2>
-    </div>
-    <div class="grid-4">
-      <div class="card" style="text-align:center; padding:32px 24px;">
-        <div class="card-icon" style="margin:0 auto 20px;">
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-        </div>
-        <div class="card-title">Reduce Due Diligence Time</div>
-      </div>
-      <div class="card" style="text-align:center; padding:32px 24px;">
-        <div class="card-icon" style="margin:0 auto 20px;">
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-        </div>
-        <div class="card-title">Verified Deal Matching</div>
-      </div>
-      <div class="card" style="text-align:center; padding:32px 24px;">
-        <div class="card-icon" style="margin:0 auto 20px;">
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
-        </div>
-        <div class="card-title">Gateway into Africa</div>
-      </div>
-      <div class="card" style="text-align:center; padding:32px 24px;">
-        <div class="card-icon" style="margin:0 auto 20px;">
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
-        </div>
-        <div class="card-title">Market Intelligence</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- HOW IT WORKS -->
 <section class="section" id="how-it-works" style="background:var(--navy-mid); border-top:1px solid var(--border-lt); border-bottom:1px solid var(--border-lt);">
   <div class="container">
@@ -1236,6 +1197,42 @@
   </div>
 </section>
 
+<!-- WHY AIP -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Why Choose AIP</div>
+      <h2 class="display-lg">Advanced technology meets<br>infrastructure expertise</h2>
+    </div>
+    <div class="grid-4">
+      <div class="card" style="text-align:center; padding:32px 24px;">
+        <div class="card-icon" style="margin:0 auto 20px;">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <div class="card-title">Reduce Due Diligence Time</div>
+      </div>
+      <div class="card" style="text-align:center; padding:32px 24px;">
+        <div class="card-icon" style="margin:0 auto 20px;">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        </div>
+        <div class="card-title">Verified Deal Matching</div>
+      </div>
+      <div class="card" style="text-align:center; padding:32px 24px;">
+        <div class="card-icon" style="margin:0 auto 20px;">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
+        </div>
+        <div class="card-title">Gateway into Africa</div>
+      </div>
+      <div class="card" style="text-align:center; padding:32px 24px;">
+        <div class="card-icon" style="margin:0 auto 20px;">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+        </div>
+        <div class="card-title">Market Intelligence</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SECTORS PREVIEW -->
 <section class="section">
   <div class="container">
@@ -1336,7 +1333,7 @@
       <div>
         <a href="/home.html" class="nav-logo" style="margin-bottom:16px;">
           <div class="nav-logo-img-wrap">
-            <img src="aip-logo.jpeg" alt="AIP" class="nav-logo-img" style="height:50px;width:auto;max-height:50px;object-fit:contain;display:block;">
+            <img src="aip-logo.jpeg" alt="AIP" class="nav-logo-img" style="height:56px;width:auto;max-height:56px;object-fit:contain;display:block;">
           </div>
         </a>
         <p class="footer-desc">Connecting Africa's infrastructure projects with global capital. We structure, verify, and facilitate investments to drive sustainable development across the continent.</p>
