@@ -138,8 +138,8 @@
     </a>
     <div class="nav-links">
       <a href="about.html" class="active" data-i18n="nav_about">About Us</a>
-      <a href="sectors.html" data-i18n="nav_sectors">Sectors</a>
       <a href="services.html" data-i18n="nav_services">Services</a>
+      <a href="sectors.html" data-i18n="nav_sectors">Sectors</a>
       <a href="insights.html" data-i18n="nav_insights">Insights</a>
       <a href="contact.html" data-i18n="nav_contact">Contact</a>
     </div>
@@ -172,9 +172,34 @@
         <p style="font-size:16px; color:var(--muted-lt); line-height:1.8; margin-bottom:20px;">We are an independent investment and advisory platform dedicated to closing Africa's infrastructure delivery gap. We support the development, verification, and financing of high-quality infrastructure projects across the continent, going beyond a marketplace to build a complete ecosystem for delivery.</p>
         <p style="font-size:16px; color:var(--muted-lt); line-height:1.8;">By leveraging advanced technology, data analytics, and deep industry expertise, we remove the traditional frictions associated with investing in African infrastructure — equipping project owners with the tools to become bankable, while providing global investors with a transparent, de-risked pipeline of high-impact opportunities.</p>
       </div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-        <img src="uploads/team-2.jpg" alt="AIP Team" style="width:100%; height:220px; object-fit:cover; border-radius:12px; filter:grayscale(20%);">
-        <img src="uploads/team-1.jpg" alt="AIP Team at work" style="width:100%; height:220px; object-fit:cover; border-radius:12px; filter:grayscale(20%);">
+      <div style="position:relative; width:100%; height:460px; border-radius:16px; overflow:hidden; box-shadow:0 32px 80px rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.08);">
+        <style>
+        .team-slide { position:absolute; inset:0; opacity:0; transition:opacity 1s ease; }
+        .team-slide img { width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(30%) contrast(1.05); }
+        .team-slide:nth-child(1) { animation: teamRotate 18s infinite 0s; }
+        .team-slide:nth-child(2) { animation: teamRotate 18s infinite 3s; }
+        .team-slide:nth-child(3) { animation: teamRotate 18s infinite 6s; }
+        .team-slide:nth-child(4) { animation: teamRotate 18s infinite 9s; }
+        .team-slide:nth-child(5) { animation: teamRotate 18s infinite 12s; }
+        .team-slide:nth-child(6) { animation: teamRotate 18s infinite 15s; }
+        @keyframes teamRotate {
+          0%    { opacity: 0; }
+          3%    { opacity: 1; }
+          17%   { opacity: 1; }
+          20%   { opacity: 0; }
+          100%  { opacity: 0; }
+        }
+        .team-carousel-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(11,22,40,0.6) 0%, transparent 50%); pointer-events:none; }
+        .team-carousel-label { position:absolute; bottom:20px; left:20px; font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.7); background:rgba(11,22,40,0.55); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.1); padding:5px 14px; border-radius:100px; pointer-events:none; }
+        </style>
+        <div class="team-slide"><img src="uploads/leader-bahati.jpg" alt="AIP Team"></div>
+        <div class="team-slide"><img src="uploads/leader-1.jpg" alt="AIP Team"></div>
+        <div class="team-slide"><img src="uploads/team-2.jpg" alt="AIP Team"></div>
+        <div class="team-slide"><img src="uploads/team-1.jpg" alt="AIP Team"></div>
+        <div class="team-slide"><img src="uploads/leader-3.jpg" alt="AIP Team"></div>
+        <div class="team-slide"><img src="uploads/leader-2.jpg" alt="AIP Team"></div>
+        <div class="team-carousel-overlay"></div>
+        <div class="team-carousel-label">AIP Team</div>
       </div>
     </div>
   </div>
@@ -224,7 +249,7 @@
         </div>
       </div>
       <div class="founder-card">
-        <img src="uploads/leader-2.jpg" alt="Dr. Bintu Zahara Sakor" class="founder-photo" style="filter:grayscale(100%) contrast(1.05);">
+        <img src="https://pitch-assets-ccb95893-de3f-4266-973c-20049231b248.s3.eu-west-1.amazonaws.com/4c9ec531-9399-454a-9c95-801aa2fd4fd6?pitch-bytes=1599570&pitch-content-type=image%2Fpng" alt="Dr. Bintu Zahara Sakor" class="founder-photo" style="filter:grayscale(100%) contrast(1.05);">
         <div class="founder-info">
           <div class="founder-name">Dr. Bintu Zahara Sakor</div>
           <div class="founder-role">Co-Founder &amp; Partnership Manager</div>
@@ -237,7 +262,7 @@
         </div>
       </div>
       <div class="founder-card">
-        <img src="uploads/leader-1.jpg" alt="Aji Ceesay" class="founder-photo" style="filter:grayscale(100%) contrast(1.05);">
+        <img src="https://pitch-assets-ccb95893-de3f-4266-973c-20049231b248.s3.eu-west-1.amazonaws.com/412a0b8c-ff28-459c-8a53-a94ab06eafa9?pitch-bytes=778308&pitch-content-type=image%2Fjpeg" alt="Aji Ceesay" class="founder-photo" style="filter:grayscale(100%) contrast(1.05);">
         <div class="founder-info">
           <div class="founder-name">Aji Ceesay</div>
           <div class="founder-role">Head of Research</div>
